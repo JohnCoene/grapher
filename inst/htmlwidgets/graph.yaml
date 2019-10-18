@@ -3,3 +3,7 @@ dependencies:
    version: 0.0.17
    src: htmlwidgets/lib/ngraph
    script: ngraph.graph.min.js
+ - name: pixel
+   version: 2.4.1
+   src: htmlwidgets/lib/pixel
+   script: ngraph.pixel.js

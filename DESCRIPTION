@@ -10,6 +10,7 @@ Imports:
     dplyr,
     purrr,
     rlang,
+    shiny,
     crayon,
     magrittr,
     assertthat,

@@ -8,7 +8,8 @@ graph_links(g, data, source, target, ...)
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 
-returned by \code{\link{graph}}.}
+returned by \code{\link{graph}} or a \code{graph_proxy}
+as returned by a function of the same name.}
 
 \item{data}{A data.frame containing edges data.}
 
@@ -19,13 +20,13 @@ the edges source and target.}
 meta data to attach to the edges.}
 }
 \description{
-Add Edges
+Add edges to a graph.
 }
 \examples{
 graph_data <- make_data()
 
 graph() \%>\% 
-  graph_nodes(graph_data$nodes, id, color = color) \%>\% 
+  graph_nodes(graph_data$nodes, id) \%>\% 
   graph_links(graph_data$links, source, target)
 
 }

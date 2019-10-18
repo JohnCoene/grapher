@@ -1,7 +1,10 @@
 #' Add Nodes
 #' 
+#' Add nodes to the graph.
+#' 
 #' @param g An object of class \code{graph} as 
-#' returned by \code{\link{graph}}.
+#' returned by \code{\link{graph}} or a \code{graph_proxy}
+#' as returned by a function of the same name.
 #' @param data A data.frame containing nodes data.
 #' @param id The bare column names containing the nodes ids.
 #' @param ... Any other bare named column containing 
@@ -43,10 +46,40 @@ graph_nodes.graph <- function(g, data, id, ...){
   return(g)
 }
 
+#' @export
+#' @method graph_nodes graph_proxy
+graph_nodes.graph_proxy <- function(g, data, id, ...){
+  
+  assert_that(has_it(data))
+  assert_that(has_it(id))
+
+  id_enquo <- enquo(id)
+  nodes <- select(data, !!id_enquo) %>% 
+    unlist() %>% 
+    unname()
+
+  args <- rlang::quos(...)
+  if(!rlang::is_empty(args))
+    nodes <- select(data, ...) %>% 
+      transpose() %>% 
+      map2(nodes, function(meta, id){
+        list(id, meta)
+      })
+  
+  msg <- list(id = g$id, nodes = nodes)
+
+  g$session$sendCustomMessage("add-nodes", msg)
+
+  return(g)
+}
+
 #' Add Edges
 #' 
+#' Add edges to a graph.
+#' 
 #' @param g An object of class \code{graph} as 
-#' returned by \code{\link{graph}}.
+#' returned by \code{\link{graph}} or a \code{graph_proxy}
+#' as returned by a function of the same name.
 #' @param data A data.frame containing edges data.
 #' @param source,target The bare column names containing 
 #' the edges source and target.
@@ -88,6 +121,35 @@ graph_links.graph <- function(g, data, source, target, ...){
       })
   
   g$x$links <- links
+
+  return(g)
+}
+
+#' @export
+#' @method graph_links graph_proxy
+graph_links.graph_proxy <- function(g, data, source, target, ...){
+  
+  assert_that(has_it(data))
+  assert_that(has_it(source))
+  assert_that(has_it(target))
+
+  source_enquo <- enquo(source)
+  target_enquo <- enquo(target)
+  links <- select(data, !!source_enquo, !!target_enquo) %>% 
+    transpose() %>% 
+    map(unname)
+
+  args <- rlang::quos(...)
+  if(!rlang::is_empty(args))
+    links <- select(data, ...) %>% 
+      transpose() %>% 
+      map2(links, function(meta, link){
+        list(link, meta)
+      })
+  
+  msg <- list(id = g$id, links = links)
+
+  g$session$sendCustomMessage("add-links", msg)
 
   return(g)
 }

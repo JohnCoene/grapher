@@ -6,6 +6,9 @@
 #'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 #'   string and have \code{'px'} appended.
 #' @param elementId Id of element.
+#' @param bulk If \code{TRUE} nodes and edges are added in bulk rather than
+#' one by one.
+#' @param render If \code{FALSE} the graph is not rendered. 
 #' 
 #' @importFrom stats runif
 #' @import htmlwidgets
@@ -14,10 +17,24 @@
 #' @import purrr
 #'
 #' @export
-graph <- function(width = "100%", height = NULL, elementId = NULL) {
+graph <- function(render = TRUE, bulk = FALSE, width = "100%", height = "100vh", elementId = NULL) {
 
   # forward options using x
-  x = list()
+  x = list(
+    bulk = bulk,
+    render = render,
+    layout = list(
+      physics = list(
+        springLength = 30,
+        springCoeff = 0.0008,
+        gravity = -1.2,
+        theta = 0.8,
+        dragCoeff = 0.02,
+        timeStep = 20,
+        is3d = TRUE
+      )
+    )
+  )
 
   attr(x, 'TOJSON_ARGS') <- list(dataframe = "rows")
 
@@ -28,8 +45,16 @@ graph <- function(width = "100%", height = NULL, elementId = NULL) {
     width = width,
     height = height,
     package = 'grapher',
-    elementId = elementId
+    elementId = elementId,
+    sizingPolicy = htmlwidgets::sizingPolicy(
+      padding = 0,
+      browser.fill = TRUE
+    )
   )
+}
+
+graph_html <- function(id, ...){
+  shiny::tags$div(id = id, ...)
 }
 
 #' Shiny bindings for graph
@@ -37,7 +62,7 @@ graph <- function(width = "100%", height = NULL, elementId = NULL) {
 #' Output and render functions for using graph within Shiny
 #' applications and interactive Rmd documents.
 #'
-#' @param outputId output variable to read from
+#' @param outputId,id output variable to read from
 #' @param width,height Must be a valid CSS unit (like \code{'100\%'},
 #'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 #'   string and have \code{'px'} appended.
@@ -45,6 +70,7 @@ graph <- function(width = "100%", height = NULL, elementId = NULL) {
 #' @param env The environment in which to evaluate \code{expr}.
 #' @param quoted Is \code{expr} a quoted expression (with \code{quote()})? This
 #'   is useful if you want to save an expression in a variable.
+#' @param session A valid shiny session.
 #'
 #' @name graph-shiny
 #'
@@ -63,3 +89,15 @@ renderGraph <- function(expr, env = parent.frame(), quoted = FALSE) {
 #' @rdname graph-shiny
 #' @export
 render_graph <- renderGraph
+
+#' @rdname graph-shiny
+#' @export
+graphProxy <- function(id, session = shiny::getDefaultReactiveDomain()) {
+	proxy <- list(id = id, session = session)
+	class(proxy) <- "graph_proxy"
+	return(proxy)
+}
+
+#' @rdname graph-shiny
+#' @export
+graph_proxy <- graphProxy
