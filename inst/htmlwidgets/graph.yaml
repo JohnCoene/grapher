@@ -1,0 +1,5 @@
+dependencies:
+ - name: ngraph
+   version: 0.0.17
+   src: htmlwidgets/lib/ngraph
+   script: ngraph.graph.min.js

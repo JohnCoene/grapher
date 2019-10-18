@@ -1,0 +1,17 @@
+Package: grapher
+Title: Interactive Graphs
+Version: 0.0.0.9000
+Authors@R: person("John", "Coene", email = "jcoenep@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6637-4107"))
+Description: Interactive Graphs.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    dplyr,
+    purrr,
+    rlang,
+    crayon,
+    magrittr,
+    assertthat,
+    htmlwidgets
+RoxygenNote: 6.1.99.9001
