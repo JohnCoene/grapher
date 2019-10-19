@@ -4,12 +4,14 @@
 #' 
 #' @inheritParams graph_nodes
 #' @param method The igraph function to create the cluster.
+#' @param quiet Set to \code{TRUE} to \emph{not print} number 
+#' of clusters in the console.
 #' 
 #' @examples 
 #' graph_data <- make_data()
 #' 
 #' graph() %>% 
-#'   graph_nodes(graph_data$nodes, id) %>% 
+#'   graph_links(graph_data$links, source, target) %>% 
 #'   graph_cluster() 
 #' 
 #' @export 
@@ -35,7 +37,7 @@ graph_cluster.graph <- function(g, method = igraph::cluster_walktrap,
   n_grps <- length(grps)
   
   if(!isTRUE(quiet))
-    cat("Found #", n_grps, "clusters\n")
+    cat("Found #", crayon::blue(n_grps), "clusters\n")
 
   clusters <- tibble::tibble(
     cluster = membership$membership
@@ -43,11 +45,9 @@ graph_cluster.graph <- function(g, method = igraph::cluster_walktrap,
     bind_cols(vertices)
 
   if(length(g$x$nodes))
-    nodes <- left_join(g$x$nodes, clusters, by = "id")
-  else
-    nodes <- select(clusters, -id)
+    clusters <- left_join(g$x$nodes, clusters, by = "id")
   
-  g$x$nodes <- nodes
+  g$x$nodes <- clusters
 
   return(g)
 }

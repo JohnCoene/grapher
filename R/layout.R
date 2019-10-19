@@ -81,17 +81,15 @@ graph_offline_layout.graph <- function(g, method = igraph::layout_nicely, dim = 
 
   ig <- igraph::graph_from_data_frame(g$x$link_ids)
   vertices <- igraph::as_data_frame(ig, "vertices")
-  l <- method(ig, dim = dim) %>% 
+  lay_out <- method(ig, dim = dim) %>% 
     as.data.frame() %>% 
     bind_cols(vertices) %>% 
     purrr::set_names(c("x", "y", "z", "id")) 
 
   if(length(g$x$nodes))
-    nodes <- left_join(g$x$nodes, l, by = "id")
-  else
-    nodes <- select(l, -id)
+    lay_out <- left_join(g$x$nodes, lay_out, by = "id")
   
-  g$x$nodes <- nodes
+  g$x$nodes <- lay_out
   g$x$customLayout <- TRUE
 
   return(g)

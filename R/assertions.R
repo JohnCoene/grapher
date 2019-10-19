@@ -19,7 +19,7 @@ on_failure(was_passed) <- function(call, env) {
 
   paste0(
     "Must have passed `",
-    crayon::red(deparse(call$x)), 
+    crayon::red(variable), 
     "`."
   )
 }

@@ -18,6 +18,9 @@ as returned by a function of the same name.}
 
 \item{method}{The igraph function to create the cluster.}
 
+\item{quiet}{Set to \code{TRUE} to \emph{not print} number 
+of clusters in the console.}
+
 \item{...}{Any other bare named column containing 
 meta data to attach to the nodes.}
 }
@@ -28,7 +31,7 @@ Cluster nodes on the graph.
 graph_data <- make_data()
 
 graph() \%>\% 
-  graph_nodes(graph_data$nodes, id) \%>\% 
+  graph_links(graph_data$links, source, target) \%>\% 
   graph_cluster() 
 
 }
