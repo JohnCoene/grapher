@@ -1,3 +1,4 @@
 ^LICENSE\.md$
 ^test\.R$
 ^node_modules$
+srcjs

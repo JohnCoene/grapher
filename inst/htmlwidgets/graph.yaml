@@ -7,3 +7,7 @@ dependencies:
    version: 2.4.1
    src: htmlwidgets/lib/pixel
    script: ngraph.pixel.js
+ - name: pixel
+   version: 2.4.1
+   src: htmlwidgets/lib/layout-offline
+   script: ngraph.offline.layout.js

@@ -23,17 +23,7 @@ graph <- function(render = TRUE, bulk = FALSE, width = "100%", height = "100vh",
   x = list(
     bulk = bulk,
     render = render,
-    layout = list(
-      physics = list(
-        springLength = 30,
-        springCoeff = 0.0008,
-        gravity = -1.2,
-        theta = 0.8,
-        dragCoeff = 0.02,
-        timeStep = 20,
-        is3d = TRUE
-      )
-    )
+    layout = list()
   )
 
   attr(x, 'TOJSON_ARGS') <- list(dataframe = "rows")
