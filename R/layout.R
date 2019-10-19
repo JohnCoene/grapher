@@ -52,3 +52,45 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
 
   return(g)
 }
+
+#' Layout Offline
+#' 
+#' @inheritParams graph_nodes
+#' @param method The igraph function to compute node positions.
+#' @param dim Number of dimensions to use, passed to \code{method}.
+#' 
+#' @examples 
+#' graph_data <- make_data(10)
+#' 
+#' graph() %>% 
+#'   graph_nodes(graph_data$nodes, id) %>% 
+#'   graph_links(graph_data$links, source, target) %>% 
+#'   graph_offline_layout()
+#' 
+#' @export 
+graph_offline_layout <- function(g, method = igraph::layout_nicely, dim = 3) UseMethod("graph_offline_layout")
+
+#' @export
+#' @method graph_offline_layout graph
+graph_offline_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3){
+
+  assert_that(was_passed(g$x$link_ids))
+
+  ig <- igraph::graph_from_data_frame(g$x$link_ids)
+  vertices <- igraph::as_data_frame(ig, "vertices")
+  l <- method(ig, dim = 3) %>% 
+    as.data.frame() %>% 
+    bind_cols(vertices) %>% 
+    purrr::set_names(c("x", "y", "z", "id")) 
+
+  if(length(g$x$node_metas))
+    node_metas <- left_join(g$x$node_metas, l, by = "id")
+  else
+    node_metas <- select(l, -id)
+
+  
+  g$x$node_metas <- node_metas
+  g$x$customLayout <- TRUE
+
+  return(g)
+}

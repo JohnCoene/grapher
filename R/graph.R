@@ -29,19 +29,15 @@ graph_nodes.graph <- function(g, data, id, ...){
   assert_that(has_it(id))
 
   id_enquo <- enquo(id)
-  nodes <- select(data, !!id_enquo) %>% 
-    unlist() %>% 
-    unname()
+  node_ids <- select(data, id = !!id_enquo)
 
   args <- rlang::quos(...)
+  node_metas <- list()
   if(!rlang::is_empty(args))
-    nodes <- select(data, ...) %>% 
-      transpose() %>% 
-      map2(nodes, function(meta, id){
-        list(id, meta)
-      })
+    node_metas <- select(data, ...)
   
-  g$x$nodes <- nodes
+  g$x$node_ids <- node_ids
+  g$x$node_metas <- node_metas
 
   return(g)
 }
@@ -73,18 +69,18 @@ graph_nodes.graph_proxy <- function(g, data, id, ...){
   return(g)
 }
 
-#' Add Edges
+#' Add Links
 #' 
-#' Add edges to a graph.
+#' Add links to a graph.
 #' 
 #' @param g An object of class \code{graph} as 
 #' returned by \code{\link{graph}} or a \code{graph_proxy}
 #' as returned by a function of the same name.
-#' @param data A data.frame containing edges data.
+#' @param data A data.frame containing links data.
 #' @param source,target The bare column names containing 
-#' the edges source and target.
+#' the links source and target.
 #' @param ... Any other bare named column containing 
-#' meta data to attach to the edges.
+#' meta data to attach to the links.
 #' 
 #' @examples 
 #' graph_data <- make_data()
@@ -108,19 +104,15 @@ graph_links.graph <- function(g, data, source, target, ...){
 
   source_enquo <- enquo(source)
   target_enquo <- enquo(target)
-  links <- select(data, !!source_enquo, !!target_enquo) %>% 
-    transpose() %>% 
-    map(unname)
+  link_ids <- select(data, !!source_enquo, !!target_enquo) 
 
+  link_metas <- list()
   args <- rlang::quos(...)
   if(!rlang::is_empty(args))
-    links <- select(data, ...) %>% 
-      transpose() %>% 
-      map2(links, function(meta, link){
-        list(link, meta)
-      })
+    link_metas <- select(data, ...)
   
-  g$x$links <- links
+  g$x$link_ids <- link_ids
+  g$x$link_metas <- link_metas
 
   return(g)
 }

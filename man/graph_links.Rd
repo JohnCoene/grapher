@@ -2,7 +2,7 @@
 % Please edit documentation in R/graph.R
 \name{graph_links}
 \alias{graph_links}
-\title{Add Edges}
+\title{Add Links}
 \usage{
 graph_links(g, data, source, target, ...)
 }
@@ -11,16 +11,16 @@ graph_links(g, data, source, target, ...)
 returned by \code{\link{graph}} or a \code{graph_proxy}
 as returned by a function of the same name.}
 
-\item{data}{A data.frame containing edges data.}
+\item{data}{A data.frame containing links data.}
 
 \item{source, target}{The bare column names containing 
-the edges source and target.}
+the links source and target.}
 
 \item{...}{Any other bare named column containing 
-meta data to attach to the edges.}
+meta data to attach to the links.}
 }
 \description{
-Add edges to a graph.
+Add links to a graph.
 }
 \examples{
 graph_data <- make_data()

@@ -10,6 +10,12 @@
 #' one by one.
 #' @param render If \code{FALSE} the graph is not rendered. 
 #' 
+#' @examples 
+#' g <- make_data(50)
+#' 
+#' graph() %>% 
+#'   graph_links(g$links, source, target)
+#' 
 #' @importFrom stats runif
 #' @import htmlwidgets
 #' @import assertthat
@@ -36,6 +42,7 @@ graph <- function(render = TRUE, bulk = FALSE, width = "100%", height = "100vh",
     height = height,
     package = 'grapher',
     elementId = elementId,
+    preRenderHook = graph_renderer,
     sizingPolicy = htmlwidgets::sizingPolicy(
       padding = 0,
       browser.fill = TRUE

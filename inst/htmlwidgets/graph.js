@@ -19,7 +19,7 @@ HTMLWidgets.widget({
 
         if(x.nodes)
           x.nodes.forEach(function(node){
-            g.addNode(node)
+            g.addNode(node[0], node[1])
           })
         
         if(x.links)
@@ -30,6 +30,19 @@ HTMLWidgets.widget({
         if(x.bulk) g.endUpdate();
 
         x.layout.container = document.getElementById(el.id);
+
+        function get_node_position(node) {
+          return {
+            x: node.data.x,
+            y: node.data.y,
+            z: node.data.z
+          };
+        };
+
+        if(x.customLayout){
+          x.layout.createLayout = layout_static;
+          x.layout.initPosition = get_node_position;
+        }
 
         if(x.render)
           renderer = pixel(g, x.layout)

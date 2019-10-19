@@ -27,3 +27,10 @@ string and have \code{'px'} appended.}
 \description{
 Initialise a grapher graph.
 }
+\examples{
+g <- make_data(50)
+
+graph() \%>\% 
+  graph_links(g$links, source, target)
+
+}

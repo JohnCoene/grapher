@@ -2,10 +2,28 @@
 % Please edit documentation in R/layout.R
 \name{graph_offline_layout}
 \alias{graph_offline_layout}
-\title{Compute Layout}
+\title{Layout Offline}
 \usage{
-graph_offline_layout(g, directory = NULL, overwrite = FALSE)
+graph_offline_layout(g, method = igraph::layout_nicely, dim = 3)
+}
+\arguments{
+\item{g}{An object of class \code{graph} as 
+returned by \code{\link{graph}} or a \code{graph_proxy}
+as returned by a function of the same name.}
+
+\item{method}{The igraph function to compute node positions.}
+
+\item{dim}{Number of dimensions to use, passed to \code{method}.}
 }
 \description{
-Compute Layout
+Layout Offline
+}
+\examples{
+graph_data <- make_data(10)
+
+graph() \%>\% 
+  graph_nodes(graph_data$nodes, id) \%>\% 
+  graph_links(graph_data$links, source, target) \%>\% 
+  graph_offline_layout()
+
 }

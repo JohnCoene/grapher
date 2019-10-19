@@ -12,6 +12,7 @@ Imports:
     rlang,
     shiny,
     crayon,
+    igraph,
     magrittr,
     assertthat,
     htmlwidgets
