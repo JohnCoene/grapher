@@ -19,7 +19,6 @@
 #' 
 #' @return \code{tibble} of nodes or links or a \code{list} of the latter.
 #'
-#' @importFrom grDevices colorRampPalette
 #' @rdname generate
 #' @export
 make_nodes <- function(n = 10, colors = c("#B1E2A3", "#98D3A5", "#328983", "#1C5C70", "#24C96B")) {
@@ -27,8 +26,7 @@ make_nodes <- function(n = 10, colors = c("#B1E2A3", "#98D3A5", "#328983", "#1C5
 	dplyr::tibble(
 		id = as.character(seq(1, n)),
 		label = sample(paste0(LETTERS, 1:100), n, replace = TRUE),
-		size = ceiling(runif(n, 1, 5)),
-		color = colorRampPalette(colors)(n)
+		size = ceiling(runif(n, 1, 5))
 	)
 
 }

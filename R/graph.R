@@ -29,15 +29,9 @@ graph_nodes.graph <- function(g, data, id, ...){
   assert_that(has_it(id))
 
   id_enquo <- enquo(id)
-  node_ids <- select(data, id = !!id_enquo)
-
-  args <- rlang::quos(...)
-  node_metas <- list()
-  if(!rlang::is_empty(args))
-    node_metas <- select(data, ...)
+  nodes <- select(data, id = !!id_enquo, ...)
   
-  g$x$node_ids <- node_ids
-  g$x$node_metas <- node_metas
+  g$x$nodes <- nodes
 
   return(g)
 }

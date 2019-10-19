@@ -67,6 +67,9 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
 #'   graph_links(graph_data$links, source, target) %>% 
 #'   graph_offline_layout()
 #' 
+#' @note This function will overwrite \code{x}, \code{y}, \code{z} variables 
+#' previously passed to \code{\link{graph_nodes}}. 
+#' 
 #' @export 
 graph_offline_layout <- function(g, method = igraph::layout_nicely, dim = 3) UseMethod("graph_offline_layout")
 
@@ -83,15 +86,12 @@ graph_offline_layout.graph <- function(g, method = igraph::layout_nicely, dim = 
     bind_cols(vertices) %>% 
     purrr::set_names(c("x", "y", "z", "id")) 
 
-  if(length(g$x$node_metas))
-    node_metas <- left_join(g$x$node_metas, l, by = "id")
+  if(length(g$x$nodes))
+    nodes <- left_join(g$x$nodes, l, by = "id")
   else
-    node_metas <- select(l, -id)
-
-  if(!length(g$x$node_ids))
-    g$x$node_ids <- vertices
+    nodes <- select(l, -id)
   
-  g$x$node_metas <- node_metas
+  g$x$nodes <- nodes
   g$x$customLayout <- TRUE
 
   return(g)

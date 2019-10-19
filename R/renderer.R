@@ -1,19 +1,18 @@
  graph_renderer <- function(g) {
 
    node_ids <- NULL
-   if(length(g$x$node_ids))
-    node_ids <- g$x$node_ids %>% 
-      unlist() %>% 
-      unname()
-  
-  if(length(g$x$node_metas))
-    g$x$nodes <- g$x$node_metas %>% 
-      purrr::transpose() %>% 
-      map2(node_ids, function(meta, id){
-        list(id, meta)
-      })
-  else
-    g$x$nodes <- node_ids
+   if(length(g$x$nodes)){
+     node_ids <- select(g$x$nodes, id) %>% 
+        unlist() %>% 
+        unname()
+    
+     node_metas <- select(g$x$nodes, -id)
+      g$x$nodes <- node_metas %>% 
+        purrr::transpose() %>% 
+        map2(node_ids, function(meta, id){
+          list(id, meta)
+        })
+   }
 
   link_ids <- NULL
   if(length(g$x$link_ids))
@@ -31,8 +30,6 @@
   else
     g$x$links <- link_ids
 
-  g$x$node_ids <- NULL
-  g$x$node_metas <- NULL 
   g$x$link_ids <- NULL
   g$x$link_metas <- NULL  
 

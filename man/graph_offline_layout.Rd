@@ -18,6 +18,10 @@ as returned by a function of the same name.}
 \description{
 Layout Offline
 }
+\note{
+This function will overwrite \code{x}, \code{y}, \code{z} variables 
+previously passed to \code{\link{graph_nodes}}.
+}
 \examples{
 graph_data <- make_data(10)
 
