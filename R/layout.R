@@ -88,6 +88,8 @@ graph_offline_layout.graph <- function(g, method = igraph::layout_nicely, dim = 
   else
     node_metas <- select(l, -id)
 
+  if(!length(g$x$node_ids))
+    g$x$node_ids <- vertices
   
   g$x$node_metas <- node_metas
   g$x$customLayout <- TRUE
