@@ -78,7 +78,7 @@ graph_offline_layout.graph <- function(g, method = igraph::layout_nicely, dim = 
 
   ig <- igraph::graph_from_data_frame(g$x$link_ids)
   vertices <- igraph::as_data_frame(ig, "vertices")
-  l <- method(ig, dim = 3) %>% 
+  l <- method(ig, dim = dim) %>% 
     as.data.frame() %>% 
     bind_cols(vertices) %>% 
     purrr::set_names(c("x", "y", "z", "id")) 
