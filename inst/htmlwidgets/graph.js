@@ -44,6 +44,42 @@ HTMLWidgets.widget({
           x.layout.initPosition = get_node_position;
         }
 
+        x.layout.node = function createNodeUI(node) {
+          var c = 0xFFFFFF;
+          
+          if(node.data) 
+            if(node.data.color) 
+              c = '0x' + node.data.color.substr(1);
+            
+          var s = 30;
+          if(node.data) 
+            if(node.data.size) 
+              s = node.data.size;
+          
+          return {
+            color: c,
+            size: s
+          };
+        };
+
+        x.layout.link = function createNodeUI(link) {
+          var fromc = 0xFFFFFF;
+          
+          if(link.data) 
+            if(link.data.fromColor) 
+              fromc = '0x' + link.data.fromColor.substr(1);
+            
+          var toc = 0xFFFFFF;
+          if(link.data) 
+            if(link.data.toColor) 
+              toc = '0x' + link.data.toColor.substr(1);
+          
+          return {
+            fromColor: fromc,
+            toColor: toc
+          };
+        };
+
         if(x.render)
           renderer = pixel(g, x.layout)
       },

@@ -50,10 +50,6 @@ graph <- function(render = TRUE, bulk = FALSE, width = "100%", height = "100vh",
   )
 }
 
-graph_html <- function(id, ...){
-  shiny::tags$div(id = id, ...)
-}
-
 #' Shiny bindings for graph
 #'
 #' Output and render functions for using graph within Shiny

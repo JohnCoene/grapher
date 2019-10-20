@@ -23,9 +23,11 @@ graph_cluster <- function(g, method = igraph::cluster_walktrap,
 graph_cluster.graph <- function(g, method = igraph::cluster_walktrap, 
   quiet = !interactive(), ...) {
 
-  assert_that(was_passed(g$x$link_ids))
+  assert_that(was_passed(g$x$links))
 
-  ig <- igraph::graph_from_data_frame(g$x$link_ids)
+  ig <- g$x$links %>%
+    select(source, target) %>%  
+    igraph::graph_from_data_frame()
   vertices <- igraph::as_data_frame(ig, "vertices") %>% 
     purrr::set_names(c("id"))
 
@@ -40,7 +42,7 @@ graph_cluster.graph <- function(g, method = igraph::cluster_walktrap,
     cat("Found #", crayon::blue(n_grps), "clusters\n")
 
   clusters <- tibble::tibble(
-    cluster = membership$membership
+    cluster = as.factor(membership$membership)
   ) %>% 
     bind_cols(vertices)
 

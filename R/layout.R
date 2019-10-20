@@ -77,9 +77,12 @@ graph_offline_layout <- function(g, method = igraph::layout_nicely, dim = 3) Use
 #' @method graph_offline_layout graph
 graph_offline_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3){
 
-  assert_that(was_passed(g$x$link_ids))
+  assert_that(was_passed(g$x$links))
 
-  ig <- igraph::graph_from_data_frame(g$x$link_ids)
+  ig <- g$x$links %>% 
+    select(source, target) %>% 
+    igraph::graph_from_data_frame()
+    
   vertices <- igraph::as_data_frame(ig, "vertices")
   lay_out <- method(ig, dim = dim) %>% 
     as.data.frame() %>% 

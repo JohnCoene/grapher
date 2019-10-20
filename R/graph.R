@@ -29,9 +29,7 @@ graph_nodes.graph <- function(g, data, id, ...){
   assert_that(has_it(id))
 
   id_enquo <- enquo(id)
-  nodes <- select(data, id = !!id_enquo, ...)
-  
-  g$x$nodes <- nodes
+  g$x$nodes <- select(data, id = !!id_enquo, ...)
 
   return(g)
 }
@@ -98,15 +96,7 @@ graph_links.graph <- function(g, data, source, target, ...){
 
   source_enquo <- enquo(source)
   target_enquo <- enquo(target)
-  link_ids <- select(data, !!source_enquo, !!target_enquo) 
-
-  link_metas <- list()
-  args <- rlang::quos(...)
-  if(!rlang::is_empty(args))
-    link_metas <- select(data, ...)
-  
-  g$x$link_ids <- link_ids
-  g$x$link_metas <- link_metas
+  g$x$links <- select(data, !!source_enquo, !!target_enquo, ...) 
 
   return(g)
 }
