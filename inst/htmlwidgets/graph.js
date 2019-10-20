@@ -60,8 +60,6 @@ HTMLWidgets.widget({
           if(link.data) 
             if(link.data.toColor) 
               toc = '0x' + link.data.toColor.substr(1);
-
-          console.log(link)
           
           return {
             fromColor: fromc,
