@@ -6,8 +6,6 @@
 #'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 #'   string and have \code{'px'} appended.
 #' @param elementId Id of element.
-#' @param bulk If \code{TRUE} nodes and edges are added in bulk rather than
-#' one by one.
 #' @param render If \code{FALSE} the graph is not rendered. 
 #' 
 #' @examples 
@@ -23,11 +21,10 @@
 #' @import purrr
 #'
 #' @export
-graph <- function(render = TRUE, bulk = FALSE, width = "100%", height = "100vh", elementId = NULL) {
+graph <- function(render = TRUE, width = "100%", height = "100vh", elementId = NULL) {
 
   # forward options using x
   x = list(
-    bulk = bulk,
     render = render,
     layout = list()
   )

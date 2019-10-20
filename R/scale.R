@@ -85,12 +85,25 @@ scale_link_color.graph <- function(g, variable, palette = c("0xFE4A49", "0xFED76
   assert_that(has_it(variable))
   assert_that(was_passed(g$x$nodes))
 
+  # get nodes data
   var <- deparse(substitute(variable))
   nodes <- select_(g$x$nodes, "id", var)
-  links <- g$x$link_ids
-  
-  scl <- scale_colour(g$x$edges[[var]], palette)
-  g$x$edges$toColor <- scl(g$x$edges[[var]])
+
+  # build scaling dunction
+  scl <- scale_colour(nodes[[var]], palette)
+
+  # apply to source nodes
+  source <- g$x$links %>% 
+    select(id = source) %>% 
+    inner_join(nodes, by = "id")
+  to_color <- scl(source[[var]])
+
+  target <- g$x$links %>% 
+    select(id = target) %>% 
+    inner_join(nodes, by = "id")
+  from_color <- scl(target[[var]])
+
+  g$x$links <- bind_cols(g$x$links, tibble::tibble(fromColor = from_color, toColor = to_color))
 
   return(g)
 }

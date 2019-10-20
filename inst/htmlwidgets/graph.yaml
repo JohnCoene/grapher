@@ -11,3 +11,7 @@ dependencies:
    version: 2.1.1
    src: htmlwidgets/lib/layout
    script: ngraph.layout.js
+ - name: ngraph.fromjson
+   version: 0.1.9
+   src: htmlwidgets/lib/fromjson
+   script: ngraph.fromjson.js

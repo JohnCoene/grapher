@@ -15,19 +15,7 @@ HTMLWidgets.widget({
         g = createGraph();
 
         // update
-        if(x.bulk) g.beginUpdate();
-
-        if(x.nodes)
-          x.nodes.forEach(function(node){
-            g.addNode(node[0], node[1])
-          })
-        
-        if(x.links)
-          x.links.forEach(function(link){
-            g.addLink(link[0], link[1])
-          })
-
-        if(x.bulk) g.endUpdate();
+        g = from_json(x.data)
 
         x.layout.container = document.getElementById(el.id);
 
@@ -46,7 +34,6 @@ HTMLWidgets.widget({
 
         x.layout.node = function createNodeUI(node) {
           var c = 0xFFFFFF;
-          
           if(node.data) 
             if(node.data.color) 
               c = '0x' + node.data.color.substr(1);
@@ -63,8 +50,8 @@ HTMLWidgets.widget({
         };
 
         x.layout.link = function createNodeUI(link) {
-          var fromc = 0xFFFFFF;
           
+          var fromc = 0xFFFFFF;
           if(link.data) 
             if(link.data.fromColor) 
               fromc = '0x' + link.data.fromColor.substr(1);
@@ -73,6 +60,8 @@ HTMLWidgets.widget({
           if(link.data) 
             if(link.data.toColor) 
               toc = '0x' + link.data.toColor.substr(1);
+
+          console.log(link)
           
           return {
             fromColor: fromc,
