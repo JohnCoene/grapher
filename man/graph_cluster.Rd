@@ -25,7 +25,9 @@ of clusters in the console.}
 meta data to attach to the nodes.}
 }
 \description{
-Cluster nodes on the graph.
+Cluster nodes on the graph. This ultimately adds a \code{cluster}
+column to the internal node data.frame. The latter can be used in
+e.g.: \code{\link{scale_node_color}}.
 }
 \examples{
 graph_data <- make_data()

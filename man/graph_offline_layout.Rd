@@ -4,7 +4,13 @@
 \alias{graph_offline_layout}
 \title{Layout Offline}
 \usage{
-graph_offline_layout(g, method = igraph::layout_nicely, dim = 3)
+graph_offline_layout(
+  g,
+  method = igraph::layout_nicely,
+  dim = 3,
+  scaling = NULL,
+  ...
+)
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 
@@ -14,6 +20,11 @@ as returned by a function of the same name.}
 \item{method}{The igraph function to compute node positions.}
 
 \item{dim}{Number of dimensions to use, passed to \code{method}.}
+
+\item{scaling}{A vector or 2 values defining the output range to
+rescale the coordinates.}
+
+\item{...}{Any other argument to pass to \code{method}.}
 }
 \description{
 Layout Offline
@@ -25,9 +36,14 @@ previously passed to \code{\link{graph_nodes}}.
 \examples{
 graph_data <- make_data(10)
 
-graph() \%>\% 
+g <- graph() \%>\% 
   graph_nodes(graph_data$nodes, id) \%>\% 
-  graph_links(graph_data$links, source, target) \%>\% 
-  graph_offline_layout()
+  graph_links(graph_data$links, source, target)
+
+# layout
+graph_offline_layout(g)
+
+# layout with scaling
+graph_offline_layout(g, scaling = c(-200, 200))
 
 }

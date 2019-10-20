@@ -58,36 +58,50 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
 #' @inheritParams graph_nodes
 #' @param method The igraph function to compute node positions.
 #' @param dim Number of dimensions to use, passed to \code{method}.
+#' @param scaling A vector or 2 values defining the output range to
+#' rescale the coordinates.
+#' @param ... Any other argument to pass to \code{method}.
 #' 
 #' @examples 
 #' graph_data <- make_data(10)
 #' 
-#' graph() %>% 
+#' g <- graph() %>% 
 #'   graph_nodes(graph_data$nodes, id) %>% 
-#'   graph_links(graph_data$links, source, target) %>% 
-#'   graph_offline_layout()
+#'   graph_links(graph_data$links, source, target)
+#' 
+#' # layout
+#' graph_offline_layout(g)
+#' 
+#' # layout with scaling
+#' graph_offline_layout(g, scaling = c(-200, 200))
 #' 
 #' @note This function will overwrite \code{x}, \code{y}, \code{z} variables 
 #' previously passed to \code{\link{graph_nodes}}. 
 #' 
 #' @export 
-graph_offline_layout <- function(g, method = igraph::layout_nicely, dim = 3) UseMethod("graph_offline_layout")
+graph_offline_layout <- function(g, method = igraph::layout_nicely, dim = 3, scaling = NULL, ...) UseMethod("graph_offline_layout")
 
 #' @export
 #' @method graph_offline_layout graph
-graph_offline_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3){
+graph_offline_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3, scaling = NULL, ...){
 
   assert_that(was_passed(g$x$links))
 
   ig <- g$x$links %>% 
     select(source, target) %>% 
     igraph::graph_from_data_frame()
-    
+
   vertices <- igraph::as_data_frame(ig, "vertices")
-  lay_out <- method(ig, dim = dim) %>% 
+  lay_out <- method(ig, dim = dim, ...) %>% 
     as.data.frame() %>% 
     bind_cols(vertices) %>% 
-    purrr::set_names(c("x", "y", "z", "id")) 
+    purrr::set_names(c("x", "y", "z", "id"))
+
+  if(!is.null(scaling)){
+    lay_out$x <- scales::rescale(lay_out$x, to = scaling)
+    lay_out$y <- scales::rescale(lay_out$y, to = scaling)
+    lay_out$z <- scales::rescale(lay_out$z, to = scaling)
+  }
 
   if(length(g$x$nodes))
     lay_out <- left_join(g$x$nodes, lay_out, by = "id")

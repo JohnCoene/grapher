@@ -1,6 +1,8 @@
 #' Cluster
 #' 
-#' Cluster nodes on the graph.
+#' Cluster nodes on the graph. This ultimately adds a \code{cluster}
+#' column to the internal node data.frame. The latter can be used in
+#' e.g.: \code{\link{scale_node_color}}.
 #' 
 #' @inheritParams graph_nodes
 #' @param method The igraph function to create the cluster.
