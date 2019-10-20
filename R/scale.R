@@ -16,11 +16,11 @@
 #'   scale_node_color(var)
 #' 
 #' @export
-scale_node_color <- function(g, variable, palette = c("0xFE4A49", "0xFED766", "0x009FB7", "0xF79256")) UseMethod("scale_node_color")
+scale_node_color <- function(g, variable, palette = graph_palette()) UseMethod("scale_node_color")
 
 #' @export 
 #' @method scale_node_color graph
-scale_node_color.graph <- function(g, variable, palette = c("0xFE4A49", "0xFED766", "0x009FB7", "0xF79256")){
+scale_node_color.graph <- function(g, variable, palette = graph_palette()){
   assert_that(has_it(variable))
   assert_that(was_passed(g$x$nodes))
 
@@ -41,11 +41,11 @@ scale_node_color.graph <- function(g, variable, palette = c("0xFE4A49", "0xFED76
 #' 
 #' @name scale_link_color
 #' @export
-scale_link_source_color <- function(g, variable, palette = c("0xFE4A49", "0xFED766", "0x009FB7", "0xF79256")) UseMethod("scale_link_source_color")
+scale_link_source_color <- function(g, variable, palette = graph_palette()) UseMethod("scale_link_source_color")
 
 #' @export 
 #' @method scale_link_source_color graph
-scale_link_source_color.graph <- function(g, variable, palette = c("0xFE4A49", "0xFED766", "0x009FB7", "0xF79256")){
+scale_link_source_color.graph <- function(g, variable, palette = graph_palette()){
   assert_that(has_it(variable))
   assert_that(was_passed(g$x$links))
 
@@ -59,11 +59,11 @@ scale_link_source_color.graph <- function(g, variable, palette = c("0xFE4A49", "
 
 #' @rdname scale_link_color
 #' @export
-scale_link_target_color <- function(g, variable, palette = c("0xFE4A49", "0xFED766", "0x009FB7", "0xF79256")) UseMethod("scale_link_target_color")
+scale_link_target_color <- function(g, variable, palette = graph_palette()) UseMethod("scale_link_target_color")
 
 #' @export 
 #' @method scale_link_target_color graph
-scale_link_target_color.graph <- function(g, variable, palette = c("0xFE4A49", "0xFED766", "0x009FB7", "0xF79256")){
+scale_link_target_color.graph <- function(g, variable, palette = graph_palette()){
   assert_that(has_it(variable))
   assert_that(was_passed(g$x$links))
 
@@ -77,11 +77,11 @@ scale_link_target_color.graph <- function(g, variable, palette = c("0xFE4A49", "
 
 #' @rdname scale_link_color
 #' @export
-scale_link_color <- function(g, variable, palette = c("0xFE4A49", "0xFED766", "0x009FB7", "0xF79256")) UseMethod("scale_link_color")
+scale_link_color <- function(g, variable, palette = graph_palette()) UseMethod("scale_link_color")
 
 #' @export 
 #' @method scale_link_color graph
-scale_link_color.graph <- function(g, variable, palette = c("0xFE4A49", "0xFED766", "0x009FB7", "0xF79256")){
+scale_link_color.graph <- function(g, variable, palette = graph_palette()){
   assert_that(has_it(variable))
   assert_that(was_passed(g$x$nodes))
 
@@ -106,4 +106,16 @@ scale_link_color.graph <- function(g, variable, palette = c("0xFE4A49", "0xFED76
   g$x$links <- bind_cols(g$x$links, tibble::tibble(fromColor = from_color, toColor = to_color))
 
   return(g)
+}
+
+#' Color Palette
+#' 
+#' A bright default color palette.
+#' 
+#' @return A vector of hex colors.
+#' 
+#' @export 
+graph_palette <- function() {
+  c("#DEFF68", "#68FF77", "#60AFFF", "#CE6DFF", "#F96161") %>% 
+    invisible()
 }

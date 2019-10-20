@@ -4,11 +4,7 @@
 \alias{scale_node_color}
 \title{Scale Node Color}
 \usage{
-scale_node_color(
-  g,
-  variable,
-  palette = c("0xFE4A49", "0xFED766", "0x009FB7", "0xF79256")
-)
+scale_node_color(g, variable, palette = graph_palette())
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 

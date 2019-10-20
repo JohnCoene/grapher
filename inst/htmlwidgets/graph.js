@@ -71,6 +71,24 @@ HTMLWidgets.widget({
 
         if(x.render)
           renderer = pixel(g, x.layout)
+
+
+        if (HTMLWidgets.shinyMode) {
+          if(x.on_node_click)
+            renderer.on('nodeclick', function(node) {
+              Shiny.setInputValue(el.id + '_node_click' + ":grapherParser", node);
+            });
+
+          if(x.on_node_double_click)
+            renderer.on('nodedblclick', function(node) {
+              Shiny.setInputValue(el.id + '_node_double_click' + ":grapherParser", node);
+            });
+
+          if(x.on_node_hover)
+            renderer.on('nodehover', function(node) {
+              Shiny.setInputValue(el.id + 'node_hover' + ":grapherParser", node);
+            });
+        }
       },
 
       resize: function(width, height) {

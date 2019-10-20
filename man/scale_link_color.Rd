@@ -6,23 +6,11 @@
 \alias{scale_link_target_color}
 \title{Scale Edge Color}
 \usage{
-scale_link_source_color(
-  g,
-  variable,
-  palette = c("0xFE4A49", "0xFED766", "0x009FB7", "0xF79256")
-)
+scale_link_source_color(g, variable, palette = graph_palette())
 
-scale_link_target_color(
-  g,
-  variable,
-  palette = c("0xFE4A49", "0xFED766", "0x009FB7", "0xF79256")
-)
+scale_link_target_color(g, variable, palette = graph_palette())
 
-scale_link_color(
-  g,
-  variable,
-  palette = c("0xFE4A49", "0xFED766", "0x009FB7", "0xF79256")
-)
+scale_link_color(g, variable, palette = graph_palette())
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 
