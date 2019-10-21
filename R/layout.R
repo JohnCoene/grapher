@@ -114,3 +114,37 @@ graph_static_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3
 
   return(g)
 }
+
+#' Offline Layout
+#' 
+#' Add layout computed offline via nodejs.
+#' 
+#' @inheritParams graph_nodes
+#' @param positions Path to binary positions file as computed
+#' by \href{ngraph.offline.layout}{https://github.com/anvaka/ngraph.offline.layout},
+#' generally \code{positions.bin}.
+#' 
+#' @export 
+graph_offline_layout <- function(g, positions) UseMethod("graph_offline_layout")
+
+#' @export 
+#' @method graph_offline_layout graph
+graph_offline_layout.graph <- function(g, positions){
+  assert_that(has_it(positions))
+  assert_that(was_passed(g$x$nodes))
+
+  # maximum should be n node * x/y/z 
+  MAX <- nrow(g$x$nodes) * 3
+
+  to_read = file(positions, "rb")
+  endian <- readBin(to_read, integer(), n = MAX, endian = "little")
+  m <- matrix(endian, ncol = 3) %>% 
+    as.data.frame() %>% 
+    set_names(c("x", "y", "z"))
+
+  g$x$nodes <- bind_cols(g$x$nodes, m)
+
+  g$x$customLayout <- TRUE
+
+  return(g)
+}

@@ -67,7 +67,7 @@ HTMLWidgets.widget({
           };
         };
 
-        if(x.render)
+        if(x.draw)
           renderer = pixel(g, x.layout)
 
 
@@ -96,6 +96,9 @@ HTMLWidgets.widget({
       },
       getGraph: function(){
         return g;
+      },
+      getRenderer: function(){
+        return renderer;
       }
 
     };
@@ -115,13 +118,26 @@ function get_graph(id){
   return(g);
 }
 
+function get_renderer(id){
+
+  var htmlWidgetsObj = HTMLWidgets.find("#" + id);
+
+  var r;
+
+  if (typeof htmlWidgetsObj != 'undefined') {
+    r = htmlWidgetsObj.getRenderer();
+  }
+
+  return(r);
+}
+
 if (HTMLWidgets.shinyMode) {
   
   // Add node
   Shiny.addCustomMessageHandler('add-nodes',
     function(msg) {
-      var chart = get_graph(msg.id);
-      if (typeof chart != 'undefined') {
+      var g = get_graph(msg.id);
+      if (typeof g != 'undefined') {
         msg.nodes.forEach(function(node){
           g.addNode(node)
         })
@@ -131,11 +147,20 @@ if (HTMLWidgets.shinyMode) {
   // Add links
   Shiny.addCustomMessageHandler('add-links',
     function(msg) {
-      var chart = get_graph(msg.id);
-      if (typeof chart != 'undefined') {
+      var g = get_graph(msg.id);
+      if (typeof g != 'undefined') {
         msg.links.forEach(function(link){
-          g.addLink(links)
+          g.addLink(link)
         })
+      }
+  });
+
+  // Redraw
+  Shiny.addCustomMessageHandler('draw',
+    function(msg) {
+      var r = get_renderer(msg.id);
+      if (typeof r != 'undefined') {
+        r.redraw()
       }
   });
 

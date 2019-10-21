@@ -6,7 +6,7 @@
 #'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 #'   string and have \code{'px'} appended.
 #' @param elementId Id of element.
-#' @param render If \code{FALSE} the graph is not rendered. 
+#' @param draw If \code{FALSE} the graph is not rendered. 
 #' 
 #' @examples 
 #' g <- make_data(50)
@@ -21,11 +21,11 @@
 #' @import purrr
 #'
 #' @export
-graph <- function(render = TRUE, width = "100%", height = "100vh", elementId = NULL) {
+graph <- function(draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
 
   # forward options using x
   x = list(
-    render = render,
+    draw = draw,
     layout = list()
   )
 
