@@ -29,6 +29,30 @@ graph() \%>\%
   graph_nodes(graph_data$nodes, id) \%>\% 
   graph_links(graph_data$links, source, target)
 
+# using the shiny proxy
+library(shiny)
+
+data1 <- make_data(150)
+data2 <- make_data(50)
+
+ui <- fluidPage(
+  actionButton("add", "add"),
+  graphOutput("g", height = "90vh")
+)
+
+server <- function(input, output) {
+  output$g <- render_graph({
+    graph(data1) 
+  })
+
+  observeEvent(input$add, {
+    graph_proxy("g") \%>\% 
+      graph_links(data2$links, source, target)
+  })
+}
+
+if(interactive()) shinyApp(ui, server)
+
 }
 \seealso{
 \code{\link{graph_nodes}} to add nodes.
