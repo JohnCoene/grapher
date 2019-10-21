@@ -7,6 +7,7 @@ HTMLWidgets.widget({
   factory: function(el, width, height) {
 
     var renderer, g;
+    var layout =  [];
 
     return {
 
@@ -15,9 +16,11 @@ HTMLWidgets.widget({
         g = createGraph();
 
         // update
-        g = from_json(x.data)
+        g = from_json(x.data);
+        
+        layout = x.layout;
 
-        x.layout.container = document.getElementById(el.id);
+        layout.container = document.getElementById(el.id);
 
         function get_node_position(node) {
           return {
@@ -28,11 +31,11 @@ HTMLWidgets.widget({
         };
 
         if(x.customLayout){
-          x.layout.createLayout = layout_static;
-          x.layout.initPosition = get_node_position;
+          layout.createLayout = layout_static;
+          layout.initPosition = get_node_position;
         }
 
-        x.layout.node = function createNodeUI(node) {
+        layout.node = function createNodeUI(node) {
           var c = 0xFFFFFF;
           if(node.data) 
             if(node.data.color) 
@@ -49,7 +52,7 @@ HTMLWidgets.widget({
           };
         };
 
-        x.layout.link = function createNodeUI(link) {
+        layout.link = function createNodeUI(link) {
           
           var fromc = 0xFFFFFF;
           if(link.data) 
@@ -68,8 +71,7 @@ HTMLWidgets.widget({
         };
 
         if(x.draw)
-          renderer = pixel(g, x.layout)
-
+          renderer = pixel(g, x.layout);
 
         if (HTMLWidgets.shinyMode) {
           if(x.on_node_click)
@@ -139,7 +141,7 @@ if (HTMLWidgets.shinyMode) {
       var g = get_graph(msg.id);
       if (typeof g != 'undefined') {
         msg.nodes.forEach(function(node){
-          g.addNode(node)
+          g.addNode(node);
         })
       }
   });
@@ -150,7 +152,7 @@ if (HTMLWidgets.shinyMode) {
       var g = get_graph(msg.id);
       if (typeof g != 'undefined') {
         msg.links.forEach(function(link){
-          g.addLink(link)
+          g.addLink(link[0], link[1], link[2]);
         })
       }
   });
@@ -160,7 +162,7 @@ if (HTMLWidgets.shinyMode) {
     function(msg) {
       var r = get_renderer(msg.id);
       if (typeof r != 'undefined') {
-        r.redraw()
+        r.redraw();
       }
   });
 
