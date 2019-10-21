@@ -22,8 +22,19 @@ graph_renderer <- function(g) {
   return(g)
 } 
 
-
 .render_graph <- function(g){
+
+  ERROR <- paste0(
+    "You must initialise the graph with at least one ", 
+    crayon::yellow("node"), 
+    " or one ", 
+    crayon::yellow("link"), ".\n"
+  )
+
+  assert_that(
+    length(g$x$nodes) != 0 || length(g$x$links) != 0,
+    msg = ERROR
+  )
 
   nodes <- list()
   if(length(g$x$nodes)){
