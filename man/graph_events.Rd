@@ -2,16 +2,16 @@
 % Please edit documentation in R/events.R
 \name{graph_events}
 \alias{graph_events}
-\alias{on_node_click}
-\alias{on_node_double_click}
-\alias{on_node_hover}
-\title{Capture events}
+\alias{capture_node_click}
+\alias{capture_node_double_click}
+\alias{capture_node_hover}
+\title{Capture Events}
 \usage{
-on_node_click(g)
+capture_node_click(g)
 
-on_node_double_click(g)
+capture_node_double_click(g)
 
-on_node_hover(g)
+capture_node_hover(g)
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 
@@ -35,7 +35,7 @@ server <- function(input, output) {
     graph() \%>\% 
       graph_nodes(graph_data$nodes, id) \%>\% 
       graph_links(graph_data$links, source, target) \%>\% 
-      on_node_click()
+      capture_node_click()
   })
 
   observeEvent(input$g_node_click, {

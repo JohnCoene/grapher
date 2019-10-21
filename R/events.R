@@ -1,4 +1,4 @@
-#' Capture events
+#' Capture Events
 #' 
 #' Enables capturing events in Shiny.
 #' 
@@ -18,7 +18,7 @@
 #'     graph() %>% 
 #'       graph_nodes(graph_data$nodes, id) %>% 
 #'       graph_links(graph_data$links, source, target) %>% 
-#'       on_node_click()
+#'       capture_node_click()
 #'   })
 #' 
 #'   observeEvent(input$g_node_click, {
@@ -30,33 +30,33 @@
 #' 
 #' @name graph_events
 #' @export 
-on_node_click <- function(g) UseMethod("on_node_click")
+capture_node_click <- function(g) UseMethod("capture_node_click")
 
 #' @export 
-#' @method on_node_click graph
-on_node_click.graph <- function(g) {
+#' @method capture_node_click graph
+capture_node_click.graph <- function(g) {
   g$x$on_node_click <- TRUE
   return(g)
 }
 
 #' @rdname graph_events
 #' @export 
-on_node_double_click <- function(g) UseMethod("on_node_double_click")
+capture_node_double_click <- function(g) UseMethod("capture_node_double_click")
 
 #' @export 
-#' @method on_node_double_click graph
-on_node_double_click.graph <- function(g) {
+#' @method capture_node_double_click graph
+capture_node_double_click.graph <- function(g) {
   g$x$on_node_double_click <- TRUE
   return(g)
 }
 
 #' @rdname graph_events
 #' @export 
-on_node_hover <- function(g) UseMethod("on_node_hover")
+capture_node_hover <- function(g) UseMethod("capture_node_hover")
 
 #' @export 
-#' @method on_node_hover graph
-on_node_hover.graph <- function(g) {
+#' @method capture_node_hover graph
+capture_node_hover.graph <- function(g) {
   g$x$on_node_hover <- TRUE
   return(g)
 }
