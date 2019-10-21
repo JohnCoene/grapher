@@ -26,7 +26,7 @@ make_nodes <- function(n = 10, colors = c("#B1E2A3", "#98D3A5", "#328983", "#1C5
 	dplyr::tibble(
 		id = as.character(seq(1, n)),
 		label = sample(paste0(LETTERS, 1:100), n, replace = TRUE),
-		size = ceiling(runif(n, 20, 40))
+		size = ceiling(runif(n, 10, 50))
 	)
 
 }
