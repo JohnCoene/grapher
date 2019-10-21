@@ -53,7 +53,10 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
   return(g)
 }
 
-#' Layout Offline
+#' Layout Static
+#' 
+#' LAyout the graph given using an igraph algorith rather 
+#' than the built-in force layout.
 #' 
 #' @inheritParams graph_nodes
 #' @param method The igraph function to compute node positions.
@@ -70,20 +73,20 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
 #'   graph_links(graph_data$links, source, target)
 #' 
 #' # layout
-#' graph_offline_layout(g)
+#' graph_static_layout(g)
 #' 
 #' # layout with scaling
-#' graph_offline_layout(g, scaling = c(-200, 200))
+#' graph_static_layout(g, scaling = c(-200, 200))
 #' 
 #' @note This function will overwrite \code{x}, \code{y}, \code{z} variables 
 #' previously passed to \code{\link{graph_nodes}}. 
 #' 
 #' @export 
-graph_offline_layout <- function(g, method = igraph::layout_nicely, dim = 3, scaling = NULL, ...) UseMethod("graph_offline_layout")
+graph_static_layout <- function(g, method = igraph::layout_nicely, dim = 3, scaling = NULL, ...) UseMethod("graph_static_layout")
 
 #' @export
-#' @method graph_offline_layout graph
-graph_offline_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3, scaling = NULL, ...){
+#' @method graph_static_layout graph
+graph_static_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3, scaling = NULL, ...){
 
   assert_that(was_passed(g$x$links))
 
