@@ -17,6 +17,7 @@ Imports:
     scales,
     jsonlite,
     magrittr,
+    tidygraph,
     assertthat,
     htmlwidgets
 RoxygenNote: 6.1.99.9001

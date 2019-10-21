@@ -1,5 +1,5 @@
 globalVariables(
-  c("source", "target")
+  c("source", "target", "nodes", "edges")
 )
 
 scale_colour <- function(x, palette){
@@ -9,53 +9,15 @@ scale_colour <- function(x, palette){
     scales::col_factor(palette, unique(x), na.color = "#FFFFFF")
 }
 
-.render_graph <- function(g){
+.prepare_graph <- function(x, n, nms){
+  if(is.null(x))
+    return(NULL)
 
-  nodes <- list()
-  if(length(g$x$nodes)){
+  if(!ncol(x))
+    return(NULL)
 
-    nodes <- select(g$x$nodes, id) %>% 
-      unlist() %>% 
-      unname() %>% 
-      map(function(x){
-        list(id = x)
-      })
-
-    node_metas <- select(g$x$nodes, -id) %>% 
-      purrr::transpose() %>% 
-      map(function(x){
-        list(data = x)
-      })
-
-    if(length(node_metas))
-      nodes <- map2(nodes, node_metas, 
-        function(id, meta){
-          list(id, meta) %>% 
-            flatten()
-        }) 
-  }
-
-  links <- list()
-  if(length(g$x$links)){
-    links <- g$x$links %>%
-      select(fromId = source, toId = target) %>%  
-      transpose()
-
-    link_metas <- g$x$links %>%
-      select(-source, -target) %>%  
-      purrr::transpose() %>% 
-      map(function(x){
-        list(data = x)
-      })
-
-    if(length(link_metas))
-      links <- map2(links, link_metas, 
-        function(id, meta){
-          list(id, meta) %>% 
-            flatten()
-        })
-
-  }
-
-  list(nodes = nodes, links = links)
+  names <- names(x)
+  names[n] <- nms
+  names(x) <- names
+  return(x)
 }

@@ -4,9 +4,23 @@
 \alias{graph}
 \title{Initialise}
 \usage{
-graph(draw = TRUE, width = "100\%", height = "100vh", elementId = NULL)
+graph(
+  data = NULL,
+  draw = TRUE,
+  width = "100\%",
+  height = "100vh",
+  elementId = NULL
+)
 }
 \arguments{
+\item{data}{A named \code{list} containing \code{nodes} and \code{links} 
+where the former's first column are the node ids and the latter's first
+and second columns are source and target, every other column is added as
+respective meta-data. Can also be an object of class \code{igraph} from the
+\link[igraph]{igraph} package.
+If \code{NULL} data must be later supplied with \code{\link{graph_nodes}}
+and \code{\link{graph_links}}.}
+
 \item{draw}{If \code{FALSE} the graph is not rendered.}
 
 \item{width, height}{Must be a valid CSS unit (like \code{'100\%'},
@@ -19,9 +33,27 @@ string and have \code{'px'} appended.}
 Initialise a grapher graph.
 }
 \examples{
-g <- make_data(50)
+g <- make_data(50) # mock data
 
+# from a list
+graph(g)
+
+# from igraph
+ig <- igraph::make_ring(10)
+graph(ig)
+
+# from tidygraph
+tbl_graph <- tidygraph::create_ring(20)
+graph(tbl_graph)
+
+# from data.frames
+# pass only links
 graph() \%>\% 
+  graph_links(g$links, source, target)
+
+# pass nodes and links
+graph() \%>\% 
+  graph_nodes(g$nodes, id) \%>\% 
   graph_links(g$links, source, target)
 
 }
