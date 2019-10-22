@@ -15,3 +15,7 @@ dependencies:
    version: 0.1.9
    src: htmlwidgets/lib/fromjson
    script: ngraph.fromjson.js
+ - name: ngraph.gexf
+   version: 0.0.10
+   src: htmlwidgets/lib/gexf
+   script: ngraph.gexf.js

@@ -6,8 +6,9 @@
 #' where the former's first column are the node ids and the latter's first
 #' and second columns are source and target, every other column is added as
 #' respective meta-data. Can also be an object of class \code{igraph} from the
-#' \link[igraph]{igraph} package.
-#' If \code{NULL} data must be later supplied with \code{\link{graph_nodes}}
+#' \link[igraph]{igraph} package. If a character string is passed the string is
+#' assumed to be the path to a \code{.gexf} file.
+#' If \code{NULL} data \emph{must} be later supplied with \code{\link{graph_nodes}}
 #' and \code{\link{graph_links}}.
 #' @param width,height Must be a valid CSS unit (like \code{'100\%'},
 #'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
@@ -125,6 +126,26 @@ graph.tbl_graph <- function(data = NULL, draw = TRUE, width = "100%", height = "
 
   as_widget(x, width, height, elementId)
 }
+
+#' @export
+#' @method graph character
+graph.character <- function(data = NULL, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
+
+  data <- tryCatch(suppressWarnings(readLines(data)), error = function(e) e)
+  assert_that(!inherits(data, "error"), msg = "Cannot read file.")
+  data <- paste(data, collapse = "\n")
+
+  x = list(
+    links = list(),
+    nodes = list(),
+    draw = draw,
+    gexf = data,
+    layout = list()
+  )
+
+  as_widget(x, width, height, elementId)
+}
+
 
 #' Shiny bindings for graph
 #'

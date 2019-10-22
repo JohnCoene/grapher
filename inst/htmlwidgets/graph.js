@@ -16,7 +16,10 @@ HTMLWidgets.widget({
         g = createGraph();
 
         // update
-        g = from_json(x.data);
+        if(!x.hasOwnProperty('gexf'))
+          g = from_json(x.data);
+        else
+          g = load_gexf.load(x.gexf)
         
         layout = x.layout;
 
