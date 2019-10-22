@@ -7,7 +7,8 @@
 #' and second columns are source and target, every other column is added as
 #' respective meta-data. Can also be an object of class \code{igraph} from the
 #' \link[igraph]{igraph} package. If a character string is passed the string is
-#' assumed to be the path to a \code{.gexf} file.
+#' assumed to be the path to either a \code{.gexf} file or a \code{.gv} 
+#' \href{https://en.wikipedia.org/wiki/DOT_(graph_description_language)}{dot file}.
 #' If \code{NULL} data \emph{must} be later supplied with \code{\link{graph_nodes}}
 #' and \code{\link{graph_links}}.
 #' @param width,height Must be a valid CSS unit (like \code{'100\%'},
@@ -29,6 +30,13 @@
 #' # from tidygraph
 #' tbl_graph <- tidygraph::create_ring(20)
 #' graph(tbl_graph)
+#' 
+#' # from gexf
+#' graph("http://gephi.org/datasets/LesMiserables.gexf")
+#' 
+#' # from dot file
+#' fl <- system.file("example/dotfile.gv", package = "grapher")
+#' graph(fl)
 #' 
 #' # from data.frames
 #' # pass only links
@@ -131,17 +139,25 @@ graph.tbl_graph <- function(data = NULL, draw = TRUE, width = "100%", height = "
 #' @method graph character
 graph.character <- function(data = NULL, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
 
+  # determine extension
+  exts <- strsplit(basename(data), split="\\.")[[1]][-1]
   data <- tryCatch(suppressWarnings(readLines(data)), error = function(e) e)
-  assert_that(!inherits(data, "error"), msg = "Cannot read file.")
-  data <- paste(data, collapse = "\n")
+  assert_that(!inherits(data, "error"), msg = "Cannot read file.")  
+  
+  if(exts == "gexf")
+    data <- paste(data, collapse = "\n")
 
   x = list(
     links = list(),
     nodes = list(),
     draw = draw,
-    gexf = data,
     layout = list()
   )
+
+  if(exts == "gexf")
+    x$gexf <- data
+  else
+    x$dot <- data
 
   as_widget(x, width, height, elementId)
 }

@@ -19,3 +19,7 @@ dependencies:
    version: 0.0.10
    src: htmlwidgets/lib/gexf
    script: ngraph.gexf.js
+ - name: ngraph.fromdot
+   version: 0.4.0
+   src: htmlwidgets/lib/fromdot
+   script: ngraph.fromdot.js

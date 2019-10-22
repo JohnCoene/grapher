@@ -18,7 +18,7 @@ as_widget <- function(x, width, height, elementId){
 }
 
 graph_renderer <- function(g) {
-  if(!length(g$x$gexf))
+  if(!length(g$x$gexf) && !length(g$x$dot))
     g$x$data <- .render_graph(g)
   return(g)
 } 

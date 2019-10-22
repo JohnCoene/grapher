@@ -15,11 +15,13 @@ HTMLWidgets.widget({
 
         g = createGraph();
 
-        // update
-        if(!x.hasOwnProperty('gexf'))
-          g = from_json(x.data);
+        // update according to data
+        if(x.hasOwnProperty('gexf'))
+          g = load_gexf.load(x.gexf);
+        else if (x.hasOwnProperty('dot'))
+          g = ngraph_fromdot(x.dot, g);
         else
-          g = load_gexf.load(x.gexf)
+          g = from_json(x.data);
         
         layout = x.layout;
 
