@@ -1,4 +1,18 @@
 as_widget <- function(x, width, height, elementId){
+  # default variables to get
+  x$style <- list(
+    nodes = list(
+      size = "size",
+      color = "color"
+    ),
+    links = list(
+      fromColor = "fromColor",
+      toColor = "toColor"
+    )
+  )
+
+  x$layout$clearColor <- "#000"
+
   attr(x, 'TOJSON_ARGS') <- list(dataframe = "rows")
 
   # create widget
