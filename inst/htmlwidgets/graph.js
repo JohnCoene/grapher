@@ -24,6 +24,7 @@ HTMLWidgets.widget({
           g = from_json(x.data);
         
         layout = x.layout;
+        layout.clearColor = '0x' + layout.clearColor.substr(1);
 
         layout.container = document.getElementById(el.id);
 
@@ -43,13 +44,13 @@ HTMLWidgets.widget({
         layout.node = function createNodeUI(node) {
           var c = 0xFFFFFF;
           if(node.data) 
-            if(node.data.color) 
-              c = '0x' + node.data.color.substr(1);
+            if(node.data[x.style.nodes.color]) 
+              c = '0x' + node.data[x.style.nodes.color].substr(1);
             
           var s = 30;
           if(node.data) 
-            if(node.data.size) 
-              s = node.data.size;
+            if(node.data[x.style.nodes.size]) 
+              s = node.data[x.style.nodes.size];
           
           return {
             color: c,
@@ -61,13 +62,13 @@ HTMLWidgets.widget({
           
           var fromc = 0xFFFFFF;
           if(link.data) 
-            if(link.data.fromColor) 
-              fromc = '0x' + link.data.fromColor.substr(1);
+            if(link.data[x.style.links.fromColor]) 
+              fromc = '0x' + link.data[x.style.links.fromColor].substr(1);
             
           var toc = 0xFFFFFF;
           if(link.data) 
-            if(link.data.toColor) 
-              toc = '0x' + link.data.toColor.substr(1);
+            if(link.data[x.style.links.toColor]) 
+              toc = '0x' + link.data[x.style.links.toColor].substr(1);
           
           return {
             fromColor: fromc,
@@ -76,7 +77,7 @@ HTMLWidgets.widget({
         };
 
         if(x.draw)
-          renderer = pixel(g, x.layout);
+          renderer = pixel(g, layout);
 
         if (HTMLWidgets.shinyMode) {
           if(x.on_node_click)

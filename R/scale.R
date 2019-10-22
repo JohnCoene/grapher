@@ -28,6 +28,7 @@ scale_node_color.graph <- function(g, variable, palette = graph_palette()){
   
   scl <- scale_colour(g$x$nodes[[var]], palette)
   g$x$nodes$color <- scl(g$x$nodes[[var]])
+  g$x$style$nodes$color <- "toColor"
 
   return(g)
 }
@@ -53,6 +54,7 @@ scale_link_source_color.graph <- function(g, variable, palette = graph_palette()
   
   scl <- scale_colour(g$x$links[[var]], palette)
   g$x$links$fromColor <- scl(g$x$links[[var]])
+  g$x$style$links$fromColor <- "fromColor"
 
   return(g)
 }
@@ -71,6 +73,7 @@ scale_link_target_color.graph <- function(g, variable, palette = graph_palette()
   
   scl <- scale_colour(g$x$links[[var]], palette)
   g$x$links$toColor <- scl(g$x$links[[var]])
+  g$x$style$links$toColor <- "toColor"
 
   return(g)
 }
@@ -102,6 +105,11 @@ scale_link_color.graph <- function(g, variable, palette = graph_palette()){
     select(id = target) %>% 
     inner_join(nodes, by = "id")
   from_color <- scl(target[[var]])
+
+  # using fromColor and toColor
+  # force style set
+  g$x$style$links$fromColor <- "fromColor"
+  g$x$style$links$toColor <- "toColor"
 
   g$x$links <- bind_cols(g$x$links, tibble::tibble(fromColor = from_color, toColor = to_color))
 
