@@ -79,6 +79,12 @@ HTMLWidgets.widget({
         if(x.draw)
           renderer = pixel(g, layout);
 
+        if(x.draw && x.legend){
+          var settings = createSettingsView(renderer);
+          settings.remove(['View Settings', 'Layout Settings']);
+          createLegend(settings, x.legend.title, x.legend.groups);
+        }
+
         if (HTMLWidgets.shinyMode) {
           if(x.on_node_click)
             renderer.on('nodeclick', function(node) {
