@@ -16,6 +16,8 @@
 #'   string and have \code{'px'} appended.
 #' @param elementId Id of element.
 #' @param draw If \code{FALSE} the graph is not rendered. 
+#' @param directed Whether the graph is directed, if passing an object of class 
+#' \code{igraph} to \code{data} then this is inferred from the object.
 #' 
 #' @examples 
 #' g <- make_data(50) # mock data
@@ -55,14 +57,15 @@
 #' @import purrr
 #'
 #' @export
-graph <- function(data = NULL, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) UseMethod("graph")
+graph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) UseMethod("graph")
 
 #' @export
-graph.default <- function(data = NULL, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
+graph.default <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
 
   # forward options using x
   x = list(
     draw = draw,
+    directed = directed,
     layout = list()
   )
 
@@ -71,7 +74,7 @@ graph.default <- function(data = NULL, draw = TRUE, width = "100%", height = "10
 
 #' @export
 #' @method graph igraph
-graph.igraph <- function(data = NULL, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
+graph.igraph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
 
   g_df <- igraph::as_data_frame(data, "both")
   nodes <- g_df$vertices
@@ -84,6 +87,7 @@ graph.igraph <- function(data = NULL, draw = TRUE, width = "100%", height = "100
   x = list(
     links = links,
     nodes = nodes,
+    directed = igraph::is_directed(data),
     draw = draw,
     layout = list()
   )
@@ -93,7 +97,7 @@ graph.igraph <- function(data = NULL, draw = TRUE, width = "100%", height = "100
 
 #' @export
 #' @method graph list
-graph.list <- function(data = NULL, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
+graph.list <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
 
   links <- data$links
   nodes <- data$nodes
@@ -104,6 +108,7 @@ graph.list <- function(data = NULL, draw = TRUE, width = "100%", height = "100vh
   x = list(
     links = links,
     nodes = nodes,
+    directed = directed,
     draw = draw,
     layout = list()
   )
@@ -113,7 +118,7 @@ graph.list <- function(data = NULL, draw = TRUE, width = "100%", height = "100vh
 
 #' @export
 #' @method graph tbl_graph
-graph.tbl_graph <- function(data = NULL, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
+graph.tbl_graph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
 
   links <- data %>% 
     tidygraph::activate(edges) %>% 
@@ -128,6 +133,7 @@ graph.tbl_graph <- function(data = NULL, draw = TRUE, width = "100%", height = "
   x = list(
     links = links,
     nodes = nodes,
+    directed = directed,
     draw = draw,
     layout = list()
   )
@@ -137,7 +143,7 @@ graph.tbl_graph <- function(data = NULL, draw = TRUE, width = "100%", height = "
 
 #' @export
 #' @method graph character
-graph.character <- function(data = NULL, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
+graph.character <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
 
   # determine extension
   exts <- strsplit(basename(data), split="\\.")[[1]][-1]
@@ -150,6 +156,7 @@ graph.character <- function(data = NULL, draw = TRUE, width = "100%", height = "
   x = list(
     links = list(),
     nodes = list(),
+    directed = directed,
     draw = draw,
     layout = list()
   )

@@ -8,6 +8,7 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     dplyr,
+    tidyr,
     purrr,
     rlang,
     shiny,

@@ -29,7 +29,7 @@ graph_cluster.graph <- function(g, method = igraph::cluster_walktrap,
 
   ig <- g$x$links %>%
     select(source, target) %>%  
-    igraph::graph_from_data_frame()
+    igraph::graph_from_data_frame(directed = g$x$directed)
   vertices <- igraph::as_data_frame(ig, "vertices") %>% 
     purrr::set_names(c("id"))
 

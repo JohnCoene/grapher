@@ -1,5 +1,6 @@
 globalVariables(
-  c("source", "target", "nodes", "edges")
+  c("source", "target", "nodes", "edges",
+    "Depends", "Imports", "LinkingTo", "Package")
 )
 
 scale_colour <- function(x, palette){

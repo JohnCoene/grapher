@@ -6,6 +6,7 @@
 \usage{
 graph(
   data = NULL,
+  directed = TRUE,
   draw = TRUE,
   width = "100\%",
   height = "100vh",
@@ -22,6 +23,9 @@ assumed to be the path to either a \code{.gexf} file or a \code{.gv}
 \href{https://en.wikipedia.org/wiki/DOT_(graph_description_language)}{dot file}.
 If \code{NULL} data \emph{must} be later supplied with \code{\link{graph_nodes}}
 and \code{\link{graph_links}}.}
+
+\item{directed}{Whether the graph is directed, if passing an object of class 
+\code{igraph} to \code{data} then this is inferred from the object.}
 
 \item{draw}{If \code{FALSE} the graph is not rendered.}
 

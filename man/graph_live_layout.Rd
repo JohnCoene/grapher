@@ -20,7 +20,7 @@ graph_live_layout(
 returned by \code{\link{graph}} or a \code{graph_proxy}
 as returned by a function of the same name.}
 
-\item{spring_length}{Used to compute Hook's law, default of \code{30} is generally idea.}
+\item{spring_length}{Used to compute Hook's law, default of \code{30} is generally ideal.}
 
 \item{sping_coeff}{Hook's law coefficient, where \code{1} is a solid spring.}
 

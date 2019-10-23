@@ -3,7 +3,7 @@
 #' Layout the graph live on the canvas using a physics simulator.
 #' 
 #' @inheritParams graph_nodes
-#' @param spring_length Used to compute Hook's law, default of \code{30} is generally idea.
+#' @param spring_length Used to compute Hook's law, default of \code{30} is generally ideal.
 #' @param sping_coeff Hook's law coefficient, where \code{1} is a solid spring.
 #' @param gravity Coulomb's law coefficient. It's used to repel nodes thus should be negative 
 #' if positive nodes attract each other.
@@ -92,7 +92,7 @@ graph_static_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3
 
   ig <- g$x$links %>% 
     select(source, target) %>% 
-    igraph::graph_from_data_frame()
+    igraph::graph_from_data_frame(directed = g$x$directed)
 
   vertices <- igraph::as_data_frame(ig, "vertices")
   lay_out <- method(ig, dim = dim, ...) %>% 
