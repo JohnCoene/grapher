@@ -56,3 +56,10 @@ Body forces are calculated in \eqn{n*lg(n)} time with help of Barnes-Hut algorit
 \href{https://en.wikipedia.org/wiki/Euler_method}{Euler} method is then used to 
 solve ordinary differential equation of Newton's law and get position of bodies.
 }
+\examples{
+data <- make_data(20)
+
+graph(data) \%>\% 
+ graph_live_layout(time_step = 5L)
+
+}

@@ -37,9 +37,7 @@ previously passed to \code{\link{graph_nodes}}.
 \examples{
 graph_data <- make_data(10)
 
-g <- graph() \%>\% 
-  graph_nodes(graph_data$nodes, id) \%>\% 
-  graph_links(graph_data$links, source, target)
+g <- graph(graph_data)
 
 # layout
 graph_static_layout(g)

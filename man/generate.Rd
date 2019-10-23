@@ -42,6 +42,9 @@ Generate nodes and links.
 
 \examples{
 graph_data <- make_data()
-names(graph_data)
+names(graph_data) # structure
+
+# graph
+graph(graph_data)
 
 }

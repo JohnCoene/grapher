@@ -15,7 +15,10 @@
 #'
 #' @examples
 #' graph_data <- make_data()
-#' names(graph_data)
+#' names(graph_data) # structure
+#' 
+#' # graph
+#' graph(graph_data)
 #' 
 #' @return \code{tibble} of nodes or links or a \code{list} of the latter.
 #'

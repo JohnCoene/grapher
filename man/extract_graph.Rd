@@ -23,10 +23,9 @@ using nodejs as it can be imported with
 \href{ngraph.fromjson}{https://github.com/anvaka/ngraph.fromjson}.
 }
 \examples{
-graph_data <- make_data(10)
+data <- make_data(10)
 
-g <- graph() \%>\% 
-  graph_links(graph_data$links, source, target)
+g <- graph(data) 
 
 lst <- extract_graph(g)
 

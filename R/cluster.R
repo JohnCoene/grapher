@@ -12,8 +12,7 @@
 #' @examples 
 #' graph_data <- make_data()
 #' 
-#' graph() %>% 
-#'   graph_links(graph_data$links, source, target) %>% 
+#' graph(graph_data) %>% 
 #'   graph_cluster() 
 #' 
 #' @export 

@@ -15,9 +15,7 @@
 #' 
 #' server <- function(input, output) {
 #'   output$g <- render_graph({
-#'     graph() %>% 
-#'       graph_nodes(graph_data$nodes, id) %>% 
-#'       graph_links(graph_data$links, source, target) %>% 
+#'      graph(graph_data) %>% 
 #'       capture_node_click()
 #'   })
 #' 

@@ -39,7 +39,7 @@ Edges
 
 \examples{
 # generate data
-# change custom color
+# add custom color
 data <- make_data()
 data$nodes$myColor <- "#0000ff"
 

@@ -29,6 +29,12 @@
 #' \href{https://en.wikipedia.org/wiki/Euler_method}{Euler} method is then used to 
 #' solve ordinary differential equation of Newton's law and get position of bodies.
 #' 
+#' @examples 
+#' data <- make_data(20)
+#' 
+#' graph(data) %>% 
+#'  graph_live_layout(time_step = 5L)
+#' 
 #' @export 
 graph_live_layout <- function(g, spring_length = 30L, sping_coeff = .0008,
   gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE) UseMethod("graph_live_layout")
@@ -68,9 +74,7 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
 #' @examples 
 #' graph_data <- make_data(10)
 #' 
-#' g <- graph() %>% 
-#'   graph_nodes(graph_data$nodes, id) %>% 
-#'   graph_links(graph_data$links, source, target)
+#' g <- graph(graph_data)
 #' 
 #' # layout
 #' graph_static_layout(g)

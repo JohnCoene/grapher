@@ -9,10 +9,9 @@
 #' @param json = FALSE
 #' 
 #' @examples 
-#' graph_data <- make_data(10)
+#' data <- make_data(10)
 #' 
-#' g <- graph() %>% 
-#'   graph_links(graph_data$links, source, target)
+#' g <- graph(data) 
 #' 
 #' lst <- extract_graph(g)
 #' 

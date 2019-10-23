@@ -12,14 +12,14 @@
 #' data$links$grp <- rep(letters[1:2], 5)
 #' data$links$color <- rep(c("#FFFFFF", "#F00FFF"), 5)
 #' 
-#' graph(data) %>% graph_linklegend(grp, color)
+#' graph(data) %>% graph_links_legend(grp, color)
 #' 
 #' @export 
-graph_linklegend <- function(g, var, color, title = "legend") UseMethod("graph_linklegend")
+graph_links_legend <- function(g, var, color, title = "legend") UseMethod("graph_links_legend")
 
 #' @export 
-#' @method graph_linklegend graph
-graph_linklegend.graph <- function(g, var, color, title = "legend"){
+#' @method graph_links_legend graph
+graph_links_legend.graph <- function(g, var, color, title = "legend"){
 
   assert_that(was_passed(g$x$links))
 

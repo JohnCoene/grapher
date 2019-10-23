@@ -10,6 +10,11 @@
 #' latter is only useful if \code{draw} was set to \code{FALSE}
 #' in the initialisation function (\code{\link{graph}}).
 #' 
+#' @examples
+#' make_data() %>% 
+#'   graph(draw = FALSE) %>% 
+#'   graph_draw()
+#' 
 #' @export 
 graph_draw <- function(g) UseMethod("graph_draw")
 

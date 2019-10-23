@@ -21,3 +21,9 @@ the graph is re-draw, if used on a static visualisation
 latter is only useful if \code{draw} was set to \code{FALSE}
 in the initialisation function (\code{\link{graph}}).
 }
+\examples{
+make_data() \%>\% 
+  graph(draw = FALSE) \%>\% 
+  graph_draw()
+
+}
