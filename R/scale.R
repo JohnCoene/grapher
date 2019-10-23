@@ -33,6 +33,38 @@ scale_node_color.graph <- function(g, variable, palette = graph_palette()){
   return(g)
 }
 
+#' Scale Node Size
+#' 
+#' Scale nodes size.
+#' 
+#' @inheritParams graph_nodes
+#' @param variable Bare column name of variable to scale against.
+#' @param range Output range.
+#' 
+#' @examples
+#' graph_data <- make_data()
+#' 
+#' graph_data %>% 
+#'   graph() %>% 
+#'   scale_node_size(size)
+#' 
+#' @export
+scale_node_size <- function(g, variable, range = c(20, 70)) UseMethod("scale_node_size")
+
+#' @export 
+#' @method scale_node_size graph
+scale_node_size.graph <- function(g, variable, range = c(20, 70)){
+  assert_that(has_it(variable))
+  assert_that(was_passed(g$x$nodes))
+
+  var <- deparse(substitute(variable))
+  
+  g$x$nodes$size <- scales::rescale(g$x$nodes[[var]], to = range)
+  g$x$style$nodes$size <- "size"
+
+  return(g)
+}
+
 #' Scale Edge Color
 #' 
 #' Scale nodes color.
