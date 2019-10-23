@@ -57,3 +57,88 @@ make_data <- function(n = 10, colors = c("#B1E2A3", "#98D3A5", "#328983", "#1C5C
     links = links
   )
 }
+
+#' CRAN Dependency Graph
+#' 
+#' Builds the CRAN dependency graph.
+#' 
+#' @param deps Forms of dependencies to take into account. 
+#' @param max Maximum number of reverse dependencies for a package 
+#' may have.
+#' @param format The format in which to return the graph, either a 
+#' \code{list} or nodes and edges or an object of class \code{igraph}.
+#' 
+#' @examples 
+#' \dontrun{
+#' g <- cran_deps_graph(500, format = "igraph")
+#' min_g <- igraph::mst(g)
+#' 
+#' min_g %>% 
+#'   graph() %>% 
+#'   graph_cluster() %>% 
+#'   scale_link_color(cluster) %>% 
+#'   scale_node_size(degree, c(20, 100))
+#' }
+#' 
+#' @return A list of nodes and links.
+#' 
+#' @import assertthat
+#' @importFrom stats quantile
+#' @importFrom utils available.packages
+#' 
+#' @export
+cran_deps_graph <- function(max = 10, deps = c("Depends", "Imports", "LinkingTo"), format = c("list", "igraph")) {
+
+  format <- match.arg(format)
+
+  if(max > 15)
+    cat(paste0("A high `", crayon::blue("max"), "` value makes a large ", crayon::underline("hariball"), " graph.\n"))
+
+  pkgs <- available.packages() %>% 
+    tibble::as_tibble()
+
+  depends <- tibble::tibble()
+  linkingto <- tibble::tibble()
+  imports <- tibble::tibble()
+
+  if("Depends" %in% deps)
+    depends <- pkgs %>% 
+      dplyr::select(source = Package, target = Depends) %>% 
+      tidyr::separate_rows(target, sep = ",") 
+
+  if("Imports" %in% deps)
+    imports <- pkgs %>% 
+      dplyr::select(source = Package, target = Imports) %>% 
+      tidyr::separate_rows(target, sep = ",")
+
+  if("LinkingTo" %in% deps)
+    linkingto <- pkgs %>% 
+      dplyr::select(source = Package, target = LinkingTo) %>% 
+      tidyr::separate_rows(target, sep = ",")
+
+  links <- dplyr::bind_rows(depends, imports, linkingto) %>% 
+    dplyr::filter(!is.na(target)) %>% 
+    dplyr::mutate(
+      target = gsub("\\(.*\\)", "", target),
+      target = trimws(target)
+    ) %>% 
+    dplyr::filter(!target %in% c("R", "")) 
+  
+  target_count <- links %>% 
+    dplyr::count(target) %>% 
+    dplyr::filter(n < max)
+
+  links <- links %>% 
+    dplyr::inner_join(target_count, by = "target") %>% 
+    dplyr::distinct(source, target)
+
+  nodes <- tibble::tibble(
+    id = c(links$source, links$target)
+  ) %>% 
+  dplyr::count(id, name = "degree")
+
+  if(format == "igraph")
+    return(igraph::graph_from_data_frame(links, TRUE, nodes))
+
+  list(nodes = nodes, links = links)
+}
