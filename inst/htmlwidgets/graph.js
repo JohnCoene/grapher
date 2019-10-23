@@ -178,4 +178,28 @@ if (HTMLWidgets.shinyMode) {
       }
   });
 
+  // remove nodes
+  Shiny.addCustomMessageHandler('remove-nodes',
+    function(msg) {
+      var g = get_graph(msg.id);
+      if (typeof g != 'undefined') {
+        msg.data.forEach(function(id){
+          g.removeNode(id);
+        });
+      }
+  });
+
+  // remove links
+  Shiny.addCustomMessageHandler('remove-links',
+    function(msg) {
+      var g = get_graph(msg.id);
+      if (typeof g != 'undefined') {
+        var lnk;
+        msg.links.forEach(function(link){
+          lnk = g.getLink(link.source, link.target);
+          g.removeLink(lnk);
+        });
+      }
+  });
+
 }
