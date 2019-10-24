@@ -3,7 +3,7 @@
 
 # grapher
 
-Create 3D and 2D interactive graphs (networks): an R integration of the amazing work of [Andrei Kashcha](https://github.com/anvaka).
+Create 3D and 2D interactive graphs (networks): an R integration of many of the amazing works of [Andrei Kashcha](https://github.com/anvaka).
 
 ## Usage
 

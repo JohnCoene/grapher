@@ -71,3 +71,6 @@ graph() \%>\%
   graph_links(g$links, source, target)
 
 }
+\seealso{
+\code{\link{graph_nodes}} and \code{\link{graph_links}} to add nodes and links.
+}

@@ -154,3 +154,46 @@ graph_offline_layout.graph <- function(g, positions){
 
   return(g)
 }
+
+#' Pin Nodes
+#' 
+#' Pin nodes in place.
+#' 
+#' @inheritParams graph_nodes
+#' 
+#' @name pin_nodes
+#' @export 
+pin_nodes <- function(g, data, id) UseMethod("pin_nodes")
+
+#' @export
+#' @method pin_nodes graph_proxy
+pin_nodes.graph_proxy <- function(g, data, id){
+
+  assert_that(has_it(data), has_it(id))
+
+  nodes <- pull(data, id) %>% 
+    as.list() # for list in case only one node
+
+  msg <- list(id = g$id, nodes = nodes)
+
+  g$session$sendCustomMessage("pin-nodes", msg)
+
+  return(g)
+}
+
+#' @rdname pin_nodes
+#' @export 
+pin_node <- function(g, id) UseMethod("pin_node")
+
+#' @export
+#' @method pin_node graph_proxy
+pin_node.graph_proxy <- function(g, id){
+
+  assert_that(has_it(id))
+
+  msg <- list(id = g$id, nodes = as.list(id))
+
+  g$session$sendCustomMessage("pin-nodes", msg)
+
+  return(g)
+}

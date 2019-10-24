@@ -89,12 +89,6 @@ HTMLWidgets.widget({
         if(x.draw)
           renderer = pixel(g, layout);
 
-        if(x.draw && x.legend){
-          var settings = createSettingsView(renderer);
-          settings.remove(['View Settings', 'Layout Settings']);
-          createLegend(settings, x.legend.title, x.legend.groups);
-        }
-
         if (HTMLWidgets.shinyMode) {
           if(x.on_node_click)
             renderer.on('nodeclick', function(node) {
@@ -208,6 +202,19 @@ if (HTMLWidgets.shinyMode) {
         msg.links.forEach(function(link){
           lnk = g.getLink(link.source, link.target);
           g.removeLink(lnk);
+        });
+      }
+  });
+
+  // pin nodes
+  Shiny.addCustomMessageHandler('pin-nodes',
+    function(msg) {
+      var g = get_graph(msg.id);
+      var r = get_renderer(msg.id);
+      if (typeof g != 'undefined') {
+        var layout = r.layout;
+        msg.nodes.forEach(function(node){
+          layout(g).pinNode(node, true)
         });
       }
   });

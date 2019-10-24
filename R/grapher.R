@@ -56,6 +56,8 @@
 #' @import assertthat
 #' @import dplyr
 #' @import purrr
+#' 
+#' @seealso \code{\link{graph_nodes}} and \code{\link{graph_links}} to add nodes and links.
 #'
 #' @export
 graph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) UseMethod("graph")
