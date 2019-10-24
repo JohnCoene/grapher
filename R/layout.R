@@ -142,11 +142,13 @@ graph_offline_layout.graph <- function(g, positions){
 
   to_read = file(positions, "rb")
   endian <- readBin(to_read, integer(), n = MAX, endian = "little")
+  close(to_read)
   m <- matrix(endian, ncol = 3) %>% 
     as.data.frame() %>% 
-    set_names(c("x", "y", "z"))
+    set_names(c("x", "y", "z")) %>% 
+    transpose()
 
-  g$x$nodes <- bind_cols(g$x$nodes, m)
+  g$x$offline_nodes <- m
 
   g$x$customLayout <- TRUE
 
