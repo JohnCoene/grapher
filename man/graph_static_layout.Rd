@@ -27,7 +27,7 @@ rescale the coordinates.}
 \item{...}{Any other argument to pass to \code{method}.}
 }
 \description{
-LAyout the graph given using an igraph algorith rather 
+Layout the graph given using an igraph algorithm rather 
 than the built-in force layout.
 }
 \note{
