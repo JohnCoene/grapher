@@ -18,7 +18,8 @@ graph(
 where the former's first column are the node ids and the latter's first
 and second columns are source and target, every other column is added as
 respective meta-data. Can also be an object of class \code{igraph} from the
-\link[igraph]{igraph} package. If a character string is passed the string is
+\link[igraph]{igraph} package or an object of class \code{tbl_graph} from 
+the \link[tidygraph]{tidygraph} package. If a character string is passed the string is
 assumed to be the path to either a \code{.gexf} file or a \code{.gv} 
 \href{https://en.wikipedia.org/wiki/DOT_(graph_description_language)}{dot file}.
 If \code{NULL} data \emph{must} be later supplied with \code{\link{graph_nodes}}
