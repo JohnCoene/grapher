@@ -240,4 +240,14 @@ if (HTMLWidgets.shinyMode) {
       }
   });
 
+
+  // change background
+  Shiny.addCustomMessageHandler('camera-fov',
+    function(msg) {
+      var g = get_graph(msg.id);
+      var r = get_renderer(msg.id);
+      if (typeof r != 'undefined') {
+        r.camera(g).fov = msg.fov;
+      }
+  });
 }
