@@ -10,5 +10,5 @@ graph_palette()
 A vector of hex colors.
 }
 \description{
-A bright default color palette.
+A bright default color palette for examples and defaults.
 }

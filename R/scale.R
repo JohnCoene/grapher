@@ -150,12 +150,12 @@ scale_link_color.graph <- function(g, variable, palette = graph_palette()){
 
 #' Color Palette
 #' 
-#' A bright default color palette.
+#' A bright default color palette for examples and defaults.
 #' 
 #' @return A vector of hex colors.
 #' 
 #' @export 
 graph_palette <- function() {
-  c("#FF964C", "#F7EF5D", "#EF5047", "#4592E0", "#5041D8") %>% 
+  c("#FF964C", "#F7EF5D", "#EF5047", "#4592E0", "#5041D8", "#37A855") %>% 
     invisible()
 }
