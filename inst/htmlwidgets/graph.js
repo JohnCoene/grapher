@@ -219,4 +219,25 @@ if (HTMLWidgets.shinyMode) {
       }
   });
 
+  // change dimensions
+  Shiny.addCustomMessageHandler('change-dim',
+    function(msg) {
+      var g = get_graph(msg.id);
+      var r = get_renderer(msg.id);
+      if (typeof g != 'undefined') {
+        var layout = r.layout;
+        layout(g).is3d(msg.is3d);
+      }
+  });
+
+  // change background
+  Shiny.addCustomMessageHandler('background',
+    function(msg) {
+      var r = get_renderer(msg.id);
+      if (typeof r != 'undefined') {
+        r.clearColor('0x' + msg.color.substr(1));
+        r.clearAlpha(msg.alpha);
+      }
+  });
+
 }

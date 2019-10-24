@@ -61,7 +61,7 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
 
 #' Layout Static
 #' 
-#' LAyout the graph given using an igraph algorith rather 
+#' Layout the graph given using an igraph algorithm rather 
 #' than the built-in force layout.
 #' 
 #' @inheritParams graph_nodes
@@ -160,6 +160,45 @@ graph_offline_layout.graph <- function(g, positions){
 #' Pin nodes in place.
 #' 
 #' @inheritParams graph_nodes
+#' @param data A data.frame holding nodes to pin.
+#' @param id Either the bare name of the column 
+#' containing node ids to pin or an integer 
+#' (vector of length one) of node id to pin.
+#' 
+#' @examples 
+#' library(shiny)
+#' 
+#' N <- 500
+#' graph_data <- make_data(N)
+#' 
+#' ui <- fluidPage(
+#'   actionButton("pin", "pin node"),
+#'   numericInput("node", "node to pin", 1, min = 1, max = N, step = 1),
+#'   actionButton("pinall", "pin ALL node"),
+#'   graphOutput("graph")
+#' )
+#' 
+#' server <- function(input, output) {
+#' 
+#'   output$graph <- renderGraph({
+#'     graph_data %>% 
+#'       graph() %>% 
+#'       graph_live_layout(time_step = 5)
+#'   })
+#' 
+#'   observeEvent(input$pin, {
+#'     graph_proxy("graph") %>% 
+#'       pin_node(input$node)
+#'   })
+#' 
+#'   observeEvent(input$pinall, {
+#'     graph_proxy("graph") %>% 
+#'     pin_nodes(graph_data$nodes, id)
+#'   })
+#' 
+#' }
+#' 
+#' if(interactive()) shinyApp(ui, server)
 #' 
 #' @name pin_nodes
 #' @export 
@@ -194,6 +233,62 @@ pin_node.graph_proxy <- function(g, id){
   msg <- list(id = g$id, nodes = as.list(id))
 
   g$session$sendCustomMessage("pin-nodes", msg)
+
+  return(g)
+}
+
+#' Change Dimensions
+#' 
+#' Change the dimensions of the graph.
+#' 
+#' @inheritParams graph_nodes
+#' @param is_3d Whether to plot in 3 dimensions or 2 dimensions.
+#' 
+#' @examples 
+#' library(shiny)
+#' 
+#' N <- 500
+#' graph_data <- make_data(N)
+#' 
+#' ui <- fluidPage(
+#'   radioButtons("dims", "Dimensions", choices = list("3D" = TRUE, "2D" = FALSE)),
+#'   graphOutput("graph")
+#' )
+#' 
+#' server <- function(input, output) {
+#' 
+#'   output$graph <- renderGraph({
+#'     graph_data %>% 
+#'       graph() %>% 
+#'       graph_live_layout(time_step = 5)
+#'   })
+#' 
+#'   observeEvent(input$dims, {
+#'     graph_proxy("graph") %>% 
+#'       change_dimensions(input$dims)
+#'   })
+#' 
+#' }
+#' 
+#' if(interactive()) shinyApp(ui, server)
+#' 
+#' @export 
+change_dimensions <- function(g, is_3d = FALSE) UseMethod("change_dimensions")
+
+#' @export
+#' @method change_dimensions graph
+change_dimensions.graph <- function(g, is_3d = FALSE){
+  g$x$layout$physics$is3d <- is_3d
+  return(g)
+}
+
+#' @export
+#' @method change_dimensions graph_proxy
+change_dimensions.graph_proxy <- function(g, is_3d = FALSE){
+  
+  msg <- list(id = g$id, is3d = is_3d)
+
+  g$session$sendCustomMessage("change-dim", msg)
 
   return(g)
 }
