@@ -11,6 +11,38 @@
 #'   graph() %>% 
 #'   graph_background("#d3d3d3", .2)
 #' 
+#' # as proxy
+#' library(shiny)
+#' 
+#' graph_data <- make_data(500)
+#' 
+#' colors <- list(
+#'   "#000000", "#121420",
+#'   "#1B2432", "#2C2B3C"
+#' )
+#' 
+#' ui <- fluidPage(
+#'   selectInput("bg", "background color", choices = colors),
+#'   graphOutput("graph")
+#' )
+#' 
+#' server <- function(input, output) {
+#' 
+#'   output$graph <- renderGraph({
+#'     graph_data %>% 
+#'       graph() %>% 
+#'       graph_live_layout(time_step = 5)
+#'   })
+#' 
+#'   observeEvent(input$bg, {
+#'     graph_proxy("graph") %>% 
+#'     graph_background(input$bg)
+#'   })
+#' 
+#' }
+#' 
+#' if(interactive()) shinyApp(ui, server)
+#' 
 #' @export 
 graph_background <- function(g, color = "#000", alpha = 1) UseMethod("graph_background")
 
@@ -21,5 +53,15 @@ graph_background.graph <- function(g, color = "#000", alpha = 1){
     clearColor = color,
     clearAlpha = alpha
   )
+  return(g)
+}
+
+#' @export
+#' @method graph_background graph_proxy
+graph_background.graph_proxy <- function(g, color = "#000", alpha = 1){
+
+  msg <- list(id = g$id, color = color, alpha = alpha)
+
+  g$session$sendCustomMessage("background", msg)
   return(g)
 }
