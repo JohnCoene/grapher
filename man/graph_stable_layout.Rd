@@ -4,7 +4,7 @@
 \alias{graph_stable_layout}
 \title{Stabilize}
 \usage{
-graph_stable_layout(g, stable = TRUE)
+graph_stable_layout(g, stable = TRUE, ms = 0L)
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 
@@ -12,11 +12,19 @@ returned by \code{\link{graph}} or a \code{graph_proxy}
 as returned by a function of the same name.}
 
 \item{stable}{Whether to stabilise the graph.}
+
+\item{ms}{Milliseconds before stabilizing the graph.}
 }
 \description{
 Stabilize the layout of the graph.
 }
 \examples{
+gdata <- make_data(100)
+
+graph(gdata) \%>\%
+ graph_stable_layout(ms = 5000)
+ 
+# as proxy
 library(shiny)
 
 graph_data <- make_data(200)

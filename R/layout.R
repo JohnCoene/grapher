@@ -301,8 +301,15 @@ change_dimensions.graph_proxy <- function(g, is_3d = FALSE){
 #' 
 #' @inheritParams graph_nodes
 #' @param stable Whether to stabilise the graph.
+#' @param ms Milliseconds before stabilizing the graph.
 #' 
 #' @examples
+#' gdata <- make_data(100)
+#' 
+#' graph(gdata) %>%
+#'  graph_stable_layout(ms = 5000)
+#'  
+#' # as proxy
 #' library(shiny)
 #' 
 #' graph_data <- make_data(200)
@@ -328,19 +335,19 @@ change_dimensions.graph_proxy <- function(g, is_3d = FALSE){
 #' if(interactive()) shinyApp(ui, server)
 #' 
 #' @export 
-graph_stable_layout <- function(g, stable = TRUE) UseMethod("graph_stable_layout")
+graph_stable_layout <- function(g, stable = TRUE, ms = 0L) UseMethod("graph_stable_layout")
 
 #' @export
 #' @method graph_stable_layout graph
-graph_stable_layout.graph <- function(g, stable = TRUE){
-  g$x$stable <- TRUE
+graph_stable_layout.graph <- function(g, stable = TRUE, ms = 0L){
+  g$x$stable <- ms
   return(g)
 }
 
 #' @export
 #' @method graph_stable_layout graph_proxy
-graph_stable_layout.graph_proxy <- function(g, stable = TRUE){
-  msg <- list(id = g$id, stable = stable)
+graph_stable_layout.graph_proxy <- function(g, stable = TRUE, ms = 0L){
+  msg <- list(id = g$id, stable = stable, ms = ms)
   g$session$sendCustomMessage("stable", msg)
   return(g)
 }
