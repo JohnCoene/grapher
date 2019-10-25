@@ -27,7 +27,7 @@
 #' 
 #' observeEvent(input$rm, {
 #'   graph_proxy("g") %>% 
-#'     graph_nodes_remove(
+#'     graph_drop_nodes(
 #'       dplyr::slice(data$nodes, sample(1:N, 2)), 
 #'       id
 #'     ) 
@@ -38,11 +38,11 @@
 #' 
 #' @name remove
 #' @export 
-graph_nodes_remove <- function(g, data, id) UseMethod("graph_nodes_remove")
+graph_drop_nodes <- function(g, data, id) UseMethod("graph_drop_nodes")
 
 #' @export
-#' @method graph_nodes_remove graph_proxy
-graph_nodes_remove.graph_proxy <- function(g, data, id){
+#' @method graph_drop_nodes graph_proxy
+graph_drop_nodes.graph_proxy <- function(g, data, id){
   assert_that(has_it(data))
 
   id_enquo <- enquo(id)
@@ -55,11 +55,11 @@ graph_nodes_remove.graph_proxy <- function(g, data, id){
 
 #' @rdname remove
 #' @export 
-graph_links_remove <- function(g, data, source, target) UseMethod("graph_links_remove")
+graph_drop_links <- function(g, data, source, target) UseMethod("graph_drop_links")
 
 #' @export
-#' @method graph_links_remove graph_proxy
-graph_links_remove.graph_proxy <- function(g, data, source, target){
+#' @method graph_drop_links graph_proxy
+graph_drop_links.graph_proxy <- function(g, data, source, target){
   assert_that(has_it(data))
 
   src_enquo <- enquo(source)

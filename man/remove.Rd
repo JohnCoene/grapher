@@ -2,13 +2,13 @@
 % Please edit documentation in R/remove.R
 \name{remove}
 \alias{remove}
-\alias{graph_nodes_remove}
-\alias{graph_links_remove}
+\alias{graph_drop_nodes}
+\alias{graph_drop_links}
 \title{Remove Nodes & Edges}
 \usage{
-graph_nodes_remove(g, data, id)
+graph_drop_nodes(g, data, id)
 
-graph_links_remove(g, data, source, target)
+graph_drop_links(g, data, source, target)
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 
@@ -44,7 +44,7 @@ server <- function(input, output) {
 
 observeEvent(input$rm, {
   graph_proxy("g") \%>\% 
-    graph_nodes_remove(
+    graph_drop_nodes(
       dplyr::slice(data$nodes, sample(1:N, 2)), 
       id
     ) 
