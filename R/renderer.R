@@ -48,6 +48,7 @@ graph_renderer <- function(g) {
   # remove nodes and links
   g$x$nodes <- NULL
   g$x$links <- NULL
+  g$x$igraph <- NULL
 
   return(g)
 } 

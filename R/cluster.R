@@ -10,7 +10,7 @@
 #' of clusters in the console.
 #' 
 #' @examples 
-#' graph_data <- make_data()
+#' graph_data <- make_data(200)
 #' 
 #' graph(graph_data) %>% 
 #'   graph_cluster() 
@@ -24,15 +24,18 @@ graph_cluster <- function(g, method = igraph::cluster_walktrap,
 graph_cluster.graph <- function(g, method = igraph::cluster_walktrap, 
   quiet = !interactive(), ...) {
 
-  assert_that(was_passed(g$x$links))
+  if(!length(g$x$igraph)){
+    assert_that(was_passed(g$x$links))
 
-  ig <- g$x$links %>%
-    select(source, target) %>%  
-    igraph::graph_from_data_frame(directed = g$x$directed)
-  vertices <- igraph::as_data_frame(ig, "vertices") %>% 
+    g$x$igraph <- g$x$links %>%
+      select(source, target) %>%  
+      igraph::graph_from_data_frame(directed = g$x$directed)
+  }
+  
+  vertices <- igraph::as_data_frame(g$x$igraph, "vertices") %>% 
     purrr::set_names(c("id"))
 
-  communities <- method(ig, ...)
+  communities <- method(g$x$igraph, ...)
   membership <- igraph::as_membership(communities)
   
   # build color table

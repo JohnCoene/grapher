@@ -72,11 +72,11 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
 #' @param ... Any other argument to pass to \code{method}.
 #' 
 #' @examples 
-#' graph_data <- make_data(10)
+#' graph_data <- make_data(200)
 #' 
 #' g <- graph(graph_data)
 #' 
-#' # layout
+#' # layout without scaling
 #' graph_static_layout(g)
 #' 
 #' # layout with scaling
@@ -92,14 +92,16 @@ graph_static_layout <- function(g, method = igraph::layout_nicely, dim = 3, scal
 #' @method graph_static_layout graph
 graph_static_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3, scaling = NULL, ...){
 
-  assert_that(was_passed(g$x$links))
+  if(!length(g$x$igraph)){
+    assert_that(was_passed(g$x$links))
 
-  ig <- g$x$links %>% 
-    select(source, target) %>% 
-    igraph::graph_from_data_frame(directed = g$x$directed)
+    g$x$igraph <- g$x$links %>% 
+      select(source, target) %>% 
+      igraph::graph_from_data_frame(directed = g$x$directed)
+  }
 
-  vertices <- igraph::as_data_frame(ig, "vertices")
-  lay_out <- method(ig, dim = dim, ...) %>% 
+  vertices <- igraph::as_data_frame(g$x$igraph, "vertices")
+  lay_out <- method(g$x$igraph, dim = dim, ...) %>% 
     as.data.frame() %>% 
     bind_cols(vertices) %>% 
     purrr::set_names(c("x", "y", "z", "id"))

@@ -30,7 +30,7 @@ column to the internal node data.frame. The latter can be used in
 e.g.: \code{\link{scale_node_color}}.
 }
 \examples{
-graph_data <- make_data()
+graph_data <- make_data(200)
 
 graph(graph_data) \%>\% 
   graph_cluster() 

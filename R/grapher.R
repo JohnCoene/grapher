@@ -94,6 +94,7 @@ graph.igraph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100
   x = list(
     links = links,
     nodes = nodes,
+    igraph = data, # store igraph object for later
     directed = igraph::is_directed(data),
     draw = draw,
     layout = list()
