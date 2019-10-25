@@ -99,14 +99,16 @@ HTMLWidgets.widget({
           }, x.stable)
         }
 
-        if(x.camera.x)
-          renderer.camera(g).position.setX(x.camera.x);
+        if(x.camera){
+          if(x.camera.x)
+            renderer.camera(g).position.setX(x.camera.x);
 
-        if(x.camera.y)
-          renderer.camera(g).position.setY(x.camera.y);
+          if(x.camera.y)
+            renderer.camera(g).position.setY(x.camera.y);
 
-        if(x.camera.z)
-          renderer.camera(g).position.setZ(x.camera.z);
+          if(x.camera.z)
+            renderer.camera(g).position.setZ(x.camera.z);
+        }
 
         if (HTMLWidgets.shinyMode) {
           if(x.on_node_click)
@@ -260,7 +262,7 @@ if (HTMLWidgets.shinyMode) {
   });
 
 
-  // change background
+  // change camera fov
   Shiny.addCustomMessageHandler('camera-fov',
     function(msg) {
       var g = get_graph(msg.id);
@@ -295,6 +297,22 @@ if (HTMLWidgets.shinyMode) {
 
         if(msg.z)
           r.camera(g).position.setZ(msg.z);
+      }
+  });
+
+  // stable
+  Shiny.addCustomMessageHandler('focus-node',
+    function(msg) {
+      var r = get_renderer(msg.id);
+      var g = get_renderer(msg.id);
+      if (typeof r != 'undefined') {
+        var node_pos = r.layout(g).getNodePosition(msg.node);
+        var cam_pos = r.camera(g).position;
+        var diff = node_pos - cam_pos;
+        r.camera(g).lookAt(node_pos);
+        r.camera(g).position.setX(pos.x);
+        r.camera(g).position.setY(pos.y);
+        r.camera(g).position.setZ(pos.z);
       }
   });
 }

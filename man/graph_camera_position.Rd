@@ -14,8 +14,8 @@ as returned by a function of the same name.}
 \item{x, y, z}{Coordinates of camera position.}
 }
 \description{
-Position the camera: note that this only works on a stable graph,
-see \code{\link{graph_stable_layout}}.
+Position the camera, \emph{this only works on a stable graph}:
+see \code{\link{graph_stable_layout}} and examples.
 }
 \examples{
 library(shiny)

@@ -53,8 +53,8 @@ graph_camera_fov.graph_proxy <- function(g, fov = 75L) {
 
 #' Camera Position
 #' 
-#' Position the camera: note that this only works on a stable graph,
-#' see \code{\link{graph_stable_layout}}.
+#' Position the camera, \emph{this only works on a stable graph}:
+#' see \code{\link{graph_stable_layout}} and examples.
 #' 
 #' @inheritParams graph_nodes
 #' @param x,y,z Coordinates of camera position.
@@ -106,5 +106,24 @@ graph_camera_position.graph_proxy <- function(g, x = NULL, y = NULL, z = NULL){
   msg <- list(id = g$id, x = x, y = y, z = z)
   g$session$sendCustomMessage("position-camera", msg)
 
+  return(g)
+}
+
+#' Focus 
+#' 
+#' Focus on a specific node.
+#' 
+#' @inheritParams graph_nodes
+#' @param id Node id.
+#' 
+#' @export
+graph_focus_node <- function(g, id) UseMethod("graph_focus_node")
+
+#' @export 
+#' @method graph_focus_node graph_proxy
+graph_focus_node.graph_proxy <- function(g, id){
+
+  msg <- list(id = g$id, node = id)
+  g$session$sendCustomMessage("focus-node", msg)
   return(g)
 }
