@@ -292,3 +292,53 @@ change_dimensions.graph_proxy <- function(g, is_3d = FALSE){
 
   return(g)
 }
+
+#' Stabilize
+#' 
+#' Stabilize the layout of the graph. 
+#' 
+#' @inheritParams graph_nodes
+#' @param stable Whether to stabilise the graph.
+#' 
+#' @examples
+#' library(shiny)
+#' 
+#' graph_data <- make_data(200)
+#' 
+#' ui <- fluidPage(
+#'   actionButton("stable", "stabilize"),
+#'   graphOutput("g")
+#' )
+#' 
+#' server <- function(input, output){
+#'   output$g <- renderGraph({
+#'     graph(graph_data) %>% 
+#'       graph_live_layout(time_step = 1)
+#'   })
+#' 
+#'   gp <- graph_proxy("g")
+#' 
+#'   observeEvent(input$stable, {
+#'     graph_stable_layout(gp)
+#'   })
+#' }
+#' 
+#' if(interactive()) shinyApp(ui, server)
+#' 
+#' @export 
+graph_stable_layout <- function(g, stable = TRUE) UseMethod("graph_stable_layout")
+
+#' @export
+#' @method graph_stable_layout graph
+graph_stable_layout.graph <- function(g, stable = TRUE){
+  g$x$stable <- TRUE
+  return(g)
+}
+
+#' @export
+#' @method graph_stable_layout graph_proxy
+graph_stable_layout.graph_proxy <- function(g, stable = TRUE){
+  msg <- list(id = g$id, stable = stable)
+  g$session$sendCustomMessage("stable", msg)
+  return(g)
+}

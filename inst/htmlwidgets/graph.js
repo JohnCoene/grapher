@@ -25,6 +25,7 @@ HTMLWidgets.widget({
         
         layout = x.layout;
         layout.clearColor = '0x' + layout.clearColor.substr(1);
+        layout.clearAlpha = x.clearAlpha;
 
         layout.container = document.getElementById(el.id);
 
@@ -88,6 +89,8 @@ HTMLWidgets.widget({
 
         if(x.draw)
           renderer = pixel(g, layout);
+
+        renderer.stable(x.stable)
 
         if (HTMLWidgets.shinyMode) {
           if(x.on_node_click)
@@ -248,6 +251,15 @@ if (HTMLWidgets.shinyMode) {
       var r = get_renderer(msg.id);
       if (typeof r != 'undefined') {
         r.camera(g).fov = msg.fov;
+      }
+  });
+
+  // stable
+  Shiny.addCustomMessageHandler('stable',
+    function(msg) {
+      var r = get_renderer(msg.id);
+      if (typeof r != 'undefined') {
+        r.stable(msg.stable);
       }
   });
 }

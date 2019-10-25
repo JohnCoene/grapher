@@ -11,7 +11,9 @@ as_widget <- function(x, width, height, elementId){
     )
   )
 
+  x$stable <- FALSE
   x$layout$clearColor <- "#000"
+  x$layout$clearAlpha <- 1
 
   attr(x, 'TOJSON_ARGS') <- list(dataframe = "rows")
 
