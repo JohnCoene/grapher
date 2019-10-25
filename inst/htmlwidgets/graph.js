@@ -93,7 +93,20 @@ HTMLWidgets.widget({
         if(x.draw)
           renderer = pixel(g, layout);
 
-        renderer.stable(x.stable)
+        if(x.stable){
+          setTimeout(function(){
+            renderer.stable(true)
+          }, x.stable)
+        }
+
+        if(x.camera.x)
+          renderer.camera(g).position.setX(x.camera.x);
+
+        if(x.camera.y)
+          renderer.camera(g).position.setY(x.camera.y);
+
+        if(x.camera.z)
+          renderer.camera(g).position.setZ(x.camera.z);
 
         if (HTMLWidgets.shinyMode) {
           if(x.on_node_click)
@@ -262,7 +275,26 @@ if (HTMLWidgets.shinyMode) {
     function(msg) {
       var r = get_renderer(msg.id);
       if (typeof r != 'undefined') {
-        r.stable(msg.stable);
+        setTimeout(function(){
+          renderer.stable(msg.stable)
+        }, msg.ms)
+      }
+  });
+
+  // camera postion
+  Shiny.addCustomMessageHandler('position-camera',
+    function(msg) {
+      var r = get_renderer(msg.id);
+      var g = get_renderer(msg.id);
+      if (typeof g != 'undefined') {
+        if(msg.x)
+          r.camera(g).position.setX(msg.x);
+
+        if(msg.y)
+          r.camera(g).position.setX(msg.y);
+
+        if(msg.z)
+          r.camera(g).position.setZ(msg.z);
       }
   });
 }
