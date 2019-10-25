@@ -4,9 +4,9 @@
 #' 
 #' @inheritParams graph_nodes
 #' @param data A data.frame holding nodes id or links source and target.
-#' @param id Bare column name holding node ids to remove.
-#' @param source,target Bare column names holding source and target defining
-#' links to remove.  
+#' @param id Id or bare column name holding node ids to remove.
+#' @param source,target Bare column names or vectors of length one 
+#' holding source and target defining links to remove.  
 #' 
 #' @examples 
 #' library(shiny)
@@ -55,6 +55,20 @@ graph_drop_nodes.graph_proxy <- function(g, data, id){
 
 #' @rdname remove
 #' @export 
+graph_drop_node <- function(g, id) UseMethod("graph_drop_node")
+
+#' @export
+#' @method graph_drop_node graph_proxy
+graph_drop_node.graph_proxy <- function(g, id){
+  assert_that(has_it(id))
+
+  msg <- list(id = g$id, data = as.list(id))
+  g$session$sendCustomMessage("remove-nodes", msg)
+  invisible(g)
+}
+
+#' @rdname remove
+#' @export 
 graph_drop_links <- function(g, data, source, target) UseMethod("graph_drop_links")
 
 #' @export
@@ -67,6 +81,26 @@ graph_drop_links.graph_proxy <- function(g, data, source, target){
   links <- select(data, source = !!src_enquo, target = !!tgt_enquo) %>% purrr::transpose()
 
   msg <- list(id = g$id, links = as.list(links))
+  g$session$sendCustomMessage("remove-links", msg)
+  invisible(g)
+}
+
+#' @rdname remove
+#' @export 
+graph_drop_link <- function(g, source, target) UseMethod("graph_drop_link")
+
+#' @export
+#' @method graph_drop_link graph_proxy
+graph_drop_link.graph_proxy <- function(g, source, target){
+  assert_that(has_it(source))
+  assert_that(has_it(target))
+
+  links <- list(
+    source = source,
+    target = target
+  )
+
+  msg <- list(id = g$id, links = links)
   g$session$sendCustomMessage("remove-links", msg)
   invisible(g)
 }

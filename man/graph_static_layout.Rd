@@ -35,11 +35,11 @@ This function will overwrite \code{x}, \code{y}, \code{z} variables
 previously passed to \code{\link{graph_nodes}}.
 }
 \examples{
-graph_data <- make_data(10)
+graph_data <- make_data(200)
 
 g <- graph(graph_data)
 
-# layout
+# layout without scaling
 graph_static_layout(g)
 
 # layout with scaling

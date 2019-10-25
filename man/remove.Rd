@@ -3,12 +3,18 @@
 \name{remove}
 \alias{remove}
 \alias{graph_drop_nodes}
+\alias{graph_drop_node}
 \alias{graph_drop_links}
+\alias{graph_drop_link}
 \title{Remove Nodes & Edges}
 \usage{
 graph_drop_nodes(g, data, id)
 
+graph_drop_node(g, id)
+
 graph_drop_links(g, data, source, target)
+
+graph_drop_link(g, source, target)
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 
@@ -17,10 +23,10 @@ as returned by a function of the same name.}
 
 \item{data}{A data.frame holding nodes id or links source and target.}
 
-\item{id}{Bare column name holding node ids to remove.}
+\item{id}{Id or bare column name holding node ids to remove.}
 
-\item{source, target}{Bare column names holding source and target defining
-links to remove.}
+\item{source, target}{Bare column names or vectors of length one 
+holding source and target defining links to remove.}
 }
 \description{
 Remove nodes and edges from the graph.
