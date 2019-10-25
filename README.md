@@ -7,7 +7,7 @@ Create 3D and 2D interactive graphs (networks): an R integration of many of the 
 
 ## Usage
 
-{grapher} works hand-in-hand with most graph formats.
+{grapher} works hand-in-hand with most graph objects.
 
 ```r
 library(grapher)
