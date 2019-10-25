@@ -38,7 +38,7 @@ server <- function(input, output) {
       graph() \%>\% 
       graph_live_layout(time_step = 5)
   })
-
+r
   observeEvent(input$fov, {
     graph_proxy("graph") \%>\% 
       graph_camera_fov(input$fov)
