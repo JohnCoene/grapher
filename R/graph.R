@@ -10,6 +10,10 @@
 #' @param ... Any other bare named column containing 
 #' meta data to attach to the nodes.
 #' 
+#' @details if the variables \code{x}, \code{y}, and \code{z}
+#' are passed the rendered visualisation is stable 2/3D and
+#' the force layout algorithm is not run.
+#' 
 #' @examples 
 #' graph_data <- make_data()
 #' 

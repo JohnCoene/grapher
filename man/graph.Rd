@@ -39,6 +39,11 @@ string and have \code{'px'} appended.}
 \description{
 Initialise a grapher graph.
 }
+\details{
+if the variables \code{x}, \code{y}, and \code{z}
+are included in the \code{nodes} the rendered visualisation 
+is stable 2/3 dimensional and the force layout algorithm is not run.
+}
 \examples{
 g <- make_data(50) # mock data
 

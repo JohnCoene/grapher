@@ -21,6 +21,11 @@ meta data to attach to the nodes.}
 \description{
 Add nodes to the graph.
 }
+\details{
+if the variables \code{x}, \code{y}, and \code{z}
+are passed the rendered visualisation is stable 2/3D and
+the force layout algorithm is not run.
+}
 \examples{
 graph_data <- make_data()
 

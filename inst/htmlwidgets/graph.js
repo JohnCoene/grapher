@@ -40,11 +40,14 @@ HTMLWidgets.widget({
         }
 
         function get_node_position(node) {
-          return {
+          var pos = {
             x: node.data.x,
             y: node.data.y,
-            z: node.data.z
           };
+          if(node.data.z)
+            pos.z = node.data.z
+
+          return pos;
         };
 
         if(x.customLayout){

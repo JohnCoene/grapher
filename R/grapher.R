@@ -20,6 +20,10 @@
 #' @param directed Whether the graph is directed, if passing an object of class 
 #' \code{igraph} to \code{data} then this is inferred from the object.
 #' 
+#' @details if the variables \code{x}, \code{y}, and \code{z}
+#' are included in the \code{nodes} the rendered visualisation 
+#' is stable 2/3 dimensional and the force layout algorithm is not run.
+#' 
 #' @examples 
 #' g <- make_data(50) # mock data
 #' 

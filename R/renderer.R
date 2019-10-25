@@ -34,8 +34,21 @@ as_widget <- function(x, width, height, elementId){
 }
 
 graph_renderer <- function(g) {
+
+  if(length(g$x$nodes)){
+    nms <- names(g$x$nodes)
+    has_positional <- sum(c("x", "y", "z") %in% nms)
+    if(has_positional > 1)
+      g$x$customLayout <- TRUE
+  }
+
   if(!length(g$x$gexf) && !length(g$x$dot))
     g$x$data <- .render_graph(g)
+
+  # remove nodes and links
+  g$x$nodes <- NULL
+  g$x$links <- NULL
+
   return(g)
 } 
 
