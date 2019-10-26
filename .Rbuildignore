@@ -2,3 +2,4 @@
 ^test\.R$
 ^node_modules$
 srcjs
+^docs$
