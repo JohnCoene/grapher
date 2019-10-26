@@ -1,0 +1,86 @@
+url: https://grapher.john-coene.com
+
+template:
+  params:
+    bootswatch: lumen
+    ganalytics: UA-74544116-1
+
+navbar:
+  title: "grapher"
+  left:
+    - icon: fa-home fa-lg
+      href: index.html
+    - icon: fa-balance-scale fa-lg
+      href: LICENSE.html
+    - icon: fa-newspaper-o fa-lg
+      href: news/index.html
+    - icon: fa-code fa-lg
+      text: Reference
+      href: "reference/"
+    - icon: fa-rocket fa-lg
+      text: Get Started
+      href: articles/get-started.html
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/JohnCoene/grapher
+
+reference:
+  - title: "Initialisation & Shiny"
+    desc: "Initialise a graph or create a Shiny proxy."
+    contents: 
+      - graph
+      - graph-shiny
+      - grapher_demo
+  - title: "Layout"
+    desc: "Customise the layout of the graph."
+    contents: 
+      - ends_with("_layout")
+      - pin_nodes
+      - pin_node
+      - change_dimensions
+  - title: "Cluster"
+    desc: "Compute graph clusters."
+    contents: 
+      - graph_cluster
+  - title: "Definitions"
+    desc: "Define variables to use as color and size."
+    contents: 
+      - starts_with("define")
+  - title: "Events"
+    desc: "Capture events in Shiny."
+    contents: 
+      - starts_with("capture")
+  - title: "Extract"
+    desc: "Extract the graph as list or JSON."
+    contents: 
+      - extract_graph
+  - title: "Data"
+    desc: "Data for examples and tests."
+    contents: 
+      - starts_with("make")
+      - cran_deps_graph
+  - title: "Drop & Add"
+    desc: "Drop and add nodes and links."
+    contents: 
+      - graph_drop_node
+      - graph_drop_nodes
+      - graph_drop_link
+      - graph_drop_links
+      - graph_nodes
+      - graph_links
+  - title: "Appearance"
+    desc: "Scale color and size."
+    contents: 
+      - starts_with("scale")
+      - graph_background
+      - graph_palette
+  - title: "Camera"
+    desc: "Handle camera."
+    contents: 
+      - graph_camera_fov
+      - graph_camera_position
+      - graph_focus_node
+
+authors:
+  John Coene:
+    href: http://john-coene.com

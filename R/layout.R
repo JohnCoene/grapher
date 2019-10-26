@@ -200,7 +200,7 @@ graph_offline_layout.graph <- function(g, positions){
 #' 
 #' }
 #' 
-#' if(interactive()) shinyApp(ui, server)
+#' \dontrun{shinyApp(ui, server)}
 #' 
 #' @name pin_nodes
 #' @export 
@@ -272,7 +272,7 @@ pin_node.graph_proxy <- function(g, id){
 #' 
 #' }
 #' 
-#' if(interactive()) shinyApp(ui, server)
+#' \dontrun{shinyApp(ui, server)}
 #' 
 #' @export 
 change_dimensions <- function(g, is_3d = FALSE) UseMethod("change_dimensions")
@@ -332,7 +332,7 @@ change_dimensions.graph_proxy <- function(g, is_3d = FALSE){
 #'   })
 #' }
 #' 
-#' if(interactive()) shinyApp(ui, server)
+#' \dontrun{shinyApp(ui, server)}
 #' 
 #' @export 
 graph_stable_layout <- function(g, stable = TRUE, ms = 0L) UseMethod("graph_stable_layout")

@@ -35,7 +35,7 @@
 #' 
 #' }
 #' 
-#' if(interactive()) shinyApp(ui, server)
+#' \dontrun{shinyApp(ui, server)}
 #' 
 #' @export
 graph_camera_fov <- function(g, fov = 75L) UseMethod("graph_camera_fov")
@@ -85,7 +85,7 @@ graph_camera_fov.graph_proxy <- function(g, fov = 75L) {
 #'   })
 #' }
 #' 
-#' if(interactive()) shinyApp(ui, server)
+#' \dontrun{shinyApp(ui, server)}
 #' 
 #' @export
 graph_camera_position <- function(g, x = NULL, y = NULL, z = NULL) UseMethod("graph_camera_position")
@@ -139,7 +139,7 @@ graph_camera_position.graph_proxy <- function(g, x = NULL, y = NULL, z = NULL){
 #'   })
 #' }
 #' 
-#' if(interactive()) shinyApp(ui, server)
+#' \dontrun{shinyApp(ui, server)}
 #' 
 #' @export
 graph_focus_node <- function(g, id, dist = .1) UseMethod("graph_focus_node")

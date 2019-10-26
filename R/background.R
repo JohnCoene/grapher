@@ -41,7 +41,7 @@
 #' 
 #' }
 #' 
-#' if(interactive()) shinyApp(ui, server)
+#' \dontrun{shinyApp(ui, server)}
 #' 
 #' @export 
 graph_background <- function(g, color = "#000", alpha = 1) UseMethod("graph_background")

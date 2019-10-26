@@ -51,7 +51,7 @@
 #'   })
 #' }
 #' 
-#' if(interactive()) shinyApp(ui, server)
+#' \dontrun{shinyApp(ui, server)}
 #' 
 #' @seealso \code{\link{graph_links}} to add links.
 #' 
@@ -140,7 +140,7 @@ graph_nodes.graph_proxy <- function(g, data, id, ...){
 #'   })
 #' }
 #' 
-#' if(interactive()) shinyApp(ui, server)
+#' \dontrun{shinyApp(ui, server)}
 #' 
 #' @seealso \code{\link{graph_nodes}} to add nodes.
 #' 

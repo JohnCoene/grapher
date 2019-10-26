@@ -9,3 +9,7 @@ grapher_demo()
 \description{
 A demo shiny demo to demonstrate some of the possibilites of grapher with \link[shiny]{shiny}.
 }
+\examples{
+\dontrun{grapher_demo}
+
+}

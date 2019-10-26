@@ -26,7 +26,8 @@ ui <- fluidPage(
         column(4, numericInput("addLinkTarget", "target", value = 550, min = 1, max = 2000))
       ),
       fluidRow(
-        column(4, actionButton("stabilize", "Freeze"))
+        column(6, actionButton("stabilize", "Freeze")),
+        column(6, radioButtons("dims", "Dimensions", list("3D" = TRUE, "2D" = FALSE), inline = TRUE))
       )
     ),
     column(9, graphOutput("g", height = "100vh"))
@@ -67,6 +68,10 @@ server <- function(input, output){
 
   observeEvent(input$stabilize, {
     graph_stable_layout(p)
+  })
+
+  observeEvent(input$dims, {
+    change_dimensions(p, input$dims)
   })
 
 }

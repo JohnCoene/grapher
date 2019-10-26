@@ -34,7 +34,7 @@
 #'   })
 #' }
 #' 
-#' if(interactive()) shinyApp(ui, server)
+#' \dontrun{shinyApp(ui, server)}
 #' 
 #' @name remove
 #' @export 

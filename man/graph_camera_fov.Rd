@@ -46,6 +46,6 @@ r
 
 }
 
-if(interactive()) shinyApp(ui, server)
+\dontrun{shinyApp(ui, server)}
 
 }
