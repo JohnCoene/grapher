@@ -114,16 +114,41 @@ graph_camera_position.graph_proxy <- function(g, x = NULL, y = NULL, z = NULL){
 #' Focus on a specific node.
 #' 
 #' @inheritParams graph_nodes
-#' @param id Node id.
+#' @param id The id of the node to focus on.
+#' @param dist The distance from the node the camera should move to.
+#' 
+#' @examples 
+#' library(shiny)
+#' 
+#' gdata <- make_data(100)
+#' 
+#' ui <- fluidPage(
+#'   sliderInput("node", "node to focus on", 1, max = 100, value = 5),
+#'   graphOutput("g", height = "80vh")
+#' )
+#' 
+#' server <- function(input, output) {
+#'   output$g <- render_graph({
+#'     graph(gdata) %>% 
+#'     graph_stable_layout(ms = 1500)
+#'   })
+#' 
+#'   observeEvent(input$node, {
+#'     graph_proxy("g") %>% 
+#'       graph_focus_node(input$node)
+#'   })
+#' }
+#' 
+#' if(interactive()) shinyApp(ui, server)
 #' 
 #' @export
-graph_focus_node <- function(g, id) UseMethod("graph_focus_node")
+graph_focus_node <- function(g, id, dist = .1) UseMethod("graph_focus_node")
 
 #' @export 
 #' @method graph_focus_node graph_proxy
-graph_focus_node.graph_proxy <- function(g, id){
+graph_focus_node.graph_proxy <- function(g, id, dist = .1){
 
-  msg <- list(id = g$id, node = id)
+  msg <- list(id = g$id, node = id, dist = dist)
   g$session$sendCustomMessage("focus-node", msg)
   return(g)
 }

@@ -307,12 +307,10 @@ if (HTMLWidgets.shinyMode) {
       var g = get_renderer(msg.id);
       if (typeof r != 'undefined') {
         var node_pos = r.layout(g).getNodePosition(msg.node);
-        var cam_pos = r.camera(g).position;
-        var diff = node_pos - cam_pos;
         r.camera(g).lookAt(node_pos);
-        r.camera(g).position.setX(pos.x);
-        r.camera(g).position.setY(pos.y);
-        r.camera(g).position.setZ(pos.z);
+        r.camera(g).position.setX(node_pos.x - msg.dist);
+        r.camera(g).position.setY(node_pos.y - msg.dist);
+        r.camera(g).position.setZ(node_pos.z - msg.dist);
       }
   });
 }

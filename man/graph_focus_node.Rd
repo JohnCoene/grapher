@@ -4,15 +4,42 @@
 \alias{graph_focus_node}
 \title{Focus}
 \usage{
-graph_focus_node(g, id)
+graph_focus_node(g, id, dist = 0.1)
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 
 returned by \code{\link{graph}} or a \code{graph_proxy}
 as returned by a function of the same name.}
 
-\item{id}{Node id.}
+\item{id}{The id of the node to focus on.}
+
+\item{dist}{The distance from the node the camera should move to.}
 }
 \description{
 Focus on a specific node.
+}
+\examples{
+library(shiny)
+
+gdata <- make_data(100)
+
+ui <- fluidPage(
+  sliderInput("node", "node to focus on", 1, max = 100, value = 5),
+  graphOutput("g", height = "80vh")
+)
+
+server <- function(input, output) {
+  output$g <- render_graph({
+    graph(gdata) \%>\% 
+    graph_stable_layout(ms = 1500)
+  })
+
+  observeEvent(input$node, {
+    graph_proxy("g") \%>\% 
+      graph_focus_node(input$node)
+  })
+}
+
+if(interactive()) shinyApp(ui, server)
+
 }
