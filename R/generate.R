@@ -95,7 +95,7 @@ cran_deps_graph <- function(max = 10, deps = c("Depends", "Imports", "LinkingTo"
   format <- match.arg(format)
 
   if(max > 15)
-    cat(paste0("A high `", crayon::blue("max"), "` value makes a large ", crayon::underline("hariball"), " graph.\n"))
+    cat(paste0("A high `", crayon::blue("max"), "` value makes a large ", crayon::underline("hairball"), " graph.\n"))
 
   pkgs <- available.packages() %>% 
     tibble::as_tibble()
