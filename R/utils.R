@@ -23,3 +23,10 @@ scale_colour <- function(x, palette){
   names(x) <- names
   return(x)
 }
+
+.get_default_style <- function(object, var, style){
+  nms <- names(object)
+  if(var %in% nms && !is.null(style[[style]]))
+    return(var)
+  return(NULL)
+}

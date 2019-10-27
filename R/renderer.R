@@ -2,14 +2,19 @@ as_widget <- function(x, width, height, elementId){
   # default variables to get
   x$style <- list(
     nodes = list(
-      size = "size",
-      color = "color"
+      size = .get_default_style(x$nodes, "size", x$styles$nodes),
+      color = .get_default_style(x$nodes, "color", x$styles$nodes)
     ),
     links = list(
-      fromColor = "fromColor",
-      toColor = "toColor"
+      fromColor = .get_default_style(x$links, "fromColor", x$styles$links),
+      toColor = .get_default_style(x$links, "toColor", x$styles$links)
     )
-  )
+  ) %>% 
+    keep(function(x){
+      if(is.null(x))
+        return(FALSE)
+      return(TRUE)
+    })
 
   x$layout$clearColor <- "#000"
   x$layout$clearAlpha <- 1
