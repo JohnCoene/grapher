@@ -21,15 +21,15 @@
 #' data$nodes$myColor <- "#0000ff"
 #' 
 #' graph(data) %>% 
-#'   define_nodes_color(myColor)
+#'   define_node_color(myColor)
 #' 
 #' @name definitions
 #' @export
-define_nodes_color <- function(g, var) UseMethod("define_nodes_color")
+define_node_color <- function(g, var) UseMethod("define_node_color")
 
 #' @export
-#' @method define_nodes_color graph
-define_nodes_color.graph <- function(g, var) {
+#' @method define_node_color graph
+define_node_color.graph <- function(g, var) {
   assert_that(has_it(var))
   g$x$style$nodes$color <- deparse(substitute(var))
   return(g)
@@ -37,11 +37,11 @@ define_nodes_color.graph <- function(g, var) {
 
 #' @rdname definitions
 #' @export
-define_nodes_size <- function(g, var) UseMethod("define_nodes_size")
+define_node_size <- function(g, var) UseMethod("define_node_size")
 
 #' @export
-#' @method define_nodes_size graph
-define_nodes_size.graph <- function(g, var) {
+#' @method define_node_size graph
+define_node_size.graph <- function(g, var) {
   assert_that(has_it(var))
   g$x$style$nodes$size <- deparse(substitute(var))
   return(g)
@@ -49,11 +49,11 @@ define_nodes_size.graph <- function(g, var) {
 
 #' @rdname definitions
 #' @export
-define_links_from_color <- function(g, var) UseMethod("define_links_from_color")
+define_link_from_color <- function(g, var) UseMethod("define_link_from_color")
 
 #' @export
-#' @method define_links_from_color graph
-define_links_from_color.graph <- function(g, var) {
+#' @method define_link_from_color graph
+define_link_from_color.graph <- function(g, var) {
   assert_that(has_it(var))
   g$x$style$links$fromColor <- deparse(substitute(var))
   return(g)
@@ -61,11 +61,11 @@ define_links_from_color.graph <- function(g, var) {
 
 #' @rdname definitions
 #' @export
-define_links_to_color <- function(g, var) UseMethod("define_links_to_color")
+define_link_to_color <- function(g, var) UseMethod("define_link_to_color")
 
 #' @export
-#' @method define_links_to_color graph
-define_links_to_color.graph <- function(g, var) {
+#' @method define_link_to_color graph
+define_link_to_color.graph <- function(g, var) {
   assert_that(has_it(var))
   g$x$style$links$toColor <- deparse(substitute(var))
   return(g)

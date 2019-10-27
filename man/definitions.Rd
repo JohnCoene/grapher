@@ -2,19 +2,19 @@
 % Please edit documentation in R/definitions.R
 \name{definitions}
 \alias{definitions}
-\alias{define_nodes_color}
-\alias{define_nodes_size}
-\alias{define_links_from_color}
-\alias{define_links_to_color}
+\alias{define_node_color}
+\alias{define_node_size}
+\alias{define_link_from_color}
+\alias{define_link_to_color}
 \title{Definitions}
 \usage{
-define_nodes_color(g, var)
+define_node_color(g, var)
 
-define_nodes_size(g, var)
+define_node_size(g, var)
 
-define_links_from_color(g, var)
+define_link_from_color(g, var)
 
-define_links_to_color(g, var)
+define_link_to_color(g, var)
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 
@@ -44,6 +44,6 @@ data <- make_data()
 data$nodes$myColor <- "#0000ff"
 
 graph(data) \%>\% 
-  define_nodes_color(myColor)
+  define_node_color(myColor)
 
 }
