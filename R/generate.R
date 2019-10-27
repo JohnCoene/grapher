@@ -70,6 +70,7 @@ make_data <- function(n = 10, colors = c("#B1E2A3", "#98D3A5", "#328983", "#1C5C
 #' may have.
 #' @param format The format in which to return the graph, either a 
 #' \code{list} or nodes and edges or an object of class \code{igraph}.
+#' @param include_base_r Set to \code{FALSE} to exclude base R packages.
 #' 
 #' @examples 
 #' \dontrun{
@@ -90,7 +91,7 @@ make_data <- function(n = 10, colors = c("#B1E2A3", "#98D3A5", "#328983", "#1C5C
 #' @importFrom utils available.packages
 #' 
 #' @export
-cran_deps_graph <- function(max = 10, deps = c("Depends", "Imports", "LinkingTo"), format = c("list", "igraph")) {
+cran_deps_graph <- function(max = 10, include_base_r = TRUE, deps = c("Depends", "Imports", "LinkingTo"), format = c("list", "igraph")) {
 
   format <- match.arg(format)
 
@@ -135,6 +136,11 @@ cran_deps_graph <- function(max = 10, deps = c("Depends", "Imports", "LinkingTo"
     inner_join(target_count, by = "target") %>% 
     distinct(source, target)
 
+  if(!isTRUE(include_base_r))
+    links <- links %>% 
+      anti_join(base_r_pkgs, by = c("source" = "pkg")) %>% 
+      anti_join(base_r_pkgs, by = c("target" = "pkg"))
+
   nodes <- tibble::tibble(
     id = c(links$source, links$target)
   ) %>% 
@@ -145,3 +151,13 @@ cran_deps_graph <- function(max = 10, deps = c("Depends", "Imports", "LinkingTo"
 
   list(nodes = nodes, links = links)
 }
+
+base_r_pkgs <- tibble::tibble(
+  pkg = c(
+    "base", "boot", "class", "cluster", "codetools", "compiler", 
+    "datasets", "foreign", "graphics", "grDevices", "grid", "KernSmooth", 
+    "lattice", "MASS", "Matrix", "methods", "mgcv", "nlme", "nnet", 
+    "parallel", "rpart", "spatial", "splines", "stats", "stats4", 
+    "survival", "tcltk", "tools", "utils"
+  )
+)

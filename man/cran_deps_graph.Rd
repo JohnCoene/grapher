@@ -6,6 +6,7 @@
 \usage{
 cran_deps_graph(
   max = 10,
+  include_base_r = TRUE,
   deps = c("Depends", "Imports", "LinkingTo"),
   format = c("list", "igraph")
 )
@@ -13,6 +14,8 @@ cran_deps_graph(
 \arguments{
 \item{max}{Maximum number of reverse dependencies for a package 
 may have.}
+
+\item{include_base_r}{Set to \code{FALSE} to exclude base R packages.}
 
 \item{deps}{Forms of dependencies to take into account.}
 
