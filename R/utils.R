@@ -1,6 +1,7 @@
 globalVariables(
   c("source", "target", "nodes", "edges",
-    "Depends", "Imports", "LinkingTo", "Package")
+    "Depends", "Imports", "LinkingTo", "Package",
+    "activate", "from", "id.x", "id.y", "name", "tg_id", "to")
 )
 
 scale_colour <- function(x, palette){
@@ -20,19 +21,5 @@ scale_colour <- function(x, palette){
   names <- names(x)
   names[n] <- nms
   names(x) <- names
-  return(x)
-}
-
-.force_character <- function(x){
-  if(is.null(x))
-    return(x)
-
-  nms <- names(x)
-  if(nms[1] == "id"){
-    x$id <- as.character(x$id)
-  } else {
-    x$source <- as.character(x$source)
-    x$target <- as.character(x$target)
-  }
   return(x)
 }

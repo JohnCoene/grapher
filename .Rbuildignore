@@ -5,3 +5,4 @@ srcjs
 ^docs$
 ^pkgdown$
 ^index\.Rmd$
+^data-raw$
