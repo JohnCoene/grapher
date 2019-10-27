@@ -106,39 +106,39 @@ cran_deps_graph <- function(max = 10, deps = c("Depends", "Imports", "LinkingTo"
 
   if("Depends" %in% deps)
     depends <- pkgs %>% 
-      dplyr::select(source = Package, target = Depends) %>% 
+      select(source = Package, target = Depends) %>% 
       tidyr::separate_rows(target, sep = ",") 
 
   if("Imports" %in% deps)
     imports <- pkgs %>% 
-      dplyr::select(source = Package, target = Imports) %>% 
+      select(source = Package, target = Imports) %>% 
       tidyr::separate_rows(target, sep = ",")
 
   if("LinkingTo" %in% deps)
     linkingto <- pkgs %>% 
-      dplyr::select(source = Package, target = LinkingTo) %>% 
+      select(source = Package, target = LinkingTo) %>% 
       tidyr::separate_rows(target, sep = ",")
 
-  links <- dplyr::bind_rows(depends, imports, linkingto) %>% 
-    dplyr::filter(!is.na(target)) %>% 
-    dplyr::mutate(
+  links <- bind_rows(depends, imports, linkingto) %>% 
+    filter(!is.na(target)) %>% 
+    mutate(
       target = gsub("\\(.*\\)", "", target),
       target = trimws(target)
     ) %>% 
-    dplyr::filter(!target %in% c("R", "")) 
+    filter(!target %in% c("R", "")) 
   
   target_count <- links %>% 
-    dplyr::count(target) %>% 
-    dplyr::filter(n < max)
+    count(target) %>% 
+    filter(n < max)
 
   links <- links %>% 
-    dplyr::inner_join(target_count, by = "target") %>% 
-    dplyr::distinct(source, target)
+    inner_join(target_count, by = "target") %>% 
+    distinct(source, target)
 
   nodes <- tibble::tibble(
     id = c(links$source, links$target)
   ) %>% 
-  dplyr::count(id, name = "degree")
+  count(id, name = "degree")
 
   if(format == "igraph")
     return(igraph::graph_from_data_frame(links, TRUE, nodes))
