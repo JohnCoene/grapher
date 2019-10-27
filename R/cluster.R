@@ -32,8 +32,8 @@ graph_cluster.graph <- function(g, method = igraph::cluster_walktrap,
       igraph::graph_from_data_frame(directed = g$x$directed)
   }
   
-  vertices <- igraph::as_data_frame(g$x$igraph, "vertices") %>% 
-    purrr::set_names(c("id"))
+  vertices <- igraph::as_data_frame(g$x$igraph, "vertices")
+  names(vertices)[1] <- "id"
 
   communities <- method(g$x$igraph, ...)
   membership <- igraph::as_membership(communities)

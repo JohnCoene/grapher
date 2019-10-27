@@ -22,3 +22,17 @@ scale_colour <- function(x, palette){
   names(x) <- names
   return(x)
 }
+
+.force_character <- function(x){
+  if(is.null(x))
+    return(x)
+
+  nms <- names(x)
+  if(nms[1] == "id"){
+    x$id <- as.character(x$id)
+  } else {
+    x$source <- as.character(x$source)
+    x$target <- as.character(x$target)
+  }
+  return(x)
+}

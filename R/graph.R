@@ -66,7 +66,8 @@ graph_nodes.graph <- function(g, data, id, ...){
   assert_that(has_it(id))
 
   id_enquo <- enquo(id)
-  g$x$nodes <- select(data, id = !!id_enquo, ...)
+  g$x$nodes <- select(data, id = !!id_enquo, ...) %>% 
+    .force_character()
 
   return(g)
 }
@@ -157,7 +158,8 @@ graph_links.graph <- function(g, data, source, target, ...){
 
   source_enquo <- enquo(source)
   target_enquo <- enquo(target)
-  g$x$links <- select(data, !!source_enquo, !!target_enquo, ...) 
+  g$x$links <- select(data, source = !!source_enquo, target = !!target_enquo, ...) %>% 
+    .force_character()
 
   return(g)
 }

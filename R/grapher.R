@@ -87,8 +87,10 @@ graph.igraph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100
   nodes <- g_df$vertices
   links <- g_df$edges
 
-  nodes <- .prepare_graph(nodes, 1, "id")
-  links <- .prepare_graph(links, 1:2, c("source", "target"))
+  nodes <- .prepare_graph(nodes, 1, "id") %>% 
+    .force_character()
+  links <- .prepare_graph(links, 1:2, c("source", "target")) %>% 
+    .force_character()
 
   # forward options using x
   x = list(
@@ -110,8 +112,10 @@ graph.list <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%"
   links <- data$links
   nodes <- data$nodes
 
-  nodes <- .prepare_graph(nodes, 1, "id")
-  links <- .prepare_graph(links, 1:2, c("source", "target"))
+  nodes <- .prepare_graph(nodes, 1, "id") %>% 
+    .force_character()
+  links <- .prepare_graph(links, 1:2, c("source", "target")) %>% 
+    .force_character()
 
   x = list(
     links = links,
@@ -131,12 +135,15 @@ graph.tbl_graph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "
   links <- data %>% 
     tidygraph::activate(edges) %>% 
     tibble::as_tibble()
+  
   nodes <- data %>% 
     tidygraph::activate(nodes) %>% 
     tibble::as_tibble()
 
-  nodes <- .prepare_graph(nodes, 1, "id")
-  links <- .prepare_graph(links, 1:2, c("source", "target"))
+  nodes <- .prepare_graph(nodes, 1, "id") %>% 
+    .force_character()
+  links <- .prepare_graph(links, 1:2, c("source", "target")) %>% 
+    .force_character()
 
   x = list(
     links = links,
