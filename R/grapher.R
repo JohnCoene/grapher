@@ -87,10 +87,8 @@ graph.igraph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100
   nodes <- g_df$vertices
   links <- g_df$edges
 
-  nodes <- .prepare_graph(nodes, 1, "id") %>% 
-    .force_character()
-  links <- .prepare_graph(links, 1:2, c("source", "target")) %>% 
-    .force_character()
+  nodes <- .prepare_graph(nodes, 1, "id")
+  links <- .prepare_graph(links, 1:2, c("source", "target"))
 
   # forward options using x
   x = list(
@@ -112,10 +110,8 @@ graph.list <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%"
   links <- data$links
   nodes <- data$nodes
 
-  nodes <- .prepare_graph(nodes, 1, "id") %>% 
-    .force_character()
-  links <- .prepare_graph(links, 1:2, c("source", "target")) %>% 
-    .force_character()
+  nodes <- .prepare_graph(nodes, 1, "id")
+  links <- .prepare_graph(links, 1:2, c("source", "target"))
 
   x = list(
     links = links,
@@ -134,16 +130,34 @@ graph.tbl_graph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "
 
   links <- data %>% 
     tidygraph::activate(edges) %>% 
-    tibble::as_tibble()
+    tibble::as_tibble() %>% 
+    .prepare_graph(1:2, c("source", "target"))
   
   nodes <- data %>% 
     tidygraph::activate(nodes) %>% 
-    tibble::as_tibble()
+    tibble::as_tibble() %>% 
+    .prepare_graph(1, "id")
 
-  nodes <- .prepare_graph(nodes, 1, "id") %>% 
-    .force_character()
-  links <- .prepare_graph(links, 1:2, c("source", "target")) %>% 
-    .force_character()
+  if(!is.null(nodes)){
+    nodes <- mutate(nodes, tg_id = 1:dplyr::n())
+
+    nodes_to_join <- dplyr::select(nodes, id, tg_id)
+
+    links_clean <- select(links, source, target)
+    links_meta <- select(links, -source, -target)
+
+    links_clean <- links_clean %>% 
+      dplyr::left_join(
+        nodes_to_join, by = c("source" = "tg_id")
+      ) %>% 
+      dplyr::left_join(
+        nodes_to_join, by = c("target" = "tg_id")
+      ) %>% 
+      select(source = id.x, target = id.y) 
+    
+    links <- bind_cols(links_clean, links_meta)
+    nodes <- select(nodes, -tg_id)
+  }
 
   x = list(
     links = links,
