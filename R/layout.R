@@ -360,7 +360,8 @@ graph_stable_layout.graph_proxy <- function(g, stable = TRUE, ms = 0L){
 #' @details This is the technique used by \href{Andrei Kashcha}{https://github.com/anvaka},
 #' in his \href{package managers visualisation project}{https://anvaka.github.io/pm}, though
 #' the latter does not use ngraph.pixel (which grapher uses) and hides links based on the 
-#' distance in pixels.
+#' distance in pixels. Hiding distant edges allows to undo the hairball while still being
+#' able to discern smaller communities.
 #' 
 #' @inheritParams graph_nodes
 #' @param distance distance above which links should be hidden.
