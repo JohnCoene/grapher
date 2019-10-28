@@ -73,16 +73,19 @@ HTMLWidgets.widget({
         };
 
         layout.link = function createNodeUI(link) {
-          
+
           var fromc = 0xFFFFFF;
-          if(link.data) 
+          var toc = 0xFFFFFF;
+          if(link.data){
+            if(link.data.hidden)
+              if(link.data.hidden === true) return;
+
             if(link.data[x.style.links.fromColor]) 
               fromc = '0x' + link.data[x.style.links.fromColor].substr(1);
             
-          var toc = 0xFFFFFF;
-          if(link.data) 
             if(link.data[x.style.links.toColor]) 
               toc = '0x' + link.data[x.style.links.toColor].substr(1);
+          }
           
           return {
             fromColor: fromc,

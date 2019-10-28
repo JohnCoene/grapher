@@ -23,3 +23,21 @@ on_failure(was_passed) <- function(call, env) {
     "`."
   )
 }
+
+has_coords <- function(x) {
+  nms <- names(x)
+  total <- sum(c("x", "y", "z") %in% nms)
+
+  if(total != 3L)
+    return(FALSE)
+  
+  return(TRUE)
+}
+
+on_failure(has_coords) <- function(call, env) {
+  paste0(
+    "Must have computed static layout see `",
+    crayon::blue("graph_static_layout"), 
+    "`."
+  )
+}

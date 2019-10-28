@@ -8,7 +8,7 @@ graph_static_layout(
   g,
   method = igraph::layout_nicely,
   dim = 3,
-  scaling = NULL,
+  scaling = c(-200, 200),
   ...
 )
 }
@@ -22,7 +22,7 @@ as returned by a function of the same name.}
 \item{dim}{Number of dimensions to use, passed to \code{method}.}
 
 \item{scaling}{A vector or 2 values defining the output range to
-rescale the coordinates.}
+rescale the coordinates, set \code{NULL} to not use any scaling.}
 
 \item{...}{Any other argument to pass to \code{method}.}
 }
@@ -40,9 +40,9 @@ graph_data <- make_data(200)
 g <- graph(graph_data)
 
 # layout without scaling
-graph_static_layout(g)
+graph_static_layout(g, scaling = NULL)
 
 # layout with scaling
-graph_static_layout(g, scaling = c(-200, 200))
+graph_static_layout(g)
 
 }
