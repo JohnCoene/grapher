@@ -354,17 +354,17 @@ graph_stable_layout.graph_proxy <- function(g, stable = TRUE, ms = 0L){
 
 #' Hide Links
 #' 
-#' Hide links over a certain distance, based on computations by \code{graph_static_layout}.
+#' Hide links over a certain length, based on computations by \code{graph_static_layout}.
 #' Nodes will actually be hidden in resulting visualisation but not removed.
 #' 
 #' @details This is the technique used by \href{Andrei Kashcha}{https://github.com/anvaka},
 #' in his \href{package managers visualisation project}{https://anvaka.github.io/pm}, though
 #' the latter does not use ngraph.pixel (which grapher uses) and hides links based on the 
-#' distance in pixels. Hiding distant edges allows to undo the hairball while still being
+#' length in pixels. Hiding distant edges allows to undo the hairball while still being
 #' able to discern smaller communities.
 #' 
 #' @inheritParams graph_nodes
-#' @param distance distance above which links should be hidden.
+#' @param length Length above which links should be hidden.
 #' 
 #' @examples
 #' gdata <- make_data(500)
@@ -373,15 +373,15 @@ graph_stable_layout.graph_proxy <- function(g, stable = TRUE, ms = 0L){
 #'   graph_static_layout(scaling = c(-1000, 1000)) %>% 
 #'   graph_cluster() %>% 
 #'   scale_link_color(cluster) %>%  
-#'   hide_distant_links(150)
+#'   hide_long_links(150)
 #' 
 #' @name link_distance
 #' @export
-hide_distant_links <- function(g, distance = 1) UseMethod("hide_distant_links")
+hide_long_links <- function(g, length = 1) UseMethod("hide_long_links")
 
 #' @export
-#' @method hide_distant_links graph
-hide_distant_links.graph <- function(g, distance = 1){
+#' @method hide_long_links graph
+hide_long_links.graph <- function(g, length = 1){
   assert_that(was_passed(g$x$links))
   assert_that(has_coords(g$x$nodes))
 
@@ -391,11 +391,11 @@ hide_distant_links.graph <- function(g, distance = 1){
     left_join(n, by = c("source" = "id")) %>% 
     left_join(n, by = c("target" = "id"), suffix = c(".source", ".target")) %>% 
     mutate(
-      dist = .compute_dist(x.source, y.source, z.source, x.target, y.target, z.target)
+      l = .compute_dist(x.source, y.source, z.source, x.target, y.target, z.target)
     ) %>% 
     mutate(
       hidden = case_when(
-        dist > distance ~ TRUE,
+        l > length ~ TRUE,
         TRUE ~ FALSE
       )
     ) %>% 
@@ -408,7 +408,7 @@ hide_distant_links.graph <- function(g, distance = 1){
 
 #' @rdname link_distance
 #' @export
-compute_links_distance <- function(g){
+compute_links_length <- function(g){
   assert_that(was_passed(g$x$links))
   assert_that(has_coords(g$x$nodes))
 
@@ -418,7 +418,7 @@ compute_links_distance <- function(g){
     left_join(n, by = c("source" = "id")) %>% 
     left_join(n, by = c("target" = "id"), suffix = c(".source", ".target")) %>% 
     mutate(
-      distance = .compute_dist(x.source, y.source, z.source, x.target, y.target, z.target)
+      length = .compute_dist(x.source, y.source, z.source, x.target, y.target, z.target)
     ) %>% 
-    select(source, target, distance)
+    select(source, target, length)
 }
