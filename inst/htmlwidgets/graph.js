@@ -32,9 +32,11 @@ HTMLWidgets.widget({
         if(x.offline_nodes){
           var cnt = 0;
           g.forEachNode(function(node){
-            node.data.x = x.offline_nodes[cnt].x;
-            node.data.y = x.offline_nodes[cnt].y;
-            node.data.z = x.offline_nodes[cnt].z;
+            if(node != undefined){
+              node.data.x = x.offline_nodes[cnt].x;
+              node.data.y = x.offline_nodes[cnt].y;
+              node.data.z = x.offline_nodes[cnt].z;
+            }
             cnt += 1;
           })
         }

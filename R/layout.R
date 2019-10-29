@@ -151,8 +151,11 @@ graph_offline_layout.graph <- function(g, positions){
     transpose()
 
   g$x$offline_nodes <- m
-
   g$x$customLayout <- TRUE
+
+  # force data to be passed for coordinates to work JS side
+  if(ncol(g$x$nodes) == 1)
+    g$x$nodes$RANDOM <- 0L
 
   return(g)
 }
