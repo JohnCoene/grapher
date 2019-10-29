@@ -148,14 +148,30 @@ scale_link_color.graph <- function(g, variable, palette = graph_palette()){
   return(g)
 }
 
-#' Color Palette
+#' Color Palettes
 #' 
-#' A bright default color palette for examples and defaults.
+#' Bright and light color palettes for examples and defaults.
 #' 
 #' @return A vector of hex colors.
 #' 
+#' @examples
+#' graph_data <- make_data(200)
+#' 
+#' graph_data %>% 
+#'   graph() %>% 
+#'   graph_cluster() %>% 
+#'   scale_link_color(cluster, palette = graph_palette_light())
+#' 
+#' @name graph_palette
 #' @export 
 graph_palette <- function() {
   c("#FF964C", "#F7EF5D", "#EF5047", "#4592E0", "#5041D8", "#37A855") %>% 
+    invisible()
+}
+
+#' @rdname graph_palette
+#' @export
+graph_palette_light <- function(){
+  c("#D65151", "#D69351", "#FEF2BF", "#DBC7FC", "#FED8E5", "#FFBFBF") %>% 
     invisible()
 }

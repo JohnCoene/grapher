@@ -2,13 +2,25 @@
 % Please edit documentation in R/scale.R
 \name{graph_palette}
 \alias{graph_palette}
-\title{Color Palette}
+\alias{graph_palette_light}
+\title{Color Palettes}
 \usage{
 graph_palette()
+
+graph_palette_light()
 }
 \value{
 A vector of hex colors.
 }
 \description{
-A bright default color palette for examples and defaults.
+Bright and light color palettes for examples and defaults.
+}
+\examples{
+graph_data <- make_data(200)
+
+graph_data \%>\% 
+  graph() \%>\% 
+  graph_cluster() \%>\% 
+  scale_link_color(cluster, palette = graph_light_palette())
+
 }
