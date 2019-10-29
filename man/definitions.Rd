@@ -4,17 +4,17 @@
 \alias{definitions}
 \alias{define_node_color}
 \alias{define_node_size}
-\alias{define_link_from_color}
-\alias{define_link_to_color}
+\alias{define_link_source_color}
+\alias{define_link_target_color}
 \title{Definitions}
 \usage{
 define_node_color(g, var)
 
 define_node_size(g, var)
 
-define_link_from_color(g, var)
+define_link_source_color(g, var)
 
-define_link_to_color(g, var)
+define_link_target_color(g, var)
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 

@@ -49,11 +49,11 @@ define_node_size.graph <- function(g, var) {
 
 #' @rdname definitions
 #' @export
-define_link_from_color <- function(g, var) UseMethod("define_link_from_color")
+define_link_source_color <- function(g, var) UseMethod("define_link_source_color")
 
 #' @export
-#' @method define_link_from_color graph
-define_link_from_color.graph <- function(g, var) {
+#' @method define_link_source_color graph
+define_link_source_color.graph <- function(g, var) {
   assert_that(has_it(var))
   g$x$style$links$fromColor <- deparse(substitute(var))
   return(g)
@@ -61,11 +61,11 @@ define_link_from_color.graph <- function(g, var) {
 
 #' @rdname definitions
 #' @export
-define_link_to_color <- function(g, var) UseMethod("define_link_to_color")
+define_link_target_color <- function(g, var) UseMethod("define_link_target_color")
 
 #' @export
-#' @method define_link_to_color graph
-define_link_to_color.graph <- function(g, var) {
+#' @method define_link_target_color graph
+define_link_target_color.graph <- function(g, var) {
   assert_that(has_it(var))
   g$x$style$links$toColor <- deparse(substitute(var))
   return(g)
