@@ -31,10 +31,20 @@ able to discern smaller communities.
 \examples{
 gdata <- make_data(500)
 
-graph(gdata) \%>\%
+g <- graph(gdata) \%>\%
   graph_static_layout(scaling = c(-1000, 1000)) \%>\% 
   graph_cluster() \%>\% 
-  scale_link_color(cluster) \%>\%  
-  hide_long_links(150)
+  scale_link_color(cluster) 
+
+# hide links longer than 100
+hide_long_links(g, 100)
+
+# or get computed lengths
+lengths <- compute_links_length(g)
+
+# define threshold
+threshold <- quantile(lengths$length, .2)
+
+hide_long_links(g, threshold)
 
 }

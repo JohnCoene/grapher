@@ -372,11 +372,21 @@ graph_stable_layout.graph_proxy <- function(g, stable = TRUE, ms = 0L){
 #' @examples
 #' gdata <- make_data(500)
 #' 
-#' graph(gdata) %>%
+#' g <- graph(gdata) %>%
 #'   graph_static_layout(scaling = c(-1000, 1000)) %>% 
 #'   graph_cluster() %>% 
-#'   scale_link_color(cluster) %>%  
-#'   hide_long_links(150)
+#'   scale_link_color(cluster) 
+#' 
+#' # hide links longer than 100
+#' hide_long_links(g, 100)
+#' 
+#' # or get computed lengths
+#' lengths <- compute_links_length(g)
+#' 
+#' # define threshold
+#' threshold <- quantile(lengths$length, .2)
+#' 
+#' hide_long_links(g, threshold)
 #' 
 #' @name link_distance
 #' @export
@@ -424,4 +434,36 @@ compute_links_length <- function(g){
       length = .compute_dist(x.source, y.source, z.source, x.target, y.target, z.target)
     ) %>% 
     select(source, target, length)
+}
+
+#' Remove Coordinates
+#' 
+#' Removes coordinates (\code{x}, \code{y}, and \code{z}) from the 
+#' graph. This is useful if you have used the \code{graph_static_layout}
+#' to then \code{hide_long_links} but nonetheless want to use the default 
+#' force layout (\code{graph_live_layout}). 
+#' 
+#' @inheritParams graph_nodes
+#' 
+#' @examples
+#' gdata <- make_data(500)
+#' 
+#' graph(gdata) %>%
+#'   graph_static_layout() %>% 
+#'   hide_long_links(20) %>% # hide links
+#'   remove_coordinates() 
+#' 
+#' @export
+remove_coordinates <- function(g){
+  assert_that(has_coords(g$x$nodes))
+  
+  # remove coordinates
+  g$x$nodes$x <- NULL
+  g$x$nodes$y <- NULL
+  g$x$nodes$z <- NULL
+
+  # remove setting
+  g$x$customLayout <- NULL
+
+  return(g)
 }
