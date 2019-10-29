@@ -136,7 +136,8 @@ graph.tbl_graph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "
   nodes <- data %>% 
     tidygraph::activate(nodes) %>% 
     tibble::as_tibble() %>% 
-    .prepare_graph(1, "id")
+    .prepare_graph(1, "id") %>% 
+    mutate(id = as.character(id))
 
   if(!is.null(nodes)){
     nodes <- mutate(nodes, tg_id = 1:dplyr::n())
@@ -155,7 +156,9 @@ graph.tbl_graph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "
       ) %>% 
       select(source = id.x, target = id.y) 
     
-    links <- bind_cols(links_clean, links_meta)
+    links <- bind_cols(links_clean, links_meta) %>% 
+      mutate(source = as.character(source)) %>% 
+      mutate(target = as.character(target))
     nodes <- select(nodes, -tg_id)
   }
 
