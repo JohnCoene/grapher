@@ -7,14 +7,14 @@
 \title{Generate data}
 \usage{
 make_nodes(
-  n = 10,
+  n = 100,
   colors = c("#B1E2A3", "#98D3A5", "#328983", "#1C5C70", "#24C96B")
 )
 
 make_links(nodes)
 
 make_data(
-  n = 10,
+  n = 100,
   colors = c("#B1E2A3", "#98D3A5", "#328983", "#1C5C70", "#24C96B")
 )
 }

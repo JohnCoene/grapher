@@ -21,6 +21,6 @@ graph_data <- make_data(200)
 graph_data \%>\% 
   graph() \%>\% 
   graph_cluster() \%>\% 
-  scale_link_color(cluster, palette = graph_light_palette())
+  scale_link_color(cluster, palette = graph_palette_light())
 
 }

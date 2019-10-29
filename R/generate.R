@@ -24,7 +24,7 @@
 #'
 #' @rdname generate
 #' @export
-make_nodes <- function(n = 10, colors = c("#B1E2A3", "#98D3A5", "#328983", "#1C5C70", "#24C96B")) {
+make_nodes <- function(n = 100, colors = c("#B1E2A3", "#98D3A5", "#328983", "#1C5C70", "#24C96B")) {
 
 	dplyr::tibble(
 		id = as.character(seq(1, n)),
@@ -50,7 +50,7 @@ make_links <- function(nodes) {
 
 #' @rdname generate
 #' @export
-make_data <- function(n = 10, colors = c("#B1E2A3", "#98D3A5", "#328983", "#1C5C70", "#24C96B")){
+make_data <- function(n = 100, colors = c("#B1E2A3", "#98D3A5", "#328983", "#1C5C70", "#24C96B")){
   
   nodes <- make_nodes(n, colors)
   links <- make_links(nodes)
@@ -67,7 +67,7 @@ make_data <- function(n = 10, colors = c("#B1E2A3", "#98D3A5", "#328983", "#1C5C
 #' 
 #' @param deps Forms of dependencies to take into account. 
 #' @param max Maximum number of reverse dependencies for a package 
-#' may have.
+#' may have. Set to \code{Inf} to return the entire graph.
 #' @param format The format in which to return the graph, either a 
 #' \code{list} or nodes and edges or an object of class \code{igraph}.
 #' @param include_base_r Set to \code{FALSE} to exclude base R packages.
@@ -94,9 +94,6 @@ make_data <- function(n = 10, colors = c("#B1E2A3", "#98D3A5", "#328983", "#1C5C
 cran_deps_graph <- function(max = 10, include_base_r = TRUE, deps = c("Depends", "Imports", "LinkingTo"), format = c("list", "igraph")) {
 
   format <- match.arg(format)
-
-  if(max > 15)
-    cat(paste0("A high `", crayon::blue("max"), "` value generates a ", crayon::underline("hairball"), " graph.\n"))
 
   pkgs <- available.packages() %>% 
     tibble::as_tibble()

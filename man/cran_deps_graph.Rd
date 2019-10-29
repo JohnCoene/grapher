@@ -13,7 +13,7 @@ cran_deps_graph(
 }
 \arguments{
 \item{max}{Maximum number of reverse dependencies for a package 
-may have.}
+may have. Set to \code{Inf} to return the entire graph.}
 
 \item{include_base_r}{Set to \code{FALSE} to exclude base R packages.}
 
