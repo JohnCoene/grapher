@@ -24,3 +24,5 @@ Suggests:
     V8,
     tidygraph
 RoxygenNote: 6.1.99.9001
+Remotes: 
+  SymbolixAU/jsonify

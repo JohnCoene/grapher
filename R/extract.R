@@ -41,6 +41,9 @@ extract_graph.graph <- function(g, json = FALSE){
 #' @inheritParams graph_nodes
 #' @param file Name of file to save graph, passed to 
 #' \link[htmlwidgets]{saveWidget}.
+#' @param title The title of the page, corresponds to \code{<title>} HTML tag.
+#' @param background HTML background color, if set to \code{inherits} then the
+#' background color applied by \code{graph_background} is used.
 #' @param ... Other arguments passed to
 #' \link[htmlwidgets]{saveWidget}.
 #' 
@@ -52,8 +55,11 @@ extract_graph.graph <- function(g, json = FALSE){
 #' }
 #' 
 #' @export 
-save_graph <- function(g, file, ...){
+save_graph <- function(g, file, title = "grapher", background = "inherit", ...){
   assert_that(has_it(file))
 
-  htmlwidgets::saveWidget(g, file = file, ...)
+  if(background == "inherit")
+    background <- g$x$clearColor
+
+  htmlwidgets::saveWidget(g, file = file, title = "grapher", background = background, ...)
 }
