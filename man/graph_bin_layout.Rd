@@ -16,5 +16,10 @@ by \href{ngraph.offline.layout}{https://github.com/anvaka/ngraph.offline.layout}
 generally \code{positions.bin}.}
 }
 \description{
-Add layout computed offline via nodejs.
+Add layout computed offline via nodejs. 
+Note that \code{\link{graph_offline_layout}} uses the same algorithm.
+}
+\seealso{
+\code{\link{graph_offline_layout}} to run the same algorithm without 
+having to export the graph and use nodejs.
 }

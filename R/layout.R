@@ -85,6 +85,9 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
 #' @note This function will overwrite \code{x}, \code{y}, \code{z} variables 
 #' previously passed to \code{\link{graph_nodes}}. 
 #' 
+#' @seealso \code{\link{graph_offline_layout}} to compute the same layout as
+#' \code{\link{graph_live_layout}} but in R rather than in the browser.
+#' 
 #' @export 
 graph_static_layout <- function(g, method = igraph::layout_nicely, dim = 3, scaling = c(-200, 200), ...) UseMethod("graph_static_layout")
 
@@ -123,12 +126,16 @@ graph_static_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3
 
 #' Offline Layout From File
 #' 
-#' Add layout computed offline via nodejs.
+#' Add layout computed offline via nodejs. 
+#' Note that \code{\link{graph_offline_layout}} uses the same algorithm.
 #' 
 #' @inheritParams graph_nodes
 #' @param positions Path to binary positions file as computed
 #' by \href{ngraph.offline.layout}{https://github.com/anvaka/ngraph.offline.layout},
 #' generally \code{positions.bin}.
+#' 
+#' @seealso \code{\link{graph_offline_layout}} to run the same algorithm without 
+#' having to export the graph and use nodejs.
 #' 
 #' @export 
 graph_bin_layout <- function(g, positions) UseMethod("graph_bin_layout")
@@ -490,6 +497,8 @@ remove_coordinates.graph <- function(g){
 #' 
 #' graph(gdata) %>%
 #'   graph_offline_layout(steps = 100) 
+#' 
+#' @seealso \code{\link{graph_static_layout}} for other "offline" layout methods. 
 #' 
 #' @export
 graph_offline_layout <- function(g, steps = 500, spring_length = 30L, sping_coeff = .0008,

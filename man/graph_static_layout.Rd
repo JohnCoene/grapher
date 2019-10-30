@@ -46,3 +46,7 @@ graph_static_layout(g, scaling = NULL)
 graph_static_layout(g)
 
 }
+\seealso{
+\code{\link{graph_offline_layout}} to compute the same layout as
+\code{\link{graph_live_layout}} but in R rather than in the browser.
+}

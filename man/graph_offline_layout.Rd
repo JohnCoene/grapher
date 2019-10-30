@@ -59,3 +59,6 @@ graph(gdata) \%>\%
   graph_offline_layout(steps = 100) 
 
 }
+\seealso{
+\code{\link{graph_static_layout}} for other "offline" layout methods.
+}

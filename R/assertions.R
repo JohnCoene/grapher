@@ -36,8 +36,10 @@ has_coords <- function(x) {
 
 on_failure(has_coords) <- function(call, env) {
   paste0(
-    "Must have computed static layout see `",
-    crayon::blue("graph_static_layout"), 
+    "Must have computed 3D layout see `",
+    crayon::blue("graph_static_layout"),
+    "` or `", 
+    crayon::blue("graph_offline_layout"), 
     "`."
   )
 }
