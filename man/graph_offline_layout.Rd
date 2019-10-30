@@ -4,17 +4,58 @@
 \alias{graph_offline_layout}
 \title{Offline Layout}
 \usage{
-graph_offline_layout(g, positions)
+graph_offline_layout(
+  g,
+  steps = 500,
+  spring_length = 30L,
+  sping_coeff = 8e-04,
+  gravity = -1.2,
+  theta = 0.8,
+  drag_coeff = 0.02,
+  time_step = 20L,
+  is_3d = TRUE
+)
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 
 returned by \code{\link{graph}} or a \code{graph_proxy}
 as returned by a function of the same name.}
 
-\item{positions}{Path to binary positions file as computed
-by \href{ngraph.offline.layout}{https://github.com/anvaka/ngraph.offline.layout},
-generally \code{positions.bin}.}
+\item{steps}{Number of steps to run the layout algorithm.}
+
+\item{spring_length}{Used to compute Hook's law, default of \code{30} is generally ideal.}
+
+\item{sping_coeff}{Hook's law coefficient, where \code{1} is a solid spring.}
+
+\item{gravity}{Coulomb's law coefficient. It's used to repel nodes thus should be negative 
+if positive nodes attract each other.}
+
+\item{theta}{Theta coefficient from Barnes Hut simulation, between \code{0} and \code{1}. 
+The closer it's to \code{1} the more nodes the algorithm will have to go through.
+Setting it to one makes Barnes Hut simulation no different from
+brute-force forces calculation (each node is considered).}
+
+\item{drag_coeff}{Drag force coefficient. Used to slow down system, thus should be less than \code{1}. 
+The closer it is to 0 the less tight system will be.}
+
+\item{time_step}{Default time step $dt$ for forces integration.}
+
+\item{is_3d}{Whether to plot in 3 dimensions or 2 dimensions.}
 }
 \description{
-Add layout computed offline via nodejs.
+Compute the force layout (same as \code{\link{graph_live_layout}})
+but before rendering in the browser.
+}
+\details{
+This method is not necessarily faster than rendering
+in the browser as the graph has to be serialised to JSON once
+more to be processed by the \href{ngraph.forcelayout3d}{https://github.com/anvaka/ngraph.forcelayout3d}
+algorithm then reimported in grapher.
+}
+\examples{
+gdata <- make_data(500)
+
+graph(gdata) \%>\%
+  graph_offline_layout(steps = 100) 
+
 }

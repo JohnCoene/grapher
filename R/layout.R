@@ -121,7 +121,7 @@ graph_static_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3
   return(g)
 }
 
-#' Offline Layout
+#' Offline Layout From File
 #' 
 #' Add layout computed offline via nodejs.
 #' 
@@ -131,11 +131,11 @@ graph_static_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3
 #' generally \code{positions.bin}.
 #' 
 #' @export 
-graph_offline_layout <- function(g, positions) UseMethod("graph_offline_layout")
+graph_bin_layout <- function(g, positions) UseMethod("graph_bin_layout")
 
 #' @export 
-#' @method graph_offline_layout graph
-graph_offline_layout.graph <- function(g, positions){
+#' @method graph_bin_layout graph
+graph_bin_layout.graph <- function(g, positions){
   assert_that(has_it(positions))
   assert_that(was_passed(g$x$nodes))
 
@@ -454,7 +454,11 @@ compute_links_length <- function(g){
 #'   remove_coordinates() 
 #' 
 #' @export
-remove_coordinates <- function(g){
+remove_coordinates <- function(g) UseMethod("remove_coordinates")
+
+#' @export 
+#' @method remove_coordinates graph
+remove_coordinates.graph <- function(g){
   assert_that(has_coords(g$x$nodes))
   
   # remove coordinates
@@ -466,4 +470,80 @@ remove_coordinates <- function(g){
   g$x$customLayout <- NULL
 
   return(g)
+}
+
+#' Offline Layout
+#' 
+#' Compute the force layout (same as \code{\link{graph_live_layout}})
+#' but before rendering in the browser.
+#' 
+#' @inheritParams graph_live_layout
+#' @param steps Number of steps to run the layout algorithm.
+#' 
+#' @details This method is not necessarily faster than rendering
+#' in the browser as the graph has to be serialised to JSON once
+#' more to be processed by the \href{ngraph.forcelayout3d}{https://github.com/anvaka/ngraph.forcelayout3d}
+#' algorithm then reimported in grapher.
+#' 
+#' @examples
+#' gdata <- make_data(500)
+#' 
+#' graph(gdata) %>%
+#'   graph_offline_layout(steps = 100) 
+#' 
+#' @export
+graph_offline_layout <- function(g, steps = 500, spring_length = 30L, sping_coeff = .0008,
+  gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE) UseMethod("graph_offline_layout")
+
+#' @export
+#' @method graph_offline_layout graph
+graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, sping_coeff = .0008,
+  gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE){
+
+  physics <- list(
+    springLength = spring_length,
+    springCoeff = sping_coeff,
+    gravity = gravity,
+    theta = theta,
+    dragCoeff = drag_coeff,
+    timeStep = time_step,
+    is3d = is_3d
+  )
+
+  # initialises
+  ctx <- V8::new_context()
+
+  # source dependencies
+  invisible(ctx$source(system.file("offline-layout/layout.js", package = "grapher")))
+  ctx$source(system.file("htmlwidgets/lib/ngraph/ngraph.graph.min.js", package = "grapher"))
+  invisible(ctx$source(system.file("htmlwidgets/lib/fromjson/ngraph.fromjson.js", package = "grapher")))
+  
+  # create graph and settings
+  ctx$assign("json", extract_graph(g, json = TRUE))
+  ctx$assign("settings", physics)
+  ctx$eval("var graph = from_json(json);")
+
+  # create layout
+  ctx$eval("var l = layout(graph, settings);")
+  trash <- purrr::map(1:steps, function(x){
+   ctx$eval("var step = l.step();") 
+  })
+  rm(trash)
+  ctx$assign("nodes", list())
+  ctx$eval("graph.forEachNode(function(node){
+    var pos = l.getNodePosition(node.id);
+    pos.id = node.id;
+    nodes.push(pos);
+  })")
+  positioned <- ctx$get("nodes") 
+
+  if(!is.null(g$x$nodes))
+    g$x$nodes <- left_join(g$x$nodes, positioned, by = "id")
+  else
+    g$x$nodes <- positioned
+
+  g$x$customLayout <- TRUE
+
+  return(g)
+  
 }

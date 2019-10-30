@@ -18,7 +18,9 @@ Imports:
     scales,
     jsonify,
     magrittr,
-    tidygraph,
     assertthat,
     htmlwidgets
+Suggests:
+    V8,
+    tidygraph
 RoxygenNote: 6.1.99.9001
