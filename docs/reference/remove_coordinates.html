@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CRAN Dependency Graph — cran_deps_graph • grapher</title>
+<title>Remove Coordinates — remove_coordinates • grapher</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,11 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="CRAN Dependency Graph — cran_deps_graph" />
-<meta property="og:description" content="Builds the CRAN dependency graph." />
+<meta property="og:title" content="Remove Coordinates — remove_coordinates" />
+<meta property="og:description" content="Removes coordinates (x, y, and z) from the 
+graph. This is useful if you have used the graph_static_layout
+to then hide_long_links but nonetheless want to use the default 
+force layout (graph_live_layout)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -136,67 +139,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>CRAN Dependency Graph</h1>
+    <h1>Remove Coordinates</h1>
     
-    <div class="hidden name"><code>cran_deps_graph.Rd</code></div>
+    <div class="hidden name"><code>remove_coordinates.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Builds the CRAN dependency graph.</p>
+    <p>Removes coordinates (<code>x</code>, <code>y</code>, and <code>z</code>) from the 
+graph. This is useful if you have used the <code>graph_static_layout</code>
+to then <code>hide_long_links</code> but nonetheless want to use the default 
+force layout (<code>graph_live_layout</code>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cran_deps_graph</span>(
-  <span class='kw'>max</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>include_base_r</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>deps</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Depends"</span>, <span class='st'>"Imports"</span>, <span class='st'>"LinkingTo"</span>),
-  <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"list"</span>, <span class='st'>"igraph"</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>remove_coordinates</span>(<span class='no'>g</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>max</th>
-      <td><p>Maximum number of reverse dependencies for a package 
-may have. Set to <code>Inf</code> to return the entire graph.</p></td>
-    </tr>
-    <tr>
-      <th>include_base_r</th>
-      <td><p>Set to <code>FALSE</code> to exclude base R packages.</p></td>
-    </tr>
-    <tr>
-      <th>deps</th>
-      <td><p>Forms of dependencies to take into account.</p></td>
-    </tr>
-    <tr>
-      <th>format</th>
-      <td><p>The format in which to return the graph, either a 
-<code>list</code> or nodes and edges or an object of class <code>igraph</code>.</p></td>
+      <th>g</th>
+      <td><p>An object of class <code>graph</code> as 
+returned by <code><a href='graph.html'>graph</a></code> or a <code>graph_proxy</code>
+as returned by a function of the same name.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A list of nodes and links.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'>cran_deps_graph</span>(<span class='fl'>500</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"igraph"</span>)
-<span class='no'>min_g</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/igraph/topics/mst'>mst</a></span>(<span class='no'>g</span>)
+    <pre class="examples"><div class='input'><span class='no'>gdata</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='generate.html'>make_data</a></span>(<span class='fl'>500</span>)
 
-<span class='no'>min_g</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='graph.html'>graph</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='graph_cluster.html'>graph_cluster</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='scale_link_color.html'>scale_link_color</a></span>(<span class='no'>cluster</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='scale_node_size.html'>scale_node_size</a></span>(<span class='no'>degree</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>20</span>, <span class='fl'>100</span>))
-<span class='co'># }</span><div class='input'>
-</div></pre>
+<span class='fu'><a href='graph.html'>graph</a></span>(<span class='no'>gdata</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='graph_static_layout.html'>graph_static_layout</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='link_distance.html'>hide_long_links</a></span>(<span class='fl'>20</span>) <span class='kw'>%&gt;%</span> <span class='co'># hide links</span>
+  <span class='fu'>remove_coordinates</span>()</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Color Palette — graph_palette • grapher</title>
+<title>Color Palettes — graph_palette • grapher</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Color Palette — graph_palette" />
-<meta property="og:description" content="A bright default color palette for examples and defaults." />
+<meta property="og:title" content="Color Palettes — graph_palette" />
+<meta property="og:description" content="Bright and light color palettes for examples and defaults." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -136,27 +136,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Color Palette</h1>
+    <h1>Color Palettes</h1>
     
     <div class="hidden name"><code>graph_palette.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A bright default color palette for examples and defaults.</p>
+    <p>Bright and light color palettes for examples and defaults.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>graph_palette</span>()</pre>
+    <pre class="usage"><span class='fu'>graph_palette</span>()
+
+<span class='fu'>graph_palette_light</span>()</pre>
 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A vector of hex colors.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>graph_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='generate.html'>make_data</a></span>(<span class='fl'>200</span>)
+
+<span class='no'>graph_data</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='graph.html'>graph</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='graph_cluster.html'>graph_cluster</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='scale_link_color.html'>scale_link_color</a></span>(<span class='no'>cluster</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fu'>graph_palette_light</span>())</div><div class='output co'>#&gt; Found # <span style='color: #0000BB;'>19</span><span> clusters</div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

@@ -38,6 +38,8 @@ reference:
       - pin_nodes
       - pin_node
       - change_dimensions
+      - remove_coordinates
+      - link_distance
   - title: "Cluster"
     desc: "Compute graph clusters."
     contents: 
@@ -54,6 +56,7 @@ reference:
     desc: "Extract the graph as list or JSON."
     contents: 
       - extract_graph
+      - save_graph
   - title: "Data"
     desc: "Data for examples and tests."
     contents: 
@@ -74,6 +77,7 @@ reference:
       - starts_with("scale")
       - graph_background
       - graph_palette
+      - graph_draw
   - title: "Camera"
     desc: "Handle camera."
     contents: 
