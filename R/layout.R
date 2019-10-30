@@ -535,8 +535,11 @@ graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, spin
     pos.id = node.id;
     nodes.push(pos);
   })")
+
+  # extracted positoned nodes
   positioned <- ctx$get("nodes") 
 
+  # add to grapher
   if(!is.null(g$x$nodes))
     g$x$nodes <- left_join(g$x$nodes, positioned, by = "id")
   else
