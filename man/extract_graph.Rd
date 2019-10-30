@@ -11,7 +11,7 @@ extract_graph(g, json = FALSE)
 returned by \code{\link{graph}} or a \code{graph_proxy}
 as returned by a function of the same name.}
 
-\item{json}{= FALSE}
+\item{json}{Whether to return JSON, if \code{FALSE} returns a list.}
 }
 \value{
 A \code{list} of nodes and edges.

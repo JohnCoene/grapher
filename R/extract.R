@@ -6,7 +6,7 @@
 #' \href{ngraph.fromjson}{https://github.com/anvaka/ngraph.fromjson}.
 #' 
 #' @inheritParams graph_nodes
-#' @param json = FALSE
+#' @param json Whether to return JSON, if \code{FALSE} returns a list.
 #' 
 #' @examples 
 #' data <- make_data(10)
@@ -32,4 +32,28 @@ extract_graph.graph <- function(g, json = FALSE){
     graph <- jsonify::to_json(graph, unbox = TRUE)
 
   invisible(graph)
+}
+
+#' Save
+#' 
+#' Save the graph as HTML file.
+#' 
+#' @inheritParams graph_nodes
+#' @param file Name of file to save graph, passed to 
+#' \link[htmlwidgets]{saveWidget}.
+#' @param ... Other arguments passed to
+#' \link[htmlwidgets]{saveWidget}.
+#' 
+#' @examples 
+#' \dontrun{
+#' make_data(10)
+#'  graph(data) %>% 
+#'  save_graph("grapher.html")
+#' }
+#' 
+#' @export 
+save_graph <- function(g, file, ...){
+  assert_that(has_it(file))
+
+  htmlwidgets::saveWidget(g, file = file, ...)
 }
