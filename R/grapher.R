@@ -136,8 +136,10 @@ graph.tbl_graph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "
   nodes <- data %>% 
     tidygraph::activate(nodes) %>% 
     tibble::as_tibble() %>% 
-    .prepare_graph(1, "id") %>% 
-    mutate(id = as.character(id))
+    .prepare_graph(1, "id")
+
+  if(!is.null(nodes))
+    nodes <- mutate(nodes, id = as.character(id))
 
   if(!is.null(nodes)){
     nodes <- mutate(nodes, tg_id = 1:dplyr::n())

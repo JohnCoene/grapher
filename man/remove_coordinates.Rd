@@ -22,7 +22,7 @@ gdata <- make_data(500)
 
 graph(gdata) \%>\%
   graph_static_layout() \%>\% 
-  hide_long_links(1) \%>\% # hide links
+  hide_long_links(20) \%>\% # hide links
   remove_coordinates() 
 
 }

@@ -29,7 +29,7 @@ extract_graph.graph <- function(g, json = FALSE){
   graph <- .render_graph(g)
 
   if(json)
-    graph <- jsonlite::toJSON(graph, auto_unbox = TRUE)
+    graph <- jsonify::to_json(graph, unbox = TRUE)
 
   invisible(graph)
 }

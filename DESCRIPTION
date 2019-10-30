@@ -16,7 +16,7 @@ Imports:
     igraph,
     tibble,
     scales,
-    jsonlite,
+    jsonify,
     magrittr,
     tidygraph,
     assertthat,

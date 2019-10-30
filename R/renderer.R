@@ -19,7 +19,7 @@ as_widget <- function(x, width, height, elementId){
   x$layout$clearColor <- "#000"
   x$layout$clearAlpha <- 1
 
-  attr(x, 'TOJSON_ARGS') <- list(dataframe = "rows")
+  attr(x, 'TOJSON_FUNC') <- use_jsonify
 
   # create widget
   htmlwidgets::createWidget(
@@ -35,6 +35,10 @@ as_widget <- function(x, width, height, elementId){
       browser.fill = TRUE
     )
   )
+}
+
+use_jsonify <- function(x){
+  jsonify::to_json(x, unbox = TRUE)
 }
 
 graph_renderer <- function(g) {
