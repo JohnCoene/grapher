@@ -23,6 +23,6 @@ graph_data <- make_data()
 
 graph_data \%>\% 
   graph() \%>\% 
-  scale_node_size(size)
+  scale_node_size(size, c(10, 100))
 
 }

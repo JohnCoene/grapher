@@ -25,6 +25,8 @@ scale_node_color.graph <- function(g, variable, palette = graph_palette()){
   assert_that(was_passed(g$x$nodes))
 
   var <- deparse(substitute(variable))
+
+  assert_that(has_var(g$x$nodes, var))
   
   scl <- scale_colour(g$x$nodes[[var]], palette)
   g$x$nodes$color <- scl(g$x$nodes[[var]]) %>% to_hex()
@@ -46,7 +48,7 @@ scale_node_color.graph <- function(g, variable, palette = graph_palette()){
 #' 
 #' graph_data %>% 
 #'   graph() %>% 
-#'   scale_node_size(size)
+#'   scale_node_size(size, c(10, 100))
 #' 
 #' @export
 scale_node_size <- function(g, variable, range = c(20, 70)) UseMethod("scale_node_size")
@@ -58,6 +60,8 @@ scale_node_size.graph <- function(g, variable, range = c(20, 70)){
   assert_that(was_passed(g$x$nodes))
 
   var <- deparse(substitute(variable))
+
+  assert_that(has_var(g$x$nodes, var))
   
   g$x$nodes$size <- scales::rescale(g$x$nodes[[var]], to = range)
   g$x$style$nodes$size <- "size"
@@ -83,6 +87,8 @@ scale_link_source_color.graph <- function(g, variable, palette = graph_palette()
   assert_that(was_passed(g$x$links))
 
   var <- deparse(substitute(variable))
+
+  assert_that(has_var(g$x$links, var))
   
   scl <- scale_colour(g$x$links[[var]], palette)
   g$x$links$fromColor <- scl(g$x$links[[var]]) %>% to_hex()
@@ -102,6 +108,8 @@ scale_link_target_color.graph <- function(g, variable, palette = graph_palette()
   assert_that(was_passed(g$x$links))
 
   var <- deparse(substitute(variable))
+
+  assert_that(has_var(g$x$links, var))
   
   scl <- scale_colour(g$x$links[[var]], palette)
   g$x$links$toColor <- scl(g$x$links[[var]]) %>% to_hex()

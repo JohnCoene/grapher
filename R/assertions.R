@@ -43,3 +43,13 @@ on_failure(has_coords) <- function(call, env) {
     "`."
   )
 }
+
+has_var <- function(data, variable){
+  !is.null(data[[variable]])
+}
+
+on_failure(has_var) <- function(call, env) {
+  paste0(
+    "Cannot find scaling variable."
+  )
+}
