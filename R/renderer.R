@@ -16,7 +16,7 @@ as_widget <- function(x, width, height, elementId){
       return(TRUE)
     })
 
-  x$layout$clearColor <- "#000"
+  x$layout$clearColor <- "#000000"
   x$layout$clearAlpha <- 1
 
   attr(x, 'TOJSON_FUNC') <- use_jsonify

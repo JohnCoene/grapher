@@ -56,6 +56,7 @@
 #'   graph_links(g$links, source, target)
 #' 
 #' @importFrom stats runif
+#' @importFrom grDevices col2rgb rgb
 #' @import htmlwidgets
 #' @import assertthat
 #' @import dplyr

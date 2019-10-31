@@ -44,13 +44,13 @@
 #' \dontrun{shinyApp(ui, server)}
 #' 
 #' @export 
-graph_background <- function(g, color = "#000", alpha = 1) UseMethod("graph_background")
+graph_background <- function(g, color = "#000000", alpha = 1) UseMethod("graph_background")
 
 #' @export
 #' @method graph_background graph
-graph_background.graph <- function(g, color = "#000", alpha = 1){
+graph_background.graph <- function(g, color = "#000000", alpha = 1){
   g$x$layout <- list(
-    clearColor = color,
+    clearColor = to_hex(color),
     clearAlpha = alpha
   )
   return(g)
@@ -58,9 +58,9 @@ graph_background.graph <- function(g, color = "#000", alpha = 1){
 
 #' @export
 #' @method graph_background graph_proxy
-graph_background.graph_proxy <- function(g, color = "#000", alpha = 1){
+graph_background.graph_proxy <- function(g, color = "#000000", alpha = 1){
 
-  msg <- list(id = g$id, color = color, alpha = alpha)
+  msg <- list(id = g$id, color = to_hex(color), alpha = alpha)
 
   g$session$sendCustomMessage("background", msg)
   return(g)

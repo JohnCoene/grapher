@@ -41,3 +41,7 @@ scale_colour <- function(x, palette){
   z <- (z.source - z.target)^2
   sqrt(x + y + z)
 }
+
+to_hex <- function(x){
+  rgb(t(col2rgb(x, alpha = FALSE)/255))
+}

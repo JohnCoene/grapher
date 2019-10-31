@@ -27,7 +27,7 @@ scale_node_color.graph <- function(g, variable, palette = graph_palette()){
   var <- deparse(substitute(variable))
   
   scl <- scale_colour(g$x$nodes[[var]], palette)
-  g$x$nodes$color <- scl(g$x$nodes[[var]])
+  g$x$nodes$color <- scl(g$x$nodes[[var]]) %>% to_hex()
   g$x$style$nodes$color <- "toColor"
 
   return(g)
@@ -85,7 +85,7 @@ scale_link_source_color.graph <- function(g, variable, palette = graph_palette()
   var <- deparse(substitute(variable))
   
   scl <- scale_colour(g$x$links[[var]], palette)
-  g$x$links$fromColor <- scl(g$x$links[[var]])
+  g$x$links$fromColor <- scl(g$x$links[[var]]) %>% to_hex()
   g$x$style$links$fromColor <- "fromColor"
 
   return(g)
@@ -104,7 +104,7 @@ scale_link_target_color.graph <- function(g, variable, palette = graph_palette()
   var <- deparse(substitute(variable))
   
   scl <- scale_colour(g$x$links[[var]], palette)
-  g$x$links$toColor <- scl(g$x$links[[var]])
+  g$x$links$toColor <- scl(g$x$links[[var]]) %>% to_hex()
   g$x$style$links$toColor <- "toColor"
 
   return(g)
@@ -131,12 +131,12 @@ scale_link_color.graph <- function(g, variable, palette = graph_palette()){
   source <- g$x$links %>% 
     select(id = source) %>% 
     inner_join(nodes, by = "id")
-  to_color <- scl(source[[var]])
+  to_color <- scl(source[[var]]) %>% to_hex()
 
   target <- g$x$links %>% 
     select(id = target) %>% 
     inner_join(nodes, by = "id")
-  from_color <- scl(target[[var]])
+  from_color <- scl(target[[var]]) %>% to_hex()
 
   # using fromColor and toColor
   # force style set

@@ -4,7 +4,7 @@
 \alias{graph_background}
 \title{Background}
 \usage{
-graph_background(g, color = "#000", alpha = 1)
+graph_background(g, color = "#000000", alpha = 1)
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 

@@ -4,7 +4,7 @@
 \alias{save_graph}
 \title{Save}
 \usage{
-save_graph(g, file, title = "grapher", background = "inherit", ...)
+save_graph(g, file, title = "grapher", background = "#000000", ...)
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 
@@ -16,8 +16,8 @@ as returned by a function of the same name.}
 
 \item{title}{The title of the page, corresponds to \code{<title>} HTML tag.}
 
-\item{background}{HTML background color, if set to \code{inherits} then the
-background color applied by \code{graph_background} is used.}
+\item{background}{HTML background color, ensure this is a valid hex
+color as this is passed to \link[htmlwidgets]{saveWidget} which is very strict.}
 
 \item{...}{Other arguments passed to
 \link[htmlwidgets]{saveWidget}.}
