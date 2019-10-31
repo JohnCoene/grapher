@@ -13,7 +13,8 @@ graph_offline_layout(
   theta = 0.8,
   drag_coeff = 0.02,
   time_step = 20L,
-  is_3d = TRUE
+  is_3d = TRUE,
+  quiet = !interactive()
 )
 }
 \arguments{
@@ -41,6 +42,9 @@ The closer it is to 0 the less tight system will be.}
 \item{time_step}{Default time step $dt$ for forces integration.}
 
 \item{is_3d}{Whether to plot in 3 dimensions or 2 dimensions.}
+
+\item{quiet}{Set to \code{FALSE} to print helpful messages 
+to the console, defaults to \link[base]{interactive}.}
 }
 \description{
 Compute the force layout (same as \code{\link{graph_live_layout}})
@@ -55,8 +59,9 @@ algorithm then reimported in grapher.
 \examples{
 gdata <- make_data(500)
 
-graph(gdata) \%>\%
-  graph_offline_layout(steps = 100) 
+gdata \%>\% 
+ graph() \%>\%
+ graph_offline_layout(steps = 100) 
 
 }
 \seealso{

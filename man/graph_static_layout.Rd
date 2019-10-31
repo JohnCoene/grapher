@@ -22,7 +22,8 @@ as returned by a function of the same name.}
 \item{dim}{Number of dimensions to use, passed to \code{method}.}
 
 \item{scaling}{A vector or 2 values defining the output range to
-rescale the coordinates, set \code{NULL} to not use any scaling.}
+rescale the coordinates, set \code{NULL} to not use any scaling.
+Note rescaling might distort the graph to some degree.}
 
 \item{...}{Any other argument to pass to \code{method}.}
 }

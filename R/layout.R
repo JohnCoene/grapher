@@ -69,6 +69,7 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
 #' @param dim Number of dimensions to use, passed to \code{method}.
 #' @param scaling A vector or 2 values defining the output range to
 #' rescale the coordinates, set \code{NULL} to not use any scaling.
+#' Note rescaling might distort the graph to some degree.
 #' @param ... Any other argument to pass to \code{method}.
 #' 
 #' @examples 
@@ -486,6 +487,8 @@ remove_coordinates.graph <- function(g){
 #' 
 #' @inheritParams graph_live_layout
 #' @param steps Number of steps to run the layout algorithm.
+#' @param quiet Set to \code{FALSE} to print helpful messages 
+#' to the console, defaults to \link[base]{interactive}.
 #' 
 #' @details This method is not necessarily faster than rendering
 #' in the browser as the graph has to be serialised to JSON once
@@ -495,19 +498,20 @@ remove_coordinates.graph <- function(g){
 #' @examples
 #' gdata <- make_data(500)
 #' 
-#' graph(gdata) %>%
-#'   graph_offline_layout(steps = 100) 
+#' gdata %>% 
+#'  graph() %>%
+#'  graph_offline_layout(steps = 100) 
 #' 
 #' @seealso \code{\link{graph_static_layout}} for other "offline" layout methods. 
 #' 
 #' @export
 graph_offline_layout <- function(g, steps = 500, spring_length = 30L, sping_coeff = .0008,
-  gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE) UseMethod("graph_offline_layout")
+  gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE, quiet = !interactive()) UseMethod("graph_offline_layout")
 
 #' @export
 #' @method graph_offline_layout graph
 graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, sping_coeff = .0008,
-  gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE){
+  gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE, quiet = !interactive()){
 
   physics <- list(
     springLength = spring_length,
@@ -519,7 +523,7 @@ graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, spin
     is3d = is_3d
   )
 
-  # initialises
+  # initialise V8
   ctx <- V8::new_context()
 
   # source dependencies
@@ -528,16 +532,20 @@ graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, spin
   invisible(ctx$source(system.file("htmlwidgets/lib/fromjson/ngraph.fromjson.js", package = "grapher")))
   
   # create graph and settings
+  if(!quiet)
+    cat("Serializing graph\n")
   ctx$assign("json", extract_graph(g, json = TRUE))
   ctx$assign("settings", physics)
   ctx$eval("var graph = from_json(json);")
 
   # create layout
   ctx$eval("var l = layout(graph, settings);")
-  trash <- purrr::map(1:steps, function(x){
+  bin <- purrr::map(1:steps, function(x){
+    if(!quiet)
+      cat("Step", crayon::blue(x), "\n")
    ctx$eval("var step = l.step();") 
   })
-  rm(trash)
+  rm(bin)
   ctx$assign("nodes", list())
   ctx$eval("graph.forEachNode(function(node){
     var pos = l.getNodePosition(node.id);
@@ -554,6 +562,7 @@ graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, spin
   else
     g$x$nodes <- positioned
 
+  # set custom viz settings
   g$x$customLayout <- TRUE
 
   return(g)
