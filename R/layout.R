@@ -489,6 +489,9 @@ remove_coordinates.graph <- function(g){
 #' @param steps Number of steps to run the layout algorithm.
 #' @param quiet Set to \code{FALSE} to print helpful messages 
 #' to the console, defaults to \link[base]{interactive}.
+#' @param verlet_integration If you find that standard the default Euler integration 
+#' produces too many errors and jitter, consider using verlet integration by settings
+#' this to \code{TRUE}.
 #' 
 #' @details This method is not necessarily faster than rendering
 #' in the browser as the graph has to be serialised to JSON once
@@ -506,12 +509,17 @@ remove_coordinates.graph <- function(g){
 #' 
 #' @export
 graph_offline_layout <- function(g, steps = 500, spring_length = 30L, sping_coeff = .0008,
-  gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE, quiet = !interactive()) UseMethod("graph_offline_layout")
+  gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE,
+  verlet_integration = FALSE, quiet = !interactive()) UseMethod("graph_offline_layout")
 
 #' @export
 #' @method graph_offline_layout graph
 graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, sping_coeff = .0008,
-  gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE, quiet = !interactive()){
+  gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE, 
+  verlet_integration = FALSE, quiet = !interactive()){
+
+  if(verlet_integration)
+    verlet_integration <- "verlet"
 
   physics <- list(
     springLength = spring_length,
@@ -520,8 +528,12 @@ graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, spin
     theta = theta,
     dragCoeff = drag_coeff,
     timeStep = time_step,
-    is3d = is_3d
-  )
+    is3d = is_3d,
+    integrator = verlet_integration
+  ) %>% 
+    keep(function(x){
+      !is.null(x)
+    })
 
   # initialise V8
   ctx <- V8::new_context()

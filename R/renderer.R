@@ -11,9 +11,7 @@ as_widget <- function(x, width, height, elementId){
     )
   ) %>% 
     keep(function(x){
-      if(is.null(x))
-        return(FALSE)
-      return(TRUE)
+      !is.null(x)
     })
 
   x$layout$clearColor <- "#000000"
