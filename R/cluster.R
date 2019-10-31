@@ -43,7 +43,7 @@ graph_cluster.graph <- function(g, method = igraph::cluster_walktrap,
   n_grps <- length(grps)
   
   if(!isTRUE(quiet))
-    cat("Found #", crayon::blue(n_grps), "clusters\n")
+    cat("Found", crayon::blue(n_grps), "clusters\n")
 
   clusters <- tibble::tibble(
     cluster = as.factor(membership$membership)
