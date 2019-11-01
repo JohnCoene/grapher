@@ -22,6 +22,8 @@ respective meta-data. Can also be an object of class \code{igraph} from the
 the \link[tidygraph]{tidygraph} package. If a character string is passed the string is
 assumed to be the path to either a \code{.gexf} file or a \code{.gv} 
 \href{https://en.wikipedia.org/wiki/DOT_(graph_description_language)}{dot file}.
+The thrid file type acceted is JSON, it must be the output of 
+\code{\link{save_graph_json}}.
 If \code{NULL} data \emph{must} be later supplied with \code{\link{graph_nodes}}
 and \code{\link{graph_links}}.}
 
