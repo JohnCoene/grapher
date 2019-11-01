@@ -13,19 +13,18 @@ HTMLWidgets.widget({
 
       renderValue: function(x) {
 
-        g = createGraph();
-
         if(x.hasOwnProperty('json')){
           $.ajax({ 
             url: x.json, 
             dataType: 'json', 
             async: false,
             success: function(json){ 
-              console.log(json);
               x = json;
             } 
           });
         }
+
+        g = createGraph();
 
         // update according to data
         if(x.hasOwnProperty('gexf'))

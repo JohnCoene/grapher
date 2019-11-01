@@ -187,8 +187,7 @@ graph.character <- function(data = NULL, directed = TRUE, draw = TRUE, width = "
     data <- tryCatch(suppressWarnings(readLines(data)), error = function(e) e)
     assert_that(!inherits(data, "error"), msg = "Cannot read file.")  
     
-    if(exts == "gexf")
-      data <- paste(data, collapse = "\n")
+    data <- paste(data, collapse = "\n")
   } 
 
   x = list(
