@@ -2,3 +2,5 @@ test.R
 node_modules
 srcjs
 .DS_Store
+test-data
+

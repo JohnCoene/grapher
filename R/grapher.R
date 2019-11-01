@@ -181,12 +181,15 @@ graph.tbl_graph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "
 graph.character <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
 
   # determine extension
-  exts <- strsplit(basename(data), split="\\.")[[1]][-1]
-  data <- tryCatch(suppressWarnings(readLines(data)), error = function(e) e)
-  assert_that(!inherits(data, "error"), msg = "Cannot read file.")  
-  
-  if(exts == "gexf")
-    data <- paste(data, collapse = "\n")
+  exts <- strsplit(basename(data), split = "\\.")[[1]][-1]
+
+  if(exts != "json"){
+    data <- tryCatch(suppressWarnings(readLines(data)), error = function(e) e)
+    assert_that(!inherits(data, "error"), msg = "Cannot read file.")  
+    
+    if(exts == "gexf")
+      data <- paste(data, collapse = "\n")
+  } 
 
   x = list(
     links = list(),
@@ -198,8 +201,10 @@ graph.character <- function(data = NULL, directed = TRUE, draw = TRUE, width = "
 
   if(exts == "gexf")
     x$gexf <- data
-  else
+  else if(exts == "gv")
     x$dot <- data
+  else 
+    x$json <- data
 
   as_widget(x, width, height, elementId)
 }

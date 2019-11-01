@@ -15,6 +15,18 @@ HTMLWidgets.widget({
 
         g = createGraph();
 
+        if(x.hasOwnProperty('json')){
+          $.ajax({ 
+            url: x.json, 
+            dataType: 'json', 
+            async: false,
+            success: function(json){ 
+              console.log(json);
+              x = json;
+            } 
+          });
+        }
+
         // update according to data
         if(x.hasOwnProperty('gexf'))
           g = load_gexf.load(x.gexf);

@@ -48,7 +48,7 @@ graph_renderer <- function(g) {
       g$x$customLayout <- TRUE
   }
 
-  if(!length(g$x$gexf) && !length(g$x$dot))
+  if(!length(g$x$gexf) && !length(g$x$dot) &&!length(g$x$json))
     g$x$data <- .render_graph(g)
 
   # remove nodes and links

@@ -120,7 +120,6 @@ graph_static_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3
     lay_out <- left_join(g$x$nodes, lay_out, by = "id")
   
   g$x$nodes <- lay_out
-  g$x$customLayout <- TRUE
 
   return(g)
 }
@@ -159,7 +158,6 @@ graph_bin_layout.graph <- function(g, positions){
     transpose()
 
   g$x$offline_nodes <- m
-  g$x$customLayout <- TRUE
 
   # force data to be passed for coordinates to work JS side
   if(ncol(g$x$nodes) == 1)
@@ -573,9 +571,6 @@ graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, spin
     g$x$nodes <- left_join(g$x$nodes, positioned, by = "id")
   else
     g$x$nodes <- positioned
-
-  # set custom viz settings
-  g$x$customLayout <- TRUE
 
   return(g)
   
