@@ -10,9 +10,7 @@ as_widget <- function(x, width, height, elementId){
       toColor = .get_default_style(x$links, "toColor", x$styles$links)
     )
   ) %>% 
-    keep(function(x){
-      !is.null(x)
-    })
+    discard(is.null)
 
   x$layout$clearColor <- "#000000"
   x$layout$clearAlpha <- 1

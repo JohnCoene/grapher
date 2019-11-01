@@ -52,7 +52,7 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
     dragCoeff = drag_coeff,
     timeStep = time_step,
     is3d = is_3d
-  )
+  ) 
 
   g$x$layout$physics <- physics
 
@@ -69,7 +69,6 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
 #' @param dim Number of dimensions to use, passed to \code{method}.
 #' @param scaling A vector or 2 values defining the output range to
 #' rescale the coordinates, set \code{NULL} to not use any scaling.
-#' Note rescaling might distort the graph to some degree.
 #' @param ... Any other argument to pass to \code{method}.
 #' 
 #' @examples 
@@ -529,9 +528,7 @@ graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, spin
     is3d = is_3d,
     integrator = verlet_integration
   ) %>% 
-    keep(function(x){
-      !is.null(x)
-    })
+    discard(is.null)
 
   # initialise V8
   ctx <- V8::new_context()
