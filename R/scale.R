@@ -173,7 +173,11 @@ scale_link_color.graph <- function(g, variable, palette = graph_palette()){
 #' @name graph_palette
 #' @export 
 graph_palette <- function() {
-  c("#FF964C", "#F7EF5D", "#EF5047", "#4592E0", "#5041D8", "#37A855") %>% 
+  c(
+    "#6f63bb", "#8a60b0", "#ba43b4", "#c7519c", "#d63a3a", "#ff7f0e",
+    "#ffaa0e", "#ffbf50", "#bcbd22", "#78a641", "#2ca030", "#12a2a8",
+    "#1f83b4"
+  ) %>% 
     invisible()
 }
 
