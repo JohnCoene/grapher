@@ -4,3 +4,4 @@ srcjs
 .DS_Store
 test-data
 
+inst/doc

@@ -28,12 +28,12 @@ div(
   div(
     class = "col-md-8",
     p(
-      "Interactive graphs in R, an integration of the many amazing works of",
+      "Interactive graphs in R; an integration of the many amazing works of",
       tags$a(
         "Andrei Kashcha.", 
         href = "https://github.com/anvaka", 
         target = "_blank"
-      )
+      ),
     ),
     p(
       tags$a(
@@ -44,10 +44,10 @@ div(
       ),
       tags$a(
         tags$i(class = "fa fa-desktop"),
-        "CRAN Network",
+        "CRAN Dependency Graph",
         class = "btn btn-default",
         target = "_blank",
-        href = "https://shiny.john-coene.com/gdp-app"
+        href = "https://shiny.john-coene.com/cran"
       )
     )
   )
@@ -55,42 +55,45 @@ div(
 br()
 ```
 
-## Installation
+With support for 2 and 3 dimensional layouts, {grapher} can build graphs from a multitude of formats.
 
-You can install the grapher from Github:
+```r
+library(grapher)
+
+g <- make_data(50) # mock data
+
+# from a list
+graph(g)
+
+# from igraph
+ig <- igraph::make_ring(10)
+graph(ig)
+
+# from tidygraph
+tbl_graph <- tidygraph::create_ring(20)
+graph(tbl_graph)
+
+# from gexf
+graph("http://gephi.org/datasets/LesMiserables.gexf")
+
+# from dot file
+fl <- system.file("example/dotfile.gv", package = "grapher")
+graph(fl)
+
+# from data.frames
+# pass only links
+graph() %>% 
+  graph_links(g$links, source, target)
+
+# pass nodes and links
+graph() %>% 
+  graph_nodes(g$nodes, id) %>% 
+  graph_links(g$links, source, target)
+```
+
+You can get it with:
 
 ```r
 # install.packages("remotes")
 remotes::install_github("JohnCoene/grapher")
-```
-
-## Examples
-
-```{r, echo = FALSE}
-div(
-  class = "row",
-  div(class = "col-md-3"),
-  div(class = "col-md-3",
-    tags$a(
-      "Labels",
-      class = "btn btn-default",
-      href = "labels.html",
-      target = "_blank",
-      style = "width:100%;"
-    )
-  ),
-  div(class = "col-md-3",
-    tags$a(
-      "Polygons",
-      class = "btn btn-default",
-      href = "choropleth.html",
-      target = "_blank",
-      style = "width:100%;"
-    )
-  ),
-  div(class = "col-md-3")
-)
-
-br()
-
 ```

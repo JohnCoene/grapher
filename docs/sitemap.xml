@@ -28,6 +28,9 @@
     <loc>https://grapher.john-coene.com/reference/graph_background.html</loc>
   </url>
   <url>
+    <loc>https://grapher.john-coene.com/reference/graph_bin_layout.html</loc>
+  </url>
+  <url>
     <loc>https://grapher.john-coene.com/reference/graph_camera_fov.html</loc>
   </url>
   <url>
@@ -70,6 +73,9 @@
     <loc>https://grapher.john-coene.com/reference/grapher_demo.html</loc>
   </url>
   <url>
+    <loc>https://grapher.john-coene.com/reference/link_distance.html</loc>
+  </url>
+  <url>
     <loc>https://grapher.john-coene.com/reference/pin_nodes.html</loc>
   </url>
   <url>
@@ -77,6 +83,12 @@
   </url>
   <url>
     <loc>https://grapher.john-coene.com/reference/remove.html</loc>
+  </url>
+  <url>
+    <loc>https://grapher.john-coene.com/reference/remove_coordinates.html</loc>
+  </url>
+  <url>
+    <loc>https://grapher.john-coene.com/reference/save_graph.html</loc>
   </url>
   <url>
     <loc>https://grapher.john-coene.com/reference/scale_link_color.html</loc>

@@ -6,3 +6,4 @@ srcjs
 ^pkgdown$
 ^index\.Rmd$
 ^data-raw$
+vignettes

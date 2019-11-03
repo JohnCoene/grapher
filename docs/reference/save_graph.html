@@ -36,7 +36,7 @@
   
 
 <meta property="og:title" content="Save — save_graph" />
-<meta property="og:description" content="Save the graph as HTML file." />
+<meta property="og:description" content="Save the graph as HTML or JSON file." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -78,7 +78,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grapher</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -142,10 +142,12 @@
     </div>
 
     <div class="ref-description">
-    <p>Save the graph as HTML file.</p>
+    <p>Save the graph as HTML or JSON file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>save_graph</span>(<span class='no'>g</span>, <span class='no'>file</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>save_graph_html</span>(<span class='no'>g</span>, <span class='no'>file</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"grapher"</span>, <span class='kw'>background</span> <span class='kw'>=</span> <span class='st'>"#000000"</span>, <span class='no'>...</span>)
+
+<span class='fu'>save_graph_json</span>(<span class='no'>g</span>, <span class='no'>file</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,7 +161,17 @@ as returned by a function of the same name.</p></td>
     <tr>
       <th>file</th>
       <td><p>Name of file to save graph, passed to 
-<a href='https://www.rdocumentation.org/packages/htmlwidgets/topics/saveWidget'>saveWidget</a>.</p></td>
+<a href='https://www.rdocumentation.org/packages/htmlwidgets/topics/saveWidget'>saveWidget</a> if <code>save_graph_html</code> is used 
+or passed to <a href='https://www.rdocumentation.org/packages/base/topics/write'>write</a> if /codesave_graph_json is used.</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>The title of the page, corresponds to <code>&lt;title&gt;</code> HTML tag.</p></td>
+    </tr>
+    <tr>
+      <th>background</th>
+      <td><p>HTML background color, ensure this is a valid hex
+color as this is passed to <a href='https://www.rdocumentation.org/packages/htmlwidgets/topics/saveWidget'>saveWidget</a> which is very strict.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -168,12 +180,63 @@ as returned by a function of the same name.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Serialising the data to JSON can take some time depending on the size
+of the graph you want to visualise. The <code>save_graph_json</code> will serialise
+the graph to JSON, enabling you to later load it with the <code><a href='graph.html'>graph</a></code>
+function, <em>this will only work with Shiny</em>.</p>
+    <h2 class="hasAnchor" id="formats"><a class="anchor" href="#formats"></a>Formats</h2>
+
+    
+    <ul>
+<li><p><code>save_graph_html</code> - Save visualisation as standalone HTML file.</p></li>
+<li><p><code>save_graph_json</code> - Save the graph as JSON to later re-use with the <code><a href='graph.html'>graph</a></code> function.</p></li>
+</ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
+    <pre class="examples"><div class='input'># save as HTML
+</div><span class='co'># NOT RUN {</span>
 <span class='fu'><a href='generate.html'>make_data</a></span>(<span class='fl'>10</span>)
  <span class='fu'><a href='graph.html'>graph</a></span>(<span class='no'>data</span>) <span class='kw'>%&gt;%</span>
  <span class='fu'>save_graph</span>(<span class='st'>"grapher.html"</span>)
+<span class='co'># }</span><div class='input'>
+# use case of JSON
+</div><span class='co'># NOT RUN {</span>
+<span class='co'># create directory to hold json file</span>
+<span class='no'>dir</span> <span class='kw'>&lt;-</span> <span class='st'>"./tmp"</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/files2'>dir.create</a></span>(<span class='no'>dir</span>)
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='no'>dir</span>, <span class='st'>"/graph.json"</span>)
+
+<span class='co'># create and save large graph as JSON</span>
+<span class='no'>graph_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='generate.html'>make_data</a></span>(<span class='fl'>1000</span>)
+<span class='fu'><a href='graph.html'>graph</a></span>(<span class='no'>graph_data</span>) <span class='kw'>%&gt;%</span>
+ <span class='fu'><a href='graph_static_layout.html'>graph_static_layout</a></span>() <span class='kw'>%&gt;%</span>
+ <span class='fu'>save_graph_json</span>(<span class='no'>file</span>)
+
+<span class='co'># function to delete temp</span>
+<span class='no'>on_start</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(){
+ <span class='fu'><a href='https://www.rdocumentation.org/packages/shiny/topics/onStop'>onStop</a></span>(<span class='kw'>function</span>(){
+   <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='no'>dir</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+ })
+}
+
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>shiny</span>)
+
+<span class='co'># make the directory accessible from shiny</span>
+<span class='kw pkg'>shiny</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/shiny/topics/resourcePaths'>addResourcePath</a></span>(<span class='st'>"graph"</span>, <span class='no'>dir</span>)
+
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/shiny/topics/fluidPage'>fluidPage</a></span>(
+ <span class='fu'><a href='graph-shiny.html'>graphOutput</a></span>(<span class='st'>"g"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='st'>"100vh"</span>)
+)
+
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>){
+ <span class='no'>output</span>$<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='graph-shiny.html'>renderGraph</a></span>({
+   <span class='fu'><a href='graph.html'>graph</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"./graph/graph.json"</span>))
+ })
+}
+
+<span class='fu'><a href='https://www.rdocumentation.org/packages/shiny/topics/shinyApp'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>, <span class='kw'>onStart</span> <span class='kw'>=</span> <span class='no'>on_start</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
@@ -181,6 +244,8 @@ as returned by a function of the same name.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#formats">Formats</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -191,6 +256,8 @@ as returned by a function of the same name.</p></td>
       <div class="copyright">
   <p>Developed by <a href='http://john-coene.com'>John Coene</a>.</p>
 </div>
+
+<script data-name="BMC-Widget" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="JohnCoene" data-description="Support me on Buy me a coffee!" data-message="Thank you for visiting. You can now buy me a drink!" data-color="#FF813F" data-position="left" data-x_margin="18" data-y_margin="18"></script>
 
 <div class="pkgdown">
   <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
