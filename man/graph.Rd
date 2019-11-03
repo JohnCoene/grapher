@@ -49,7 +49,7 @@ are included in the \code{nodes} the rendered visualisation
 is stable 2/3 dimensional and the force layout algorithm is not run.
 }
 \examples{
-g <- make_data(50) # mock data
+g <- make_data() # mock data
 
 # from a list
 graph(g)
@@ -68,6 +68,10 @@ graph("http://gephi.org/datasets/LesMiserables.gexf")
 # from dot file
 fl <- system.file("example/dotfile.gv", package = "grapher")
 graph(fl)
+
+# from single data.frame
+# assumes edges
+graph(g$links)
 
 # from data.frames
 # pass only links
