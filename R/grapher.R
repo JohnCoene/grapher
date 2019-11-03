@@ -11,7 +11,9 @@
 #' assumed to be the path to either a \code{.gexf} file or a \code{.gv} 
 #' \href{https://en.wikipedia.org/wiki/DOT_(graph_description_language)}{dot file}.
 #' The thrid file type acceted is JSON, it must be the output of 
-#' \code{\link{save_graph_json}}.
+#' \code{\link{save_graph_json}}. If a \code{data.frame} is passed it is assumed
+#' to be links where the first column indicates the source, and the second the 
+#' target of the links.
 #' If \code{NULL} data \emph{must} be later supplied with \code{\link{graph_nodes}}
 #' and \code{\link{graph_links}}.
 #' @param width,height Must be a valid CSS unit (like \code{'100\%'},
@@ -74,6 +76,24 @@ graph.default <- function(data = NULL, directed = TRUE, draw = TRUE, width = "10
 
   # forward options using x
   x = list(
+    draw = draw,
+    directed = directed,
+    layout = list()
+  )
+
+  as_widget(x, width, height, elementId)
+}
+
+#' @export
+#' @method graph data.frame
+graph.data.frame <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
+
+  names(data)[1:2] <- c("source", "target")
+
+  # forward options using x
+  x = list(
+    links = data,
+    nodes = NULL,
     draw = draw,
     directed = directed,
     layout = list()
