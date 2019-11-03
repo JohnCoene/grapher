@@ -28,7 +28,9 @@ as_widget <- function(x, width, height, elementId){
     preRenderHook = graph_renderer,
     sizingPolicy = htmlwidgets::sizingPolicy(
       padding = 0,
-      browser.fill = TRUE
+      browser.fill = TRUE,
+      defaultHeight = "100vh",
+      knitr.defaultHeight = 500
     )
   )
 }

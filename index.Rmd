@@ -55,46 +55,6 @@ div(
 br()
 ```
 
-With support for 2 and 3 dimensional layouts, {grapher} can build graphs from a multitude of formats.
-
-```r
-library(grapher)
-
-g <- make_data(50) # mock data
-
-# from a list
-graph(g)
-
-# from igraph
-ig <- igraph::make_ring(10)
-graph(ig)
-
-# from tidygraph
-tbl_graph <- tidygraph::create_ring(20)
-graph(tbl_graph)
-
-# from gexf
-graph("http://gephi.org/datasets/LesMiserables.gexf")
-
-# from dot file
-fl <- system.file("example/dotfile.gv", package = "grapher")
-graph(fl)
-
-# from single data.frame
-# assumes they are links
-graph(g$links)
-
-# from data.frames
-# pass only links
-graph() %>% 
-  graph_links(g$links, source, target)
-
-# pass nodes and links
-graph() %>% 
-  graph_nodes(g$nodes, id) %>% 
-  graph_links(g$links, source, target)
-```
-
 You can get it with the `remotes` or `devtools` package.
 
 ```r

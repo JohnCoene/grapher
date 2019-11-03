@@ -122,39 +122,7 @@ CRAN Dependency Graph
 </p>
 </div>
 </div>
-<br><p>With support for 2 and 3 dimensional layouts, {grapher} can build graphs from a multitude of formats.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(grapher)
-
-g &lt;-<span class="st"> </span><span class="kw"><a href="reference/generate.html">make_data</a></span>(<span class="dv">50</span>) <span class="co"># mock data</span>
-
-<span class="co"># from a list</span>
-<span class="kw"><a href="reference/graph.html">graph</a></span>(g)
-
-<span class="co"># from igraph</span>
-ig &lt;-<span class="st"> </span>igraph<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/igraph/topics/make_ring">make_ring</a></span>(<span class="dv">10</span>)
-<span class="kw"><a href="reference/graph.html">graph</a></span>(ig)
-
-<span class="co"># from tidygraph</span>
-tbl_graph &lt;-<span class="st"> </span>tidygraph<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/tidygraph/topics/create_graphs">create_ring</a></span>(<span class="dv">20</span>)
-<span class="kw"><a href="reference/graph.html">graph</a></span>(tbl_graph)
-
-<span class="co"># from gexf</span>
-<span class="kw"><a href="reference/graph.html">graph</a></span>(<span class="st">"http://gephi.org/datasets/LesMiserables.gexf"</span>)
-
-<span class="co"># from dot file</span>
-fl &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"example/dotfile.gv"</span>, <span class="dt">package =</span> <span class="st">"grapher"</span>)
-<span class="kw"><a href="reference/graph.html">graph</a></span>(fl)
-
-<span class="co"># from data.frames</span>
-<span class="co"># pass only links</span>
-<span class="kw"><a href="reference/graph.html">graph</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/graph_links.html">graph_links</a></span>(g<span class="op">$</span>links, source, target)
-
-<span class="co"># pass nodes and links</span>
-<span class="kw"><a href="reference/graph.html">graph</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/graph_nodes.html">graph_nodes</a></span>(g<span class="op">$</span>nodes, id) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/graph_links.html">graph_links</a></span>(g<span class="op">$</span>links, source, target)</code></pre></div>
-<p>You can get it with:</p>
+<br><p>You can get it with the <code>remotes</code> or <code>devtools</code> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("remotes")</span>
 remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"JohnCoene/grapher"</span>)</code></pre></div>
   </div>

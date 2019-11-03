@@ -168,7 +168,9 @@ the <a href='https://www.rdocumentation.org/packages/tidygraph/topics/tidygraph-
 assumed to be the path to either a <code>.gexf</code> file or a <code>.gv</code> 
 <a href='https://en.wikipedia.org/wiki/DOT_(graph_description_language)'>dot file</a>.
 The thrid file type acceted is JSON, it must be the output of 
-<code><a href='save_graph.html'>save_graph_json</a></code>.
+<code><a href='save_graph.html'>save_graph_json</a></code>. If a <code>data.frame</code> is passed it is assumed
+to be links where the first column indicates the source, and the second the 
+target of the links.
 If <code>NULL</code> data <em>must</em> be later supplied with <code><a href='graph_nodes.html'>graph_nodes</a></code>
 and <code><a href='graph_links.html'>graph_links</a></code>.</p></td>
     </tr>
@@ -203,7 +205,7 @@ is stable 2/3 dimensional and the force layout algorithm is not run.</p>
     <div class='dont-index'><p><code><a href='graph_nodes.html'>graph_nodes</a></code> and <code><a href='graph_links.html'>graph_links</a></code> to add nodes and links.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='generate.html'>make_data</a></span>(<span class='fl'>50</span>) <span class='co'># mock data</span>
+    <pre class="examples"><div class='input'><span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='generate.html'>make_data</a></span>() <span class='co'># mock data</span>
 
 <span class='co'># from a list</span>
 <span class='fu'>graph</span>(<span class='no'>g</span>)
@@ -222,6 +224,10 @@ is stable 2/3 dimensional and the force layout algorithm is not run.</p>
 <span class='co'># from dot file</span>
 <span class='no'>fl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"example/dotfile.gv"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"grapher"</span>)
 <span class='fu'>graph</span>(<span class='no'>fl</span>)
+
+<span class='co'># from single data.frame</span>
+<span class='co'># assumes edges</span>
+<span class='fu'>graph</span>(<span class='no'>g</span>$<span class='no'>links</span>)
 
 <span class='co'># from data.frames</span>
 <span class='co'># pass only links</span>
@@ -250,7 +256,7 @@ is stable 2/3 dimensional and the force layout algorithm is not run.</p>
   <p>Developed by <a href='http://john-coene.com'>John Coene</a>.</p>
 </div>
 
-<script data-name="BMC-Widget" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="JohnCoene" data-description="Support me on Buy me a coffee!" data-message="Thank you for visiting. You can now buy me a drink!" data-color="#FF813F" data-position="left" data-x_margin="18" data-y_margin="18"></script>
+<script data-name="BMC-Widget" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="JohnCoene" data-description="Support me on Buy me a coffee!" data-message="Thank you for visiting. You can now buy me a drink!" data-color="#FF813F" data-position="right" data-x_margin="18" data-y_margin="18"></script>
 
 <div class="pkgdown">
   <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>

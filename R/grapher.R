@@ -73,10 +73,10 @@
 #' @seealso \code{\link{graph_nodes}} and \code{\link{graph_links}} to add nodes and links.
 #'
 #' @export
-graph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) UseMethod("graph")
+graph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = NULL, elementId = NULL) UseMethod("graph")
 
 #' @export
-graph.default <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
+graph.default <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = NULL, elementId = NULL) {
 
   # forward options using x
   x = list(
@@ -90,7 +90,7 @@ graph.default <- function(data = NULL, directed = TRUE, draw = TRUE, width = "10
 
 #' @export
 #' @method graph data.frame
-graph.data.frame <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
+graph.data.frame <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = NULL, elementId = NULL) {
 
   names(data)[1:2] <- c("source", "target")
 
@@ -108,7 +108,7 @@ graph.data.frame <- function(data = NULL, directed = TRUE, draw = TRUE, width = 
 
 #' @export
 #' @method graph igraph
-graph.igraph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
+graph.igraph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = NULL, elementId = NULL) {
 
   g_df <- igraph::as_data_frame(data, "both")
   nodes <- g_df$vertices
@@ -132,7 +132,7 @@ graph.igraph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100
 
 #' @export
 #' @method graph list
-graph.list <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
+graph.list <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = NULL, elementId = NULL) {
 
   links <- data$links
   nodes <- data$nodes
@@ -153,7 +153,7 @@ graph.list <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%"
 
 #' @export
 #' @method graph tbl_graph
-graph.tbl_graph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
+graph.tbl_graph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = NULL, elementId = NULL) {
 
   links <- data %>% 
     tidygraph::activate(edges) %>% 
@@ -204,7 +204,7 @@ graph.tbl_graph <- function(data = NULL, directed = TRUE, draw = TRUE, width = "
 
 #' @export
 #' @method graph character
-graph.character <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = "100vh", elementId = NULL) {
+graph.character <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = NULL, elementId = NULL) {
 
   # determine extension
   exts <- strsplit(basename(data), split = "\\.")[[1]][-1]

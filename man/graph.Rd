@@ -9,7 +9,7 @@ graph(
   directed = TRUE,
   draw = TRUE,
   width = "100\%",
-  height = "100vh",
+  height = NULL,
   elementId = NULL
 )
 }

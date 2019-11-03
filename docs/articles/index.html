@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Definitions — definitions • grapher</title>
+<title>Articles • grapher</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,7 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Definitions — definitions" />
-<meta property="og:description" content="Define variables to use for color and size." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Articles" />
 
 
 
@@ -65,7 +63,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-article-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -136,68 +134,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Definitions</h1>
-    
-    <div class="hidden name"><code>definitions.Rd</code></div>
+      <h1>Articles</h1>
     </div>
 
-    <div class="ref-description">
-    <p>Define variables to use for color and size.</p>
+    <div class="section ">
+      <h3>All vignettes</h3>
+      <p class="section-desc"></p>
+
+      <ul>
+        <li><a href="get-started.html">Get Started</a></li>
+      </ul>
     </div>
-
-    <pre class="usage"><span class='fu'>define_node_color</span>(<span class='no'>g</span>, <span class='no'>var</span>)
-
-<span class='fu'>define_node_size</span>(<span class='no'>g</span>, <span class='no'>var</span>)
-
-<span class='fu'>define_link_source_color</span>(<span class='no'>g</span>, <span class='no'>var</span>)
-
-<span class='fu'>define_link_target_color</span>(<span class='no'>g</span>, <span class='no'>var</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>g</th>
-      <td><p>An object of class <code>graph</code> as 
-returned by <code><a href='graph.html'>graph</a></code> or a <code>graph_proxy</code>
-as returned by a function of the same name.</p></td>
-    </tr>
-    <tr>
-      <th>var</th>
-      <td><p>Bare name of variable to define.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="defaults"><a class="anchor" href="#defaults"></a>Defaults</h2>
-
-    
-    <p>Nodes:
-* `color`
-* `size`</p>
-<p>Edges
-* `fromColor`
-* `toColor`</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># generate data</span>
-<span class='co'># add custom color</span>
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='generate.html'>make_data</a></span>()
-<span class='no'>data</span>$<span class='no'>nodes</span>$<span class='no'>myColor</span> <span class='kw'>&lt;-</span> <span class='st'>"#0000ff"</span>
-
-<span class='fu'><a href='graph.html'>graph</a></span>(<span class='no'>data</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>define_node_color</span>(<span class='no'>myColor</span>)</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'jsonlite':</span>
-#&gt; <span class='message'>  method     from   </span>
-#&gt; <span class='message'>  print.json jsonify</span></div><div class='input'>
-</div></pre>
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#defaults">Defaults</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
   </div>
 </div>
 
