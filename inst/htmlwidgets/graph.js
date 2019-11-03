@@ -327,6 +327,7 @@ if (HTMLWidgets.shinyMode) {
         r.camera(g).position.setX(node_pos.x - msg.dist);
         r.camera(g).position.setY(node_pos.y - msg.dist);
         r.camera(g).position.setZ(node_pos.z - msg.dist);
+        r.camera(g).lookAt(node_pos);
       }
   });
 }
