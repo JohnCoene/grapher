@@ -17,6 +17,7 @@ Imports:
     tibble,
     scales,
     jsonify,
+    progress,
     magrittr,
     assertthat,
     htmlwidgets

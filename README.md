@@ -32,6 +32,10 @@ graph("http://gephi.org/datasets/LesMiserables.gexf")
 fl <- system.file("example/dotfile.gv", package = "grapher")
 graph(fl)
 
+# from single data.frame
+# assumes they are links
+graph(g$links)
+
 # from data.frames
 # pass only links
 graph() %>% 
@@ -45,7 +49,7 @@ graph() %>%
 
 ## Installation
 
-Simply use `remote` or `devtools`
+Simply use the `remote` or `devtools`.
 
 ``` r
 # install.packages(remotes)

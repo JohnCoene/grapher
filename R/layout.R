@@ -485,7 +485,7 @@ remove_coordinates.graph <- function(g){
 #' @inheritParams graph_live_layout
 #' @param steps Number of steps to run the layout algorithm.
 #' @param quiet Set to \code{FALSE} to print helpful messages 
-#' to the console, defaults to \link[base]{interactive}.
+#' and progress bar to track computation steps, defaults to \link[base]{interactive}.
 #' @param verlet_integration If you find that standard the default Euler integration 
 #' produces too many errors and jitter, consider using verlet integration by settings
 #' this to \code{TRUE}.
@@ -539,8 +539,13 @@ graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, spin
   invisible(ctx$source(system.file("htmlwidgets/lib/fromjson/ngraph.fromjson.js", package = "grapher")))
   
   # create graph and settings
-  if(!quiet)
+  if(!quiet){
+    pb <- progress::progress_bar$new(
+      format = " computing coordinates [:bar] :percent eta: :eta",
+      total = steps, clear = FALSE, width= 60
+    )
     cat("Serializing graph\n")
+  }
   ctx$assign("json", extract_graph(g, json = TRUE))
   ctx$assign("settings", physics)
   ctx$eval("var graph = from_json(json);")
@@ -549,7 +554,7 @@ graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, spin
   ctx$eval("var l = layout(graph, settings);")
   bin <- purrr::map(1:steps, function(x){
     if(!quiet)
-      cat("Step", crayon::blue(x), "\n")
+      pb$tick()
    ctx$eval("var step = l.step();") 
   })
   rm(bin)

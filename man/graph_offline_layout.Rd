@@ -49,7 +49,7 @@ produces too many errors and jitter, consider using verlet integration by settin
 this to \code{TRUE}.}
 
 \item{quiet}{Set to \code{FALSE} to print helpful messages 
-to the console, defaults to \link[base]{interactive}.}
+and progress bar to track computation steps, defaults to \link[base]{interactive}.}
 }
 \description{
 Compute the force layout (same as \code{\link{graph_live_layout}})
