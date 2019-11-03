@@ -23,5 +23,8 @@ Imports:
     htmlwidgets
 Suggests:
     V8,
-    tidygraph
+    tidygraph,
+    knitr,
+    rmarkdown
 RoxygenNote: 6.1.99.9001
+VignetteBuilder: knitr

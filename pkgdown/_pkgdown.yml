@@ -7,7 +7,7 @@ template:
     ganalytics: UA-74544116-1
 
 navbar:
-  title: "grapher"
+  title: "{grapher}"
   left:
     - icon: fa-home fa-lg
       href: index.html
@@ -21,6 +21,11 @@ navbar:
     - icon: fa-rocket fa-lg
       text: Get Started
       href: articles/get-started.html
+    - icon: fa-map-o
+      text: "Guide"
+      menu: 
+        - text: "Layout"
+          href: articles/layout.html
   right:
     - icon: fa-github fa-lg
       href: https://github.com/JohnCoene/grapher

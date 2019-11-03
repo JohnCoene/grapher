@@ -14,44 +14,56 @@ library(htmltools)
 
 
 ```{r, echo=FALSE}
-br()
+h1(
+  span("{", style = "color:#ffaa0e;"),
+  span("grapher"),
+  span("}", style = "color:#2ca030;"), 
+  class="headline"
+)
 
-div(
-  class = "row",
-  div(
-    class = "col-md-4",
-    img(
-      src = "logo.png",
-      class = "img-responsive responsive-img"
-    )
+p(
+  style = "text-align:center;",
+  tags$a(
+    tags$i(class = "fa fa-rocket"),
+    "Get Started",
+    class = "btn btn-primary",
+    href = "articles/get-started.html"
   ),
-  div(
-    class = "col-md-8",
-    p(
-      "Interactive graphs in R; an integration of the many amazing works of",
-      tags$a(
-        "Andrei Kashcha.", 
-        href = "https://github.com/anvaka", 
-        target = "_blank"
-      ),
-    ),
-    p(
-      tags$a(
-        tags$i(class = "fa fa-rocket"),
-        "Get Started",
-        class = "btn btn-primary",
-        href = "articles/get-started.html"
-      ),
-      tags$a(
-        tags$i(class = "fa fa-desktop"),
-        "CRAN Dependency Graph",
-        class = "btn btn-default",
-        target = "_blank",
-        href = "https://shiny.john-coene.com/cran"
-      )
-    )
+  tags$a(
+    tags$i(class = "fa fa-desktop"),
+    "CRAN Dependency Graph",
+    class = "btn btn-default",
+    target = "_blank",
+    href = "https://shiny.john-coene.com/cran"
   )
 )
+
+p(
+  "Interactive graphs in R, an integration of the many amazing works of",
+  tags$a(
+    "Andrei Kashcha.", 
+    href = "https://github.com/anvaka", 
+    target = "_blank"
+  )
+)
+
+p(
+  span("{grapher}", class = "brand"), "lets one visualise large three or two dimensional graphs in RStudio, R markdown, and Shiny.",
+  "It supports most graph formats (e.g.: igraph, and gexf). Below is a visualisation of the dependencies between R packages available",
+  "on", tags$a("CRAN.", href = "https://cran.r-project.org/", target = "_blank")
+)
+```
+
+```{r, echo=FALSE}
+tags$a(
+  target = "_blank",
+  href = "https://shiny.john-coene.com/cran",
+  img(
+    src = "cran.png",
+    class = "img-responsive responsive-img"
+  )
+)
+br()
 br()
 ```
 

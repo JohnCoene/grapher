@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Fira+Mono|Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Butterfly+Kids|Fira+Mono|Nunito&display=swap');
 
 body, h1, h2, h3{
   font-family: 'Nunito', sans-serif;
@@ -11,6 +11,33 @@ code{
 h1, h2, h3, h4, h5{
   color: #000011;
 }
+
+.headline{
+  font-family: 'Butterfly Kids', cursive;
+  text-align: center;
+  font-size: 120px;
+}
+
+.version{
+  font-size: 12px;
+  font-family: 'Fira Mono', monospace;
+}
+
+.navbar-brand{
+  font-size: 30px;
+  font-family: 'Butterfly Kids', cursive;
+}
+
+.navbar-brand > .navbar-link{
+  color: #ffaa0e !important;
+}
+
+.brand{
+  font-size: 25px;
+  color: #FF964C !important;
+  font-family: 'Butterfly Kids', cursive;
+}
+
 
 .navbar-default{
   border-color: #FF964C;
@@ -76,6 +103,10 @@ p>a {
 }
 
 li>a {
+  color: #FF964C;
+}
+
+small>a {
   color: #FF964C;
 }
 
