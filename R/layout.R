@@ -419,7 +419,11 @@ hide_long_links.graph <- function(g, length = 1){
     ) %>% 
     select(hidden)
 
+  # remove previously set hidden
+  g$x$links$hidden <- NULL
+
   g$x$links <- bind_cols(g$x$links, links_with_dist)
+  g$x$style$links$hidden <- "hidden"
 
   return(g)
 }
