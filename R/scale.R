@@ -5,16 +5,26 @@
 #' @inheritParams graph_nodes
 #' @param variable Bare column name of variable to scale against.
 #' @param palette Color palette.
+#' @param red,green,blue The possible range of values (light) that the
+#' red, green, and blue channels can take, must be vectors ranging from
+#' \code{0} to \code{1}.
 #' 
 #' @examples
 #' graph_data <- make_data(100)
 #' graph_data$nodes$var <- runif(100, 1, 10)
 #' 
+#' # scale by variable
 #' graph() %>% 
 #'   graph_nodes(graph_data$nodes, id, var) %>% 
 #'   graph_links(graph_data$links, source, target) %>% 
 #'   scale_node_color(var)
 #' 
+#' # scale by coordinate position
+#' graph(graph_data) %>% 
+#'  graph_static_layout() %>% 
+#'  scale_node_color_coords()
+#' 
+#' @name scale_node_color
 #' @export
 scale_node_color <- function(g, variable, palette = graph_palette()) UseMethod("scale_node_color")
 
@@ -31,6 +41,24 @@ scale_node_color.graph <- function(g, variable, palette = graph_palette()){
   scl <- scale_colour(g$x$nodes[[var]], palette)
   g$x$nodes$color <- scl(g$x$nodes[[var]]) %>% to_hex()
   g$x$style$nodes$color <- "toColor"
+
+  return(g)
+}
+
+#' @rdname scale_node_color
+#' @export
+scale_node_color_coords <- function(g, red = c(.01, .99), green = red, blue = red) UseMethod("scale_node_color_coords")
+
+#' @export 
+#' @method scale_node_color_coords graph
+scale_node_color_coords.graph <- function(g, red = c(.01, .99), green = red, blue = red){
+  assert_that(was_passed(g$x$nodes))
+  assert_that(has_coords(g$x$nodes))
+
+  g$x$nodes <- mutate(g$x$nodes, color = scale_rgb(x, y, z, red, green, blue))
+
+  # force style set
+  g$x$style$nodes$color <- "color"
 
   return(g)
 }
@@ -75,9 +103,6 @@ scale_node_size.graph <- function(g, variable, range = c(20, 70)){
 #' 
 #' @inheritParams graph_nodes
 #' @inheritParams scale_node_color
-#' @param red,green,blue The possible range of values (light) that the
-#' red, green, and blue channels can take, must be vectors ranging from
-#' \code{0} to \code{1}.
 #' 
 #' @section Functions:
 #' \itemize{

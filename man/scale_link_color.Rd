@@ -24,7 +24,15 @@ as returned by a function of the same name.}
 
 \item{palette}{Color palette.}
 
-\item{red, green, blue}{The possible range of values (light) that the
+\item{red}{The possible range of values (light) that the
+red, green, and blue channels can take, must be vectors ranging from
+\code{0} to \code{1}.}
+
+\item{green}{The possible range of values (light) that the
+red, green, and blue channels can take, must be vectors ranging from
+\code{0} to \code{1}.}
+
+\item{blue}{The possible range of values (light) that the
 red, green, and blue channels can take, must be vectors ranging from
 \code{0} to \code{1}.}
 }
@@ -41,7 +49,7 @@ Scale links color, note that links colors are split in two.
 }
 
 \examples{
-g <- make_data(200)
+g <- make_data(1000)
 
 # color by cluster
 graph(g) \%>\% 
