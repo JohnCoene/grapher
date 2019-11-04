@@ -7,7 +7,8 @@ as_widget <- function(x, width, height, elementId){
     ),
     links = list(
       fromColor = .get_default_style(x$links, "fromColor", x$styles$links),
-      toColor = .get_default_style(x$links, "toColor", x$styles$links)
+      toColor = .get_default_style(x$links, "toColor", x$styles$links),
+      hidden = .get_default_style(x$links, "hidden", x$styles$hidden)
     )
   ) %>% 
     discard(is.null)

@@ -6,6 +6,7 @@
 \alias{define_node_size}
 \alias{define_link_source_color}
 \alias{define_link_target_color}
+\alias{define_link_hidden}
 \title{Definitions}
 \usage{
 define_node_color(g, var)
@@ -15,6 +16,8 @@ define_node_size(g, var)
 define_link_source_color(g, var)
 
 define_link_target_color(g, var)
+
+define_link_hidden(g, var)
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 
@@ -24,7 +27,7 @@ as returned by a function of the same name.}
 \item{var}{Bare name of variable to define.}
 }
 \description{
-Define variables to use for color and size.
+Define variables to use for color, size, and hidden links.
 }
 \section{Defaults}{
 

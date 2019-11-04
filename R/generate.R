@@ -15,7 +15,7 @@
 #'
 #' @examples
 #' graph_data <- make_data()
-#' names(graph_data) # structure
+#' head(graph_data) # structure
 #' 
 #' # graph
 #' graph(graph_data)
@@ -38,13 +38,12 @@ make_nodes <- function(n = 100, colors = c("#B1E2A3", "#98D3A5", "#328983", "#1C
 #' @rdname generate
 #' @export
 make_links <- function(nodes) {
-  
-  if(missing(nodes))
-    stop("mising nodes", call. = FALSE)
+  assert_that(has_it(nodes))
 	ids <- as.character(nodes$id)
 	dplyr::tibble(
 		source = ids,
-		target = sample(ids, length(ids), replace = TRUE)
+		target = sample(ids, length(ids), replace = TRUE),
+    hidden = FALSE
 	)
 }
 

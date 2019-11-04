@@ -58,3 +58,5 @@ Finally once can also use the same algorithm as used in the browser but offline,
 graph(g) %>% 
   graph_offline_layout() 
 ```
+
+If you have used the node js library to compute the layout, you can read the `positions.bin` file with `graph_bin_layout`.

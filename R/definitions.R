@@ -1,6 +1,6 @@
 #' Definitions
 #' 
-#' Define variables to use for color and size.
+#' Define variables to use for color, size, and hidden links.
 #' 
 #' @inheritParams graph_nodes
 #' @param var Bare name of variable to define.
@@ -68,5 +68,17 @@ define_link_target_color <- function(g, var) UseMethod("define_link_target_color
 define_link_target_color.graph <- function(g, var) {
   assert_that(has_it(var))
   g$x$style$links$toColor <- deparse(substitute(var))
+  return(g)
+}
+
+#' @rdname definitions
+#' @export
+define_link_hidden <- function(g, var) UseMethod("define_link_hidden")
+
+#' @export
+#' @method define_link_hidden graph
+define_link_hidden.graph <- function(g, var) {
+  assert_that(has_it(var))
+  g$x$style$links$hidden <- deparse(substitute(var))
   return(g)
 }
