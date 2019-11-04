@@ -14,11 +14,9 @@ library(htmltools)
 
 
 ```{r, echo=FALSE}
-h1(
-  span("{", style = "color:#ffaa0e;"),
-  span("grapher"),
-  span("}", style = "color:#2ca030;"), 
-  class="headline"
+img(
+  src = "grapher-banner.png",
+  class = "img-responsive responsive-img"
 )
 
 p(
@@ -39,6 +37,7 @@ p(
 )
 
 p(
+  style = "text-align:center;",
   "Interactive graphs in R, an integration of the many amazing works of",
   tags$a(
     "Andrei Kashcha.", 
@@ -47,14 +46,37 @@ p(
   )
 )
 
-p(
-  span("{grapher}", class = "brand"), "lets one visualise large three or two dimensional graphs in RStudio, R markdown, and Shiny.",
-  "It supports most graph formats (e.g.: igraph, and gexf). Below is a visualisation of the dependencies between R packages available",
-  "on", tags$a("CRAN.", href = "https://cran.r-project.org/", target = "_blank")
+br()
+
+div(
+  class = "row",
+  div(
+    class = "col-md-4",
+    style = "text-align:center;",
+    tags$i(class = "fa fa-5x fa-cube", style = "color:black;"),
+    br(),
+    h4("3D and 2D Layouts")
+  ),
+  div(
+    class = "col-md-4",
+    style = "text-align:center;",
+    tags$i(class = "fa fa-5x fa-file", style = "color:black;"),
+    br(),
+    h4("Accepts any format")
+  ),
+  div(
+    class = "col-md-4",
+    style = "text-align:center;",
+    tags$i(class = "fa fa-5x fa-code", style = "color:black;"),
+    br(),
+    h4("Easy to use")
+  )
 )
+
+br()
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=FALSE}
 tags$a(
   target = "_blank",
   href = "https://shiny.john-coene.com/cran",

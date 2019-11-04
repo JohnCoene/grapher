@@ -235,8 +235,9 @@ including user into the community.</p>
  <span class='st'>"user 3"</span>,     <span class='st'>"group 2"</span>
 )
 
-<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'>affiliation_graph</span>(<span class='no'>data</span>, <span class='no'>user</span>, <span class='no'>group</span>)
-<span class='fu'><a href='graph.html'>graph</a></span>(<span class='no'>g</span>)
+<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'>affiliation_graph</span>(<span class='no'>data</span>, <span class='no'>user</span>, <span class='no'>group</span>)</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'jsonlite':</span>
+#&gt; <span class='message'>  method     from   </span>
+#&gt; <span class='message'>  print.json jsonify</span></div><div class='input'><span class='fu'><a href='graph.html'>graph</a></span>(<span class='no'>g</span>)
 
 <span class='co'># with weight</span>
 <span class='no'>data</span>$<span class='no'>strength</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Uniform'>runif</a></span>(<span class='fl'>6</span>, <span class='fl'>1</span>, <span class='fl'>10</span>)

@@ -90,8 +90,7 @@ HTMLWidgets.widget({
           var fromc = 0xFFFFFF;
           var toc = 0xFFFFFF;
           if(link.data){
-            if(link.data.hidden)
-              if(link.data.hidden === true) return;
+            if(link.data[x.style.links.hidden] === true) return;
 
             if(link.data[x.style.links.fromColor]) 
               fromc = '0x' + link.data[x.style.links.fromColor].substr(1);
@@ -145,8 +144,6 @@ HTMLWidgets.widget({
       },
 
       resize: function(width, height) {
-
-        // TODO: code to re-render the widget with a new size
 
       },
       getGraph: function(){

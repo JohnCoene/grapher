@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Butterfly+Kids|Fira+Mono|Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Raleway|Fira+Mono|Nunito&display=swap');
 
 body, h1, h2, h3{
   font-family: 'Nunito', sans-serif;
@@ -12,37 +12,38 @@ h1, h2, h3, h4, h5{
   color: #000011;
 }
 
-.headline{
-  font-family: 'Butterfly Kids', cursive;
-  text-align: center;
-  font-size: 100px;
-}
-@media screen and (min-width: 900px) {
-  .headline{
-     font-size: 120px;
-  }
-}
-
 .version{
   font-size: 12px;
   font-family: 'Fira Mono', monospace;
 }
 
 .navbar-brand{
-  font-size: 30px;
-  font-family: 'Butterfly Kids', cursive;
+  font-family: 'Raleway', sans-serif;
 }
 
 .navbar-brand > .navbar-link{
-  color: #ffaa0e !important;
+  color: white;
 }
 
 .brand{
-  font-size: 25px;
-  color: #FF964C !important;
-  font-family: 'Butterfly Kids', cursive;
+  font-family: 'Raleway', sans-serif;
 }
 
+#item-left{
+  border: solid;
+  border-width: 1px;
+  border-top: 0;
+  border-left: 0;
+  border-bottom: 0;
+}
+
+#item-right{
+  border: solid;
+  border-width: 1px;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
 
 .navbar-default{
   border-color: #FF964C;
@@ -139,6 +140,10 @@ code a, pre a{
 .btn-copy-ex:hover{
   background-color: #000011;
   border-color: #FF964C;
+}
+
+.btn-default{
+  border-color: #000011;
 }
 
 .btn-primary{

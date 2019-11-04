@@ -29,9 +29,15 @@ Scale nodes color.
 graph_data <- make_data(100)
 graph_data$nodes$var <- runif(100, 1, 10)
 
+# scale by variable
 graph() \%>\% 
   graph_nodes(graph_data$nodes, id, var) \%>\% 
   graph_links(graph_data$links, source, target) \%>\% 
   scale_node_color(var)
+
+# scale by coordinate position
+graph(graph_data) \%>\% 
+ graph_static_layout() \%>\% 
+ scale_node_color_coords()
 
 }

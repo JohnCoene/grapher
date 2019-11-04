@@ -167,7 +167,9 @@
     <p>Scale nodes color.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>scale_node_color</span>(<span class='no'>g</span>, <span class='no'>variable</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fu'><a href='graph_palette.html'>graph_palette</a></span>())</pre>
+    <pre class="usage"><span class='fu'>scale_node_color</span>(<span class='no'>g</span>, <span class='no'>variable</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fu'><a href='graph_palette.html'>graph_palette</a></span>())
+
+<span class='fu'>scale_node_color_coords</span>(<span class='no'>g</span>, <span class='kw'>red</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.01</span>, <span class='fl'>0.99</span>), <span class='kw'>green</span> <span class='kw'>=</span> <span class='no'>red</span>, <span class='kw'>blue</span> <span class='kw'>=</span> <span class='no'>red</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -186,6 +188,12 @@ as returned by a function of the same name.</p></td>
       <th>palette</th>
       <td><p>Color palette.</p></td>
     </tr>
+    <tr>
+      <th>red, green, blue</th>
+      <td><p>The possible range of values (light) that the
+red, green, and blue channels can take, must be vectors ranging from
+<code>0</code> to <code>1</code>.</p></td>
+    </tr>
     </table>
 
 
@@ -193,10 +201,16 @@ as returned by a function of the same name.</p></td>
     <pre class="examples"><div class='input'><span class='no'>graph_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='generate.html'>make_data</a></span>(<span class='fl'>100</span>)
 <span class='no'>graph_data</span>$<span class='no'>nodes</span>$<span class='no'>var</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Uniform'>runif</a></span>(<span class='fl'>100</span>, <span class='fl'>1</span>, <span class='fl'>10</span>)
 
+<span class='co'># scale by variable</span>
 <span class='fu'><a href='graph.html'>graph</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='graph_nodes.html'>graph_nodes</a></span>(<span class='no'>graph_data</span>$<span class='no'>nodes</span>, <span class='no'>id</span>, <span class='no'>var</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='graph_links.html'>graph_links</a></span>(<span class='no'>graph_data</span>$<span class='no'>links</span>, <span class='no'>source</span>, <span class='no'>target</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>scale_node_color</span>(<span class='no'>var</span>)</div></pre>
+  <span class='fu'>scale_node_color</span>(<span class='no'>var</span>)
+
+<span class='co'># scale by coordinate position</span>
+<span class='fu'><a href='graph.html'>graph</a></span>(<span class='no'>graph_data</span>) <span class='kw'>%&gt;%</span>
+ <span class='fu'><a href='graph_static_layout.html'>graph_static_layout</a></span>() <span class='kw'>%&gt;%</span>
+ <span class='fu'>scale_node_color_coords</span>()</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
