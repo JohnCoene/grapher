@@ -69,12 +69,35 @@ scale_node_size.graph <- function(g, variable, range = c(20, 70)){
   return(g)
 }
 
-#' Scale Edge Color
+#' Scale Link Color
 #' 
-#' Scale nodes color.
+#' Scale links color, note that links colors are split in two.
 #' 
 #' @inheritParams graph_nodes
 #' @inheritParams scale_node_color
+#' @param red,green,blue The possible range of values (light) that the
+#' red, green, and blue channels can take, must be vectors ranging from
+#' \code{0} to \code{1}.
+#' 
+#' @section Functions:
+#' \itemize{
+#'   \item{\code{scale_link_source_color}, \code{scale_link_target_color} - Scale source and target color of links according to links variables.}
+#'   \item{\code{scale_link_color} - Scale the source and target color of nodes according the values of nodes at either ends of each respective link.}
+#'   \item{\code{scale_link_color_coords} - Compute rgb colors based on the coordinates (layout) of nodes at either end of each link.}
+#' }
+#' 
+#' @examples
+#' g <- make_data(1000)
+#' 
+#' # color by cluster
+#' graph(g) %>% 
+#'   graph_cluster() %>% 
+#'   scale_link_color(cluster)
+#' 
+#' # color by coordinates
+#' graph(g) %>% 
+#'   graph_offline_layout() %>% 
+#'   scale_link_color_coords()
 #' 
 #' @name scale_link_color
 #' @export
@@ -152,6 +175,37 @@ scale_link_color.graph <- function(g, variable, palette = graph_palette()){
   g$x$style$links$toColor <- "toColor"
 
   g$x$links <- bind_cols(g$x$links, tibble::tibble(fromColor = from_color, toColor = to_color))
+
+  return(g)
+}
+
+#' @rdname scale_link_color
+#' @export
+scale_link_color_coords <- function(g, red = c(.01, .99), green = red, blue = red) UseMethod("scale_link_color_coords")
+
+#' @export 
+#' @method scale_link_color_coords graph
+scale_link_color_coords.graph <- function(g, red = c(.01, .99), green = red, blue = red){
+  assert_that(was_passed(g$x$nodes))
+  assert_that(has_coords(g$x$nodes))
+
+  nodes <- select(g$x$nodes, id, x, y, z)
+
+  links_color <- g$x$links %>% 
+    left_join(nodes, by = c("source" = "id")) %>% 
+    left_join(nodes, by = c("target" = "id"), suffix = c(".source", ".target")) %>% 
+    mutate(
+      fromColor = scale_rgb(x.source, y.source, z.source, red, green, blue),
+      toColor = scale_rgb(x.target, y.target, z.target, red, green, blue)
+    ) %>% 
+    select(fromColor, toColor)
+
+  # using fromColor and toColor
+  # force style set
+  g$x$style$links$fromColor <- "fromColor"
+  g$x$style$links$toColor <- "toColor"
+
+  g$x$links <- bind_cols(g$x$links, links_color)
 
   return(g)
 }

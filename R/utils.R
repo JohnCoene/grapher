@@ -4,7 +4,7 @@ globalVariables(
     "Depends", "Imports", "LinkingTo", "Package",
     "activate", "from", "id.x", "id.y", "name", "tg_id", "to",
     "x.source", "y.source", "z.source", "x.target", "y.target", "z.target",
-    "distance", "x", "y", "z", "hidden"
+    "distance", "x", "y", "z", "hidden", "fromColor", "toColor"
   )
 )
 
@@ -44,4 +44,11 @@ scale_colour <- function(x, palette){
 
 to_hex <- function(x){
   rgb(t(col2rgb(x, alpha = FALSE)/255))
+}
+
+scale_rgb <- function(x, y, z, r, g, b) {
+  x <- scales::rescale(x, to = r)
+  y <- scales::rescale(y, to = g)
+  z <- scales::rescale(z, to = b)
+  rgb(x, y, z)
 }

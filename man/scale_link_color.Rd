@@ -4,13 +4,16 @@
 \alias{scale_link_color}
 \alias{scale_link_source_color}
 \alias{scale_link_target_color}
-\title{Scale Edge Color}
+\alias{scale_link_color_coords}
+\title{Scale Link Color}
 \usage{
 scale_link_source_color(g, variable, palette = graph_palette())
 
 scale_link_target_color(g, variable, palette = graph_palette())
 
 scale_link_color(g, variable, palette = graph_palette())
+
+scale_link_color_coords(g, red = c(0.01, 0.99), green = red, blue = red)
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 
@@ -20,7 +23,34 @@ as returned by a function of the same name.}
 \item{variable}{Bare column name of variable to scale against.}
 
 \item{palette}{Color palette.}
+
+\item{red, green, blue}{The possible range of values (light) that the
+red, green, and blue channels can take, must be vectors ranging from
+\code{0} to \code{1}.}
 }
 \description{
-Scale nodes color.
+Scale links color, note that links colors are split in two.
+}
+\section{Functions}{
+
+\itemize{
+  \item{\code{scale_link_source_color}, \code{scale_link_target_color} - Scale source and target color of links according to links variables.}
+  \item{\code{scale_link_color} - Scale the source and target color of nodes according the values of nodes at either ends of each respective link.}
+  \item{\code{scale_link_color_coords} - Compute rgb colors based on the coordinates (layout) of nodes at either end of each link.}
+}
+}
+
+\examples{
+g <- make_data(200)
+
+# color by cluster
+graph(g) \%>\% 
+  graph_cluster() \%>\% 
+  scale_link_color(cluster)
+
+# color by coordinates
+graph(g) \%>\% 
+  graph_offline_layout() \%>\% 
+  scale_link_color_coords()
+
 }
