@@ -63,11 +63,12 @@ reference:
     contents: 
       - extract_graph
       - save_graph
-  - title: "Data"
-    desc: "Data for examples and tests."
+  - title: "Data & Affiliation"
+    desc: "Data for examples."
     contents: 
       - starts_with("make")
       - cran_deps_graph
+      - affiliation_graph
   - title: "Drop & Add"
     desc: "Drop and add nodes and links."
     contents: 
