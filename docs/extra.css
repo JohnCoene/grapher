@@ -15,7 +15,12 @@ h1, h2, h3, h4, h5{
 .headline{
   font-family: 'Butterfly Kids', cursive;
   text-align: center;
-  font-size: 120px;
+  font-size: 100px;
+}
+@media screen and (min-width: 900px) {
+  .headline{
+     font-size: 120px;
+  }
 }
 
 .version{
