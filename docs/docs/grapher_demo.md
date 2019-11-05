@@ -1,13 +1,8 @@
 ---
 id: grapher_demo
-title: grapher demo
-sidebar_label: grapher demo
+title: Grapher Demo
+sidebar_label: Grapher Demo
 ---
-
-# `grapher_demo`
-
-Run Demo Shiny App
-
 
 ## Description
 

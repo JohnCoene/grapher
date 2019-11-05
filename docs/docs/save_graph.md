@@ -1,13 +1,8 @@
 ---
 id: save_graph
-title: save graph
-sidebar_label: save graph
+title: Save Graph
+sidebar_label: Save Graph
 ---
-
-# `save_graph`
-
-Save
-
 
 ## Description
 

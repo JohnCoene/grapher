@@ -1,13 +1,8 @@
 ---
 id: graph_events
-title: graph events
-sidebar_label: graph events
+title: Graph Events
+sidebar_label: Graph Events
 ---
-
-# `graph_events`
-
-Capture Events
-
 
 ## Description
 

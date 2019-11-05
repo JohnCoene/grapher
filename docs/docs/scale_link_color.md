@@ -1,13 +1,8 @@
 ---
 id: scale_link_color
-title: scale link color
-sidebar_label: scale link color
+title: Scale Link Color
+sidebar_label: Scale Link Color
 ---
-
-# `scale_link_color`
-
-Scale Link Color
-
 
 ## Description
 

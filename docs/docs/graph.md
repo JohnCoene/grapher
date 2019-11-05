@@ -1,13 +1,8 @@
 ---
 id: graph
-title: graph
-sidebar_label: graph
+title: Graph
+sidebar_label: Graph
 ---
-
-# `graph`
-
-Initialise
-
 
 ## Description
 

@@ -1,13 +1,8 @@
 ---
 id: graph-shiny
-title: graph-shiny
-sidebar_label: graph-shiny
+title: Graph-Shiny
+sidebar_label: Graph-Shiny
 ---
-
-# `graph-shiny`
-
-Shiny bindings for graph
-
 
 ## Description
 

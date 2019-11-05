@@ -1,13 +1,8 @@
 ---
 id: link_distance
-title: link distance
-sidebar_label: link distance
+title: Link Distance
+sidebar_label: Link Distance
 ---
-
-# `link_distance`
-
-Hide Links
-
 
 ## Description
 

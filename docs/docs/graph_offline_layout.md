@@ -1,13 +1,8 @@
 ---
 id: graph_offline_layout
-title: graph offline layout
-sidebar_label: graph offline layout
+title: Graph Offline Layout
+sidebar_label: Graph Offline Layout
 ---
-
-# `graph_offline_layout`
-
-Offline Layout
-
 
 ## Description
 

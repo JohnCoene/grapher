@@ -39,7 +39,7 @@ const siteConfig = {
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
     {doc: 'get-started', label: 'Docs'},
-    {doc: 'affiliation_graph', label: 'Reference'},
+    {doc: 'graph', label: 'Reference'},
     {page: 'help', label: 'Help'},
     {blog: true, label: 'Blog'},
   ],
@@ -48,42 +48,39 @@ const siteConfig = {
   users,
 
   /* path to images for header/footer */
-  headerIcon: 'img/favicon.ico',
+  headerIcon: '',
   footerIcon: 'img/favicon.ico',
   favicon: 'img/favicon.ico',
+  defaultVersionShown: '0.1.0',
+  gaTrackingId: 'UA-74544116-1',
 
   /* Colors for website */
   colors: {
-    primaryColor: '#035fa0',
-    secondaryColor: '#024270',
+    primaryColor: '#000000',
+    secondaryColor: '#2C0E37',
   },
 
-  /* Custom fonts for website */
-  /*
-  fonts: {
-    myFont: [
-      "Times New Roman",
-      "Serif"
-    ],
-    myOtherFont: [
-      "-apple-system",
-      "system-ui"
-    ]
-  },
-  */
+  scripts: [
+    'https://buttons.github.io/buttons.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js',
+    '/js/code-block-buttons.js',
+  ],
+
+  stylesheets: [
+    'https://fonts.googleapis.com/css?family=Raleway',
+    '/css/code-block-buttons.css',
+    '/css/custom.css',
+  ],
 
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
   copyright: `Copyright © ${new Date().getFullYear()} John Coene`,
 
-  usePrism: ['r'],
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
-    theme: 'agate',
+    theme: 'an-old-hope',
     defaultLang: 'r',
+    version: '9.15.2',
   },
-
-  // Add custom scripts here that would be placed in <script> tags.
-  scripts: ['https://buttons.github.io/buttons.js'],
 
   // On page navigation for the current documentation page.
   onPageNav: 'separate',
@@ -106,7 +103,7 @@ const siteConfig = {
 
   // You may provide arbitrary config keys to be used as needed by your
   // template. For example, if you need your repo's URL...
-  //   repoUrl: 'https://github.com/facebook/test-site',
+  repoUrl: 'https://github.com/JohnCoene/grapher',
 };
 
 module.exports = siteConfig;

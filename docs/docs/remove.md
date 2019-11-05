@@ -1,13 +1,8 @@
 ---
 id: remove
-title: remove
-sidebar_label: remove
+title: Remove
+sidebar_label: Remove
 ---
-
-# `remove`
-
-Remove Nodes & Edges
-
 
 ## Description
 

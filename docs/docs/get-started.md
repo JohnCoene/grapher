@@ -1,78 +1,74 @@
 ---
 id: get-started
-title: Get Started
-sidebar_label: Get Started
+title: Get-Started
+sidebar_label: Get-Started
 ---
 
-{grapher} attempts to combine ease of use and customisation. One can initialise a graph from almost type of object.
+grapher attempts to combine ease of use and customisation. One can
+initialise a graph from almost type of object.
 
-There is a convenience data to generate graphs, called `make_data`, it returns a list of links and nodes.
+There is a convenience data to generate graphs, called `make_data`, it
+returns a list of links and nodes.
 
-```r
-# create mock data
-g <- make_data()
-```
+    g <- make_data() # mock data
 
-## List
+    head(g)
 
-From a named list (`nodes` and `links`) of nodes and links, it only assumes that the latter are data.frames where the first column of the nodes data.frame contains their unique `id` and that the first two columns of the links indicate the `source` and `target` of the links.
+List
+----
 
-```r
-# from a list of nodes and edges
-graph(g)
-```
+From a named list (`nodes` and `links`) of nodes and links, it only
+assumes that the latter are data.frames where the first column of the
+nodes data.frame contains their unique `id` and that the first two
+columns of the links indicate the `source` and `target` of the links.
 
-## igraph
+    # from a list of nodes and edges
+    graph(g)
 
-```r
-# from igraph
-ig <- igraph::make_ring(10)
-graph(ig)
-```
+igraph
+------
 
-## Tidygraph
+    # from igraph
+    ig <- igraph::make_ring(10)
+    graph(ig)
 
-```r
-# from tidygraph
-tbl_graph <- tidygraph::create_ring(20)
-graph(tbl_graph)
-```
+Tidygraph
+---------
 
-## Gexf
+    # from tidygraph
+    tbl_graph <- tidygraph::create_ring(20)
+    graph(tbl_graph)
 
-```r
-# from gexf
-graph("http://gephi.org/datasets/LesMiserables.gexf")
-```
+Gexf
+----
 
-## Dot
+    # from gexf
+    graph("http://gephi.org/datasets/LesMiserables.gexf")
 
-```r
-# from dot file
-fl <- system.file("example/dotfile.gv", package = "grapher")
-graph(fl)
-```
+Dot
+---
 
-## Data.frame
+    # from dot file
+    fl <- system.file("example/dotfile.gv", package = "grapher")
+    graph(fl)
+
+Data.frame
+----------
 
 From a single data.frame, it assumes those are links.
 
-```r
-# from single data.frame
-# assumes they are links
-graph(g$links)
-```
+    # from single data.frame
+    # assumes they are links
+    graph(g$links)
 
 Or pass the data.frame of nodes and links separately.
 
-```r
-# from data.frames
-# pass only links
-graph() %>% 
-  graph_links(g$links, source, target)
+    # from data.frames
+    # pass only links
+    graph() %>% 
+      graph_links(g$links, source, target)
 
-# pass nodes and links
-graph() %>% 
-  graph_nodes(g$nodes, id) %>% 
-  graph_links(g$links, source, target)
-```
+    # pass nodes and links
+    graph() %>% 
+      graph_nodes(g$nodes, id) %>% 
+      graph_links(g$links, source, target)

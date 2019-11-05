@@ -1,13 +1,8 @@
 ---
 id: graph_background
-title: graph background
-sidebar_label: graph background
+title: Graph Background
+sidebar_label: Graph Background
 ---
-
-# `graph_background`
-
-Background
-
 
 ## Description
 

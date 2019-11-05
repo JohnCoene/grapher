@@ -1,4 +1,10 @@
-/* your custom css */
+body{
+  font-family: 'Raleway', sans-serif;
+}
+
+.projectLogo2{
+  min-height:400px;
+}
 
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }

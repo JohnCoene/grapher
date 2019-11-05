@@ -1,13 +1,8 @@
 ---
 id: graph_bin_layout
-title: graph bin layout
-sidebar_label: graph bin layout
+title: Graph Bin Layout
+sidebar_label: Graph Bin Layout
 ---
-
-# `graph_bin_layout`
-
-Offline Layout From File
-
 
 ## Description
 

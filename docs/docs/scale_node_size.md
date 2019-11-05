@@ -1,13 +1,8 @@
 ---
 id: scale_node_size
-title: scale node size
-sidebar_label: scale node size
+title: Scale Node Size
+sidebar_label: Scale Node Size
 ---
-
-# `scale_node_size`
-
-Scale Node Size
-
 
 ## Description
 

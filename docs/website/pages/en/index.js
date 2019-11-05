@@ -30,15 +30,15 @@ class HomeSplash extends React.Component {
     );
 
     const Logo = props => (
-      <div className="projectLogo">
+      <div className="projectLogo projectLogo2">
         <img src={props.img_src} alt="Project Logo" />
       </div>
     );
 
     const ProjectTitle = () => (
       <h2 className="projectTitle">
-        {siteConfig.title}
-        <small>{siteConfig.tagline}</small>
+        Interactive Graphs
+        <small>An integration of ngraph</small>
       </h2>
     );
 
@@ -60,13 +60,12 @@ class HomeSplash extends React.Component {
 
     return (
       <SplashContainer>
-        <Logo img_src={`${baseUrl}img/undraw_monitor.svg`} />
+        <Logo img_src={`${baseUrl}img/grapher.png`} />
         <div className="inner">
           <ProjectTitle siteConfig={siteConfig} />
           <PromoSection>
-            <Button href="#try">Try It Out</Button>
-            <Button href={docUrl('doc1.html')}>Example Link</Button>
-            <Button href={docUrl('doc2.html')}>Example Link 2</Button>
+          <Button href={docUrl('get-started.html')}>Get Started</Button>
+            <Button href="https://shiny.john-coene.com/cran" target="_blank">Demo</Button>
           </PromoSection>
         </div>
       </SplashContainer>

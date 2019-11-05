@@ -1,13 +1,8 @@
 ---
 id: graph_palette
-title: graph palette
-sidebar_label: graph palette
+title: Graph Palette
+sidebar_label: Graph Palette
 ---
-
-# `graph_palette`
-
-Color Palettes
-
 
 ## Description
 

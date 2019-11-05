@@ -1,13 +1,8 @@
 ---
 id: scale_node_color
-title: scale node color
-sidebar_label: scale node color
+title: Scale Node Color
+sidebar_label: Scale Node Color
 ---
-
-# `scale_node_color`
-
-Scale Node Color
-
 
 ## Description
 

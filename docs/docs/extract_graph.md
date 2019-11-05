@@ -1,13 +1,8 @@
 ---
 id: extract_graph
-title: extract graph
-sidebar_label: extract graph
+title: Extract Graph
+sidebar_label: Extract Graph
 ---
-
-# `extract_graph`
-
-Extract Graph
-
 
 ## Description
 

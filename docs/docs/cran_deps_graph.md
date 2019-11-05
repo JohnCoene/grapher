@@ -1,13 +1,8 @@
 ---
 id: cran_deps_graph
-title: cran deps graph
-sidebar_label: cran deps graph
+title: Cran Deps Graph
+sidebar_label: Cran Deps Graph
 ---
-
-# `cran_deps_graph`
-
-CRAN Dependency Graph
-
 
 ## Description
 

@@ -1,13 +1,8 @@
 ---
 id: graph_camera_fov
-title: graph camera fov
-sidebar_label: graph camera fov
+title: Graph Camera Fov
+sidebar_label: Graph Camera Fov
 ---
-
-# `graph_camera_fov`
-
-Camera FOV
-
 
 ## Description
 

@@ -1,13 +1,8 @@
 ---
 id: graph_focus_node
-title: graph focus node
-sidebar_label: graph focus node
+title: Graph Focus Node
+sidebar_label: Graph Focus Node
 ---
-
-# `graph_focus_node`
-
-Focus
-
 
 ## Description
 

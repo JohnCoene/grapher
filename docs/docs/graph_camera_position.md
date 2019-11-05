@@ -1,13 +1,8 @@
 ---
 id: graph_camera_position
-title: graph camera position
-sidebar_label: graph camera position
+title: Graph Camera Position
+sidebar_label: Graph Camera Position
 ---
-
-# `graph_camera_position`
-
-Camera Position
-
 
 ## Description
 

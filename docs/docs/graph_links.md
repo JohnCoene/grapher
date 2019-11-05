@@ -1,13 +1,8 @@
 ---
 id: graph_links
-title: graph links
-sidebar_label: graph links
+title: Graph Links
+sidebar_label: Graph Links
 ---
-
-# `graph_links`
-
-Add Links
-
 
 ## Description
 

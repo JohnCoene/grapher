@@ -1,13 +1,8 @@
 ---
 id: graph_stable_layout
-title: graph stable layout
-sidebar_label: graph stable layout
+title: Graph Stable Layout
+sidebar_label: Graph Stable Layout
 ---
-
-# `graph_stable_layout`
-
-Stabilize
-
 
 ## Description
 

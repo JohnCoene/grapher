@@ -1,13 +1,8 @@
 {
   "docs": {
-    "Get Started": [
-      "get-started"
-    ],
-    "First Category": [
-      "doc2"
-    ],
-    "Second Category": [
-      "doc3"
+    "Guide": [
+      "get-started",
+      "layout"
     ],
     "Reference": [
       "affiliation_graph",

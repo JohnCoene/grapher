@@ -1,13 +1,8 @@
 ---
 id: remove_coordinates
-title: remove coordinates
-sidebar_label: remove coordinates
+title: Remove Coordinates
+sidebar_label: Remove Coordinates
 ---
-
-# `remove_coordinates`
-
-Remove Coordinates
-
 
 ## Description
 

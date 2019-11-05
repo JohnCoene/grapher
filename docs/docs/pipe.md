@@ -1,13 +1,8 @@
 ---
 id: pipe
-title: pipe
-sidebar_label: pipe
+title: Pipe
+sidebar_label: Pipe
 ---
-
-# `%>%`
-
-Pipe operator
-
 
 ## Description
 

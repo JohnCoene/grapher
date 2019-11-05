@@ -1,13 +1,8 @@
 ---
 id: pin_nodes
-title: pin nodes
-sidebar_label: pin nodes
+title: Pin Nodes
+sidebar_label: Pin Nodes
 ---
-
-# `pin_nodes`
-
-Pin Nodes
-
 
 ## Description
 

@@ -1,13 +1,8 @@
 ---
 id: change_dimensions
-title: change dimensions
-sidebar_label: change dimensions
+title: Change Dimensions
+sidebar_label: Change Dimensions
 ---
-
-# `change_dimensions`
-
-Change Dimensions
-
 
 ## Description
 

@@ -1,13 +1,8 @@
 ---
 id: graph_static_layout
-title: graph static layout
-sidebar_label: graph static layout
+title: Graph Static Layout
+sidebar_label: Graph Static Layout
 ---
-
-# `graph_static_layout`
-
-Layout Static
-
 
 ## Description
 

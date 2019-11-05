@@ -1,13 +1,8 @@
 ---
 id: graph_cluster
-title: graph cluster
-sidebar_label: graph cluster
+title: Graph Cluster
+sidebar_label: Graph Cluster
 ---
-
-# `graph_cluster`
-
-Cluster
-
 
 ## Description
 

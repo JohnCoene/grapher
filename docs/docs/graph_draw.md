@@ -1,13 +1,8 @@
 ---
 id: graph_draw
-title: graph draw
-sidebar_label: graph draw
+title: Graph Draw
+sidebar_label: Graph Draw
 ---
-
-# `graph_draw`
-
-Draw or Redraw a Graph
-
 
 ## Description
 

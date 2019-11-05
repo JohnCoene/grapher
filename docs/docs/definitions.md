@@ -1,13 +1,8 @@
 ---
 id: definitions
-title: definitions
-sidebar_label: definitions
+title: Definitions
+sidebar_label: Definitions
 ---
-
-# `definitions`
-
-Definitions
-
 
 ## Description
 

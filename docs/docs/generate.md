@@ -1,13 +1,8 @@
 ---
 id: generate
-title: generate
-sidebar_label: generate
+title: Generate
+sidebar_label: Generate
 ---
-
-# `make_nodes`
-
-Generate data
-
 
 ## Description
 

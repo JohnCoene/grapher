@@ -1,13 +1,8 @@
 ---
 id: affiliation_graph
-title: affiliation graph
-sidebar_label: affiliation graph
+title: Affiliation Graph
+sidebar_label: Affiliation Graph
 ---
-
-# `affiliation_graph`
-
-Affiliation Graph
-
 
 ## Description
 

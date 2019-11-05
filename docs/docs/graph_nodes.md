@@ -1,13 +1,8 @@
 ---
 id: graph_nodes
-title: graph nodes
-sidebar_label: graph nodes
+title: Graph Nodes
+sidebar_label: Graph Nodes
 ---
-
-# `graph_nodes`
-
-Add Nodes
-
 
 ## Description
 

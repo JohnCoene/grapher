@@ -1,13 +1,8 @@
 ---
 id: graph_live_layout
-title: graph live layout
-sidebar_label: graph live layout
+title: Graph Live Layout
+sidebar_label: Graph Live Layout
 ---
-
-# `graph_live_layout`
-
-Live Layout
-
 
 ## Description
 
