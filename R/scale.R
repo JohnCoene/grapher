@@ -196,6 +196,8 @@ scale_link_color.graph <- function(g, variable, palette = graph_palette()){
 
   # using fromColor and toColor
   # force style set
+  g$x$links$fromColor <- NULL
+  g$x$links$toColor <- NULL
   g$x$style$links$fromColor <- "fromColor"
   g$x$style$links$toColor <- "toColor"
 
