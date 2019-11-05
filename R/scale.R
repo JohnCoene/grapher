@@ -227,6 +227,8 @@ scale_link_color_coords.graph <- function(g, red = c(.01, .99), green = red, blu
 
   # using fromColor and toColor
   # force style set
+  g$x$links$fromColor <- NULL
+  g$x$links$toColor <- NULL
   g$x$style$links$fromColor <- "fromColor"
   g$x$style$links$toColor <- "toColor"
 
