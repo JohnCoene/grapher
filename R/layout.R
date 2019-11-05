@@ -545,7 +545,7 @@ graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, spin
   # create graph and settings
   if(!quiet){
     pb <- progress::progress_bar$new(
-      format = " computing coordinates [:bar] :percent eta: :eta",
+      format = " Computing coordinates [:bar] :percent eta: :eta",
       total = steps, clear = FALSE, width= 60
     )
     cat("Serializing graph\n")

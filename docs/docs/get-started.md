@@ -1,0 +1,78 @@
+---
+id: get-started
+title: Get Started
+sidebar_label: Get Started
+---
+
+{grapher} attempts to combine ease of use and customisation. One can initialise a graph from almost type of object.
+
+There is a convenience data to generate graphs, called `make_data`, it returns a list of links and nodes.
+
+```r
+# create mock data
+g <- make_data()
+```
+
+## List
+
+From a named list (`nodes` and `links`) of nodes and links, it only assumes that the latter are data.frames where the first column of the nodes data.frame contains their unique `id` and that the first two columns of the links indicate the `source` and `target` of the links.
+
+```r
+# from a list of nodes and edges
+graph(g)
+```
+
+## igraph
+
+```r
+# from igraph
+ig <- igraph::make_ring(10)
+graph(ig)
+```
+
+## Tidygraph
+
+```r
+# from tidygraph
+tbl_graph <- tidygraph::create_ring(20)
+graph(tbl_graph)
+```
+
+## Gexf
+
+```r
+# from gexf
+graph("http://gephi.org/datasets/LesMiserables.gexf")
+```
+
+## Dot
+
+```r
+# from dot file
+fl <- system.file("example/dotfile.gv", package = "grapher")
+graph(fl)
+```
+
+## Data.frame
+
+From a single data.frame, it assumes those are links.
+
+```r
+# from single data.frame
+# assumes they are links
+graph(g$links)
+```
+
+Or pass the data.frame of nodes and links separately.
+
+```r
+# from data.frames
+# pass only links
+graph() %>% 
+  graph_links(g$links, source, target)
+
+# pass nodes and links
+graph() %>% 
+  graph_nodes(g$nodes, id) %>% 
+  graph_links(g$links, source, target)
+```
