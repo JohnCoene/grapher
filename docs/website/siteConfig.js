@@ -38,10 +38,12 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    {doc: 'get-started', label: 'Docs'},
-    {doc: 'graph', label: 'Reference'},
+    {doc: 'install', label: 'Install'},
+    {doc: 'get-started', label: 'Guide'},
+    {doc: 'graph', label: 'Docs'},
     {page: 'help', label: 'Help'},
     {blog: true, label: 'Blog'},
+    {href: 'https://github.com/JohnCoene/grapher', label: 'Github'},
   ],
 
   // If you have users set above, you add it here:
@@ -53,12 +55,17 @@ const siteConfig = {
   favicon: 'img/favicon.ico',
   defaultVersionShown: '0.1.0',
   gaTrackingId: 'UA-74544116-1',
+  twitterUsername: 'jdata',
+
+  noIndex: false,
 
   /* Colors for website */
   colors: {
     primaryColor: '#000000',
-    secondaryColor: '#2C0E37',
+    secondaryColor: '#4f4f4f',
   },
+
+  editUrl: 'https://github.com/JohnCoene/grapher/edit/master/docs/docs/',
 
   scripts: [
     'https://buttons.github.io/buttons.js',
@@ -67,7 +74,7 @@ const siteConfig = {
   ],
 
   stylesheets: [
-    'https://fonts.googleapis.com/css?family=Raleway',
+    'https://fonts.googleapis.com/css?family=Raleway:400,700',
     '/css/code-block-buttons.css',
     '/css/custom.css',
   ],

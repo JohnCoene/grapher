@@ -1,9 +1,12 @@
 {
   "docs": {
     "Guide": [
+      "install",
       "get-started",
-      "layout"
+      "layout",
+      "cluster"
     ],
+    "Credits": ["credits"],
     "Reference": [
       "affiliation_graph",
       "change_dimensions",
