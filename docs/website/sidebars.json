@@ -6,7 +6,8 @@
       "layout",
       "cluster",
       "scales",
-      "define"
+      "define",
+      "tips"
     ],
     "Credits": ["credits"],
     "Docs": [
