@@ -21,14 +21,16 @@ function Help(props) {
 
   const supportLinks = [
     {
-      content: `Learn more using the [documentation on this site.](${docUrl(
-        'doc1.html',
-      )})`,
-      title: 'Browse Docs',
+      content: `Learn more using the package by going through the [guide](${docUrl(
+        'get-started.html',
+      )}).`,
+      title: 'Browse Guide',
     },
     {
-      content: 'Ask questions about the documentation and project',
-      title: 'Join the community',
+      content: `Learn about the many [functions](${docUrl(
+        'graph.html',
+      )}) that comprise grapher.`,
+      title: 'Check the Documentation',
     },
     {
       content: "Find out what's new with this project",

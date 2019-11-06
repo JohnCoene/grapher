@@ -41,7 +41,7 @@ const siteConfig = {
     {doc: 'install', label: 'Install'},
     {doc: 'get-started', label: 'Guide'},
     {doc: 'graph', label: 'Docs'},
-    {page: 'help', label: 'Help'},
+    //{page: 'help', label: 'Help'},
     {blog: true, label: 'Blog'},
     {href: 'https://github.com/JohnCoene/grapher', label: 'Github'},
   ],
@@ -55,14 +55,14 @@ const siteConfig = {
   favicon: 'img/favicon.ico',
   defaultVersionShown: '0.1.0',
   gaTrackingId: 'UA-74544116-1',
-  twitterUsername: 'jdata',
+  twitterUsername: 'jdatap',
 
   noIndex: false,
 
   /* Colors for website */
   colors: {
     primaryColor: '#000000',
-    secondaryColor: '#4f4f4f',
+    secondaryColor: '#525252'
   },
 
   editUrl: 'https://github.com/JohnCoene/grapher/edit/master/docs/docs/',

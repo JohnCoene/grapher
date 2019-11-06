@@ -4,7 +4,9 @@ title: Get Started
 sidebar_label: Get Started
 ---
 
-grapher attempts to combine ease of use and customisation. One can initialise a graph from almost type of graph object with a single line of code but nonetheless greatly customise all visual aspects of the graph later on.
+This is at its core an integration of the many works of [Andrei Kashcha](credits.md) that form [ngraph](https://github.com/anvaka/ngraph). This package is intended to make large visualisations where the latter is the core, such as [this one](http://shiny.john-coene.com/cran). Therefore, we show the example code but do not render the visualisation as in this form they can only be underwhelming.
+
+grapher attempts to combine ease of use and customisation. One can initialise a graph from almost type of graph object with a single line of code but nonetheless greatly customise all visual aspects of the graph later on. 
 
 There are many ways to refer to the components of a graph, grapher refers to them as nodes and links.
 

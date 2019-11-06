@@ -5,7 +5,8 @@
       "get-started",
       "layout",
       "cluster",
-      "scales"
+      "scales",
+      "define"
     ],
     "Credits": ["credits"],
     "Docs": [

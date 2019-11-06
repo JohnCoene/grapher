@@ -105,26 +105,26 @@ class Index extends React.Component {
         {[
           {
             content:
-              'To make your landing page more attractive, use illustrations! Check out ' +
-              '[**unDraw**](https://undraw.co/) which provides you with customizable illustrations which are free to use. ' +
-              'The illustrations you see on this page are from unDraw.',
-            image: `${baseUrl}img/undraw_code_review.svg`,
+              'Accepts all common graph objects (gexf, igraph, tidygraph, etc.). ' +
+              'Initialise a graph in a single line.',
+            image: `${baseUrl}img/grapher-demo.png`,
             imageAlign: 'left',
-            title: 'Wonderful SVG Illustrations',
+            title: 'Easy to use',
           },
         ]}
       </Block>
     );
 
     const Description = () => (
-      <Block background="dark">
+      <Block>
         {[
           {
             content:
-              'This is another description of how this project is useful',
-            image: `${baseUrl}img/undraw_note_list.svg`,
+              'Easily renders large graphs.' +
+              'Simple heuristic to improve performances',
+            image: `${baseUrl}img/grapher-demo.png`,
             imageAlign: 'right',
-            title: 'Description',
+            title: 'Scale',
           },
         ]}
       </Block>
@@ -135,10 +135,12 @@ class Index extends React.Component {
         {[
           {
             content:
-              'Each new Docusaurus project has **randomly-generated** theme colors.',
-            image: `${baseUrl}img/undraw_youtube_tutorial.svg`,
+              'Easily renders large graphs.' + 
+              '<br/>' +
+              'Simple heuristic to improve performances',
+            image: `${baseUrl}img/undraw_note_list.svg`,
             imageAlign: 'right',
-            title: 'Randomly Generated Theme Colors',
+            title: 'Scale',
           },
         ]}
       </Block>
@@ -148,16 +150,16 @@ class Index extends React.Component {
       <Block layout="fourColumn">
         {[
           {
-            content: 'This is the content of my feature',
-            image: `${baseUrl}img/undraw_react.svg`,
+            content: 'Draw a graph in a single line',
+            image: `${baseUrl}img/easy.png`,
             imageAlign: 'top',
-            title: 'Feature One',
+            title: 'Easy to use',
           },
           {
-            content: 'The content of my second feature',
-            image: `${baseUrl}img/undraw_operating_system.svg`,
+            content: 'Visualise large graphs',
+            //image: `${baseUrl}img/undraw_operating_system.svg`,
             imageAlign: 'top',
-            title: 'Feature Two',
+            title: 'Scales',
           },
         ]}
       </Block>
@@ -196,11 +198,11 @@ class Index extends React.Component {
       <div>
         <HomeSplash siteConfig={siteConfig} language={language} />
         <div className="mainContainer">
-          <Features />
-          <FeatureCallout />
-          <LearnHow />
+          {/* <Features /> */}
+          {/* <FeatureCallout /> */}
           <TryOut />
-          <Description />
+          <LearnHow />
+          {/* <Description /> */}
           <Showcase />
         </div>
       </div>

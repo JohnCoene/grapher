@@ -6,6 +6,18 @@ body{
   min-height:400px;
 }
 
+article a,
+.blockContent a{
+  color: #000;
+  background: repeating-linear-gradient(
+    -55deg,
+    #f5f5f5,
+    #f5f5f5 5px,
+    #e6e6e6 5px,
+    #e6e6e6 10px
+  );
+}
+
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }
 
