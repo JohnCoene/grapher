@@ -4,10 +4,11 @@
       "install",
       "get-started",
       "layout",
-      "cluster"
+      "cluster",
+      "scales"
     ],
     "Credits": ["credits"],
-    "Reference": [
+    "Docs": [
       "affiliation_graph",
       "change_dimensions",
       "cran_deps_graph",
