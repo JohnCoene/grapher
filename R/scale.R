@@ -40,7 +40,7 @@ scale_node_color.graph <- function(g, variable, palette = graph_palette()){
   
   scl <- scale_colour(g$x$nodes[[var]], palette)
   g$x$nodes$color <- scl(g$x$nodes[[var]]) %>% to_hex()
-  g$x$style$nodes$color <- "toColor"
+  g$x$style$nodes$color <- "color"
 
   return(g)
 }
@@ -246,6 +246,10 @@ scale_link_color_coords.graph <- function(g, red = c(.01, .99), green = red, blu
 #' @return A vector of hex colors.
 #' 
 #' @examples
+#' # preview_palettes
+#' graph_palette()
+#' graph_palette_light()
+#' 
 #' graph_data <- make_data(200)
 #' 
 #' graph_data %>% 
@@ -256,17 +260,31 @@ scale_link_color_coords.graph <- function(g, red = c(.01, .99), green = red, blu
 #' @name graph_palette
 #' @export 
 graph_palette <- function() {
-  c(
+  pal <- c(
     "#6f63bb", "#8a60b0", "#ba43b4", "#c7519c", "#d63a3a", "#ff7f0e",
     "#ffaa0e", "#ffbf50", "#bcbd22", "#78a641", "#2ca030", "#12a2a8",
     "#1f83b4"
-  ) %>% 
-    invisible()
+  )
+
+  structure(pal, class = c("pal", class(pal)))
 }
 
 #' @rdname graph_palette
 #' @export
 graph_palette_light <- function(){
-  c("#D65151", "#D69351", "#FEF2BF", "#DBC7FC", "#FED8E5", "#FFBFBF") %>% 
-    invisible()
+  pal <- c(
+    "#8dcabd", "#e3b1b8", "#caecbc", "#d1bbdf", "#d6ecc6", "#9db8da", 
+    "#e0bf9d", "#8ad6e4", "#e6d2c7", "#b9d7eb", "#aac5a4", "#cdebdd", "#a2bebd"
+  )
+  structure(pal, class = c("pal", class(pal)))
+}
+
+#' @export 
+print.pal <- function(x, ...){
+  map(x, function(color){
+    style <- crayon::make_style(color)
+    style(tolower(color))
+  }) %>% 
+    unlist() %>% 
+    cat("\n")
 }
