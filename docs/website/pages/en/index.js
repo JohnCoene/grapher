@@ -38,7 +38,7 @@ class HomeSplash extends React.Component {
     const ProjectTitle = () => (
       <h2 className="projectTitle">
         Interactive Graphs
-        <small>An integration of ngraph</small>
+        <small>An R integration of ngraph</small>
       </h2>
     );
 
