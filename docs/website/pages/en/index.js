@@ -31,13 +31,13 @@ class HomeSplash extends React.Component {
 
     const Logo = props => (
       <div className="projectLogo">
-        <img src={props.img_src} alt="Project Logo" />
+        {/* <img src={props.img_src} alt="Project Logo" /> */}
       </div>
     );
 
     const ProjectTitle = () => (
       <h2 className="projectTitle">
-        Interactive Graphs
+        Grapher
         <small>An R integration of ngraph</small>
       </h2>
     );
@@ -138,7 +138,7 @@ class Index extends React.Component {
               'Easily renders large graphs.' + 
               '<br/>' +
               'Simple heuristic to improve performances',
-            image: `${baseUrl}img/undraw_note_list.svg`,
+            image: `${baseUrl}img/fkg.png`,
             imageAlign: 'right',
             title: 'Scale',
           },

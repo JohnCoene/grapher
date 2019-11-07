@@ -33,3 +33,16 @@ Plainly hiding links seems blunt but works surprisingly well, bear with me. Agai
 The alternative is often to remove links (e.g.: with minimum spanning tree) but that results in graph layouts that do not resemble the original graph structure at all, it's in essence a totally different graph. Hiding links allows to keep the global graph structure. 
 
 One question remains, which links do we hide?
+
+Hiding links that are too lengthy works really well. Assuming the layout of the network is adequate, hiding long links will make the graph look less like a hairball but still show links within smaller communities.
+
+```r
+g <- make_data(2000)
+
+graph(g) %>% 
+  graph_offline_layout(steps = 100) %>% 
+  scale_link_color_coords() %>% 
+  hide_long_links(75)
+```
+
+The last trick in the book is explained in the [Shiny part of the guide](shiny.md#json).

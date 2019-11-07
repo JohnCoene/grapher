@@ -42,7 +42,7 @@ const siteConfig = {
     {doc: 'get-started', label: 'Guide'},
     {doc: 'graph', label: 'Docs'},
     //{page: 'help', label: 'Help'},
-    {blog: true, label: 'Blog'},
+    // {blog: true, label: 'Blog'},
     {href: 'https://github.com/JohnCoene/grapher', label: 'Github'},
   ],
 
@@ -95,8 +95,8 @@ const siteConfig = {
   cleanUrl: true,
 
   // Open Graph and Twitter card images.
-  ogImage: 'img/undraw_online.svg',
-  twitterImage: 'img/undraw_tweetstorm.svg',
+  ogImage: 'img/grapher-github.png',
+  twitterImage: 'img/grapher-github.png',
 
   // For sites with a sizable amount of content, set collapsible to true.
   // Expand/collapse the links and subcategories under categories.

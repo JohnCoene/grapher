@@ -4,9 +4,11 @@ title: Get Started
 sidebar_label: Get Started
 ---
 
-This package is at its core an integration of the many works of [Andrei Kashcha](credits.md) that form [ngraph](https://github.com/anvaka/ngraph). It is intended to make large visualisations where the latter is the core, such as [this visualisation of CRAN dependencies](http://shiny.john-coene.com/cran). Therefore, we show the example code but do not render the visualisation since embedded in a document such as this one they can only be underwhelming: you are encouraged to run the examples in your R console/RStudio session.
+This package is at its core an integration of the many works of [Andrei Kashcha](credits.md) that form [ngraph](https://github.com/anvaka/ngraph). It is intended to make large visualisations where the latter is the core, such as [this visualisation of CRAN dependencies](http://shiny.john-coene.com/cran), where the user uses the keyboard and mouse to explore the galaxy-looking graph (<kbd>w</kbd>, <kbd>a</kbd>, <kbd>s</kbd>, <kbd>d</kbd>, and the arrow keys).
 
-![](../img/rstudio.png)
+Therefore, we show the example code but do not render the visualisation since embedded in a document such as this one they can only be underwhelming: you are encouraged to run the examples in your R console/RStudio session.
+
+![grapher in RStudio](../img/rstudio.png)
 
 grapher attempts to combine ease of use and customisation. One can initialise a graph from almost type of graph object with a single line of code but nonetheless greatly customise all visual aspects of the graph later on. 
 
