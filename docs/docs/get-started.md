@@ -4,7 +4,9 @@ title: Get Started
 sidebar_label: Get Started
 ---
 
-This is at its core an integration of the many works of [Andrei Kashcha](credits.md) that form [ngraph](https://github.com/anvaka/ngraph). This package is intended to make large visualisations where the latter is the core, such as [this one](http://shiny.john-coene.com/cran). Therefore, we show the example code but do not render the visualisation as in this form they can only be underwhelming.
+This package is at its core an integration of the many works of [Andrei Kashcha](credits.md) that form [ngraph](https://github.com/anvaka/ngraph). It is intended to make large visualisations where the latter is the core, such as [this visualisation of CRAN dependencies](http://shiny.john-coene.com/cran). Therefore, we show the example code but do not render the visualisation since embedded in a document such as this one they can only be underwhelming: you are encouraged to run the examples in your R console/RStudio session.
+
+![](../img/rstudio.png)
 
 grapher attempts to combine ease of use and customisation. One can initialise a graph from almost type of graph object with a single line of code but nonetheless greatly customise all visual aspects of the graph later on. 
 
@@ -54,7 +56,7 @@ head(g)
 #> # … with 90 more rows
 ```
 
-With data generated and the package loaded you can start using grapher.
+With data generated and the package loaded we can start visualising graphs.
 
 ## List
 
@@ -81,9 +83,11 @@ graph(tbl_graph)
 
 ## Gexf
 
-If you pass a character string to `character` string as first argument this is assumed to be the path to either a `.gexf` or a `.gv` file. It could in fact also be a `json` file, but that is demonstrated later as it only applies to the [Shiny](https://shiny.rstudio.com/) framework.
+If you pass a `character` string as first argument it is assumed to be the path to either a `.gexf` or a `.gv` file. It could in fact also be a `json` file, but that is demonstrated later as it only applies to the [Shiny](https://shiny.rstudio.com/) framework.
 
 These are particularly useful if you are importing graph data from another software such as [Gephi](https://gephi.org/) or [GraphViz](https://www.graphviz.org/).
+
+It must be noted however, that some features of the package will not be available using this method. The files are read in R and passed to the JavaScript front end, they are interpreted by grapher, therefore things such as [scaling](scale_node_color.md) functions will not work. These visual aspects should therefore be computed beforehand.
 
 ```r
 graph("http://gephi.org/datasets/LesMiserables.gexf")

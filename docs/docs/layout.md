@@ -4,13 +4,13 @@ title: Layout
 sidebar_label: Layout
 ---
 
-There are multiple ways to layout your graph with grapher, though those can be broken down into two broad categories: static and dynamic. The former pre-computes the positions of the nodes before rendering the visualisation to produce a _static_ graph. The latter does the layout _live_ in the browser.
+There are multiple ways to layout your graph with grapher, though those can be broken down into two broad categories: static and live. The former pre-computes the positions of the nodes before rendering the visualisation to produce a _static_ graph. The latter does the layout _live_ in the browser.
 
-Computing the layout is computationally expensive and though the live layout looks fancy it quickly becomes unmanageable for the browser as the graph grows in size. You will therefore often pre-compute those in R or node js.
+Computing the layout is computationally expensive and though the live layout looks fancy it quickly becomes unmanageable for the browser as graphs grow become larger. You will therefore often pre-compute those in R or node js.
 
-By default the graph will use the live layout: it will layout the graph in the browser, unless the object you used to initialise the graph contained nodes coordinates as `x`, `y`, and `z`. Note that if you have pre-computed the coordinates but do not wish to use them in grapher you can remove them with `remove_coordinates`.
+By default the graph will use the live layout: it will layout the graph in the browser, unless the object you used to initialise the graph contained nodes coordinates as `x`, `y`, and `z` in which case it will use those to position the nodes on the canvas. If you have those coordinates but do not wish to use them in to position the nodes you can remove them with `remove_coordinates`.
 
-When it comes to pre-computing the layout you have two main choices, 1) use R and compute the coordinates using an [igraph](https://igraph.org/r/doc/layout_.html) layout function. Or, if you have the full installation of grapher which includes V8, you can also use the same algorithm as used in the browser but _offline_.
+When it comes to pre-computing the layout you have two main choices, 1) use R and compute the coordinates using an [igraph](https://igraph.org/r/doc/layout_.html) layout function, or, if you have the full installation of grapher which includes V8, you can also use the same algorithm as used in the browser but _offline_. Though there is a suboptimal third option: if you have used the node js [ngraph.offline.layout](https://github.com/anvaka/ngraph.offline.layout) library to compute the layout, you can read the `positions.bin` file with `graph_bin_layout`.
 
 ## Live
 
@@ -47,11 +47,20 @@ graph(g) %>%
 
 ## Offline
 
-Finally once can also use the same algorithm as used in the browser but offline, precomputing the nodes positons.
+Finally if you have the [full installation](install.md) you can also use the same algorithm as used in the browser but offline, precomputing the nodes positons with `graph_offline_layout`.
 
 ```r
 graph(g) %>% 
   graph_offline_layout() 
 ```
 
-If you have used the node js [ngraph.offline.layout](https://github.com/anvaka/ngraph.offline.layout) library to compute the layout, you can read the `positions.bin` file with `graph_bin_layout`.
+Then again, these do not have to be computed with grapher, you can compute them yourself prior to initialising the graph.
+
+```r
+# random coordinates
+g$nodes$x <- runif(200, 1, 1000)
+g$nodes$y <- runif(200, 1, 1000)
+g$nodes$z <- runif(200, 1, 1000)
+
+graph(g)
+```

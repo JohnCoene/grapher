@@ -4,9 +4,9 @@ title: Cluster
 sidebar_label: Cluster
 ---
 
-You can compute clusters, also known as communities, using grapher. Note that internally, as for static layouts, grapher uses [igraph](https://igraph.org/r/). You are by no means forced to use grapher's clustering methods, you can always compute these yourself before initialising the graph.
+Grapher also lets you compute clusters, also known as communities. Note that internally, as for static layouts, grapher uses [igraph](https://igraph.org/r/). You are by no means forced to use grapher's clustering methods, you can always compute these yourself before initialising the graph.
 
-Assigning nodes to communities, using grapher's `graph_cluster` function or any other prior to initialisation, has not direct effect on the visualisation. In fact it does not directly pertains to graph visualisation. It is included as it is so often used to define visual aspects of a graph, most commonly, node color.
+Community detection is included in the package as it is often used to define visual aspects of a graph (e.g.: node color), but in fact does not directly pertain to graph visualisation. Therefore assigning nodes to communities using `graph_cluster` has no direct effect on the visualisation.
 
 The `graph_cluster` function defaults to using `igraph::cluster_walktrap` but you can use another clustering igraph function.
 
@@ -17,7 +17,7 @@ graph(g) %>%
   graph_cluster()
 ```
 
-If you ran the above you probably observe that the output graph was no different had you ran the snippet without `graph_cluster`. This is, as mentioned above because is simply computes the cluster to which each node below but does not apply that to any aspect of the graph. Therefore, we can access the cluster with `cluster`.
+If you ran the above you probably observed that the output graph was no different had you ran the snippet without `graph_cluster`. This is, as mentioned above because is simply computes the cluster to which each node belongs but does not apply that to any aspect of the graph. We can do so with `scale_*` functions (covered later).
 
 ```r
 g <- make_data()

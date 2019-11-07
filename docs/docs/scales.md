@@ -51,7 +51,7 @@ head(g)
 
 ## Node size
 
-If we want to scale the node size given the data we generated we could do (I say "could" because in this case there is another way we shall cover later). We use `scale_node_size` which takes two arguments, 1) `variable` the bare variable to scale, 2) `range` the size range into which `variable` should be scaled.
+If we want to scale the node size given the data we generated we could (I say "could" because in this case there is another way we shall cover later) use `scale_node_size` which takes two arguments, 1) the `variable` the bare variable to scale, 2) and the `range` of node size to which `variable` should be scaled.
 
 ```r
 graph(g) %>% 
@@ -62,7 +62,7 @@ graph(g) %>%
 
 We can also scale the color of the nodes to given `variable`, we've actually already used this in the [guide on clustering](cluster.md). We'll repeat that example below.
 
-Note the `palette` argument which takes any vector of color of your choosing, though it must be said that it is strict with hexadecimals; use the full hex e.g.: use `#ffffff` for white rather than the shorter `#fff` or it will error.
+Note the `palette` argument which takes any vector of color of your choosing, though it must be said that it is strict with hexadecimals; use the full hex e.g.: use `#ffffff` for white rather than the shorter `#fff` or it will produce an error.
 
 ```r
 graph(g) %>% 
@@ -77,7 +77,9 @@ graph(g) %>%
   scale_node_color(size)
 ```
 
-You can also color nodes according to their `x`, `y`, and `z` coordinates with `scale_node_color_coords`. This function rescales the coordinates and uses then as red, green, blue. However, because it relies on coordinates these must have been computed already. It will not work with a live layout.
+You can also color nodes according to their `x`, `y`, and `z` coordinates with `scale_node_color_coords`. This function rescales the coordinates and uses them as red, green, blue in the RGB model. Meaning nodes at the extreme `x` coordinate will be red, etc. You can redefine those color spaces with the `red`, `green`, and `blue` arguments. 
+
+Note that because it relies on coordinates these must have been computed already. It will thus not work with a live layout.
 
 ```r
 graph(g) %>% 
@@ -89,8 +91,8 @@ graph(g) %>%
 
 In grapher, the color of a link is actually split in two:
 
-1. The color from the source node to the middle.
-2. The color from the middle to the target node.
+1. The color from the source node to the middle of the link.
+2. The color from the middle of the link to the target node.
 
 This is something that is again genius in ngraph (the underlying JavaScript library). It's incredibly simple yet extremely powerful. Thanks to this split, one can easily define links color according to meta data in the nodes (source and target). 
 
@@ -103,12 +105,12 @@ There are four scaling functions that will let you adjust those colors.
 
 In the list above, the first two are straight forward, they allow you to scale the links color according to meta data belonging to the links. The other two are slightly more interesting, `scale_link_color` will let you color the links according to meta data held in the nodes at either end of each respective link.
 
-We could, for instance, color the links according to the cluster to which belong nodes at either end. This results, in a much more better looking graph.
+We could, for instance, color the links according to the cluster to which nodes at either end of each link belong. This results, in a much better looking graph.
 
 ```r
 graph(g) %>% 
   graph_cluster() %>% 
-  scale_link_color(cluster, palette = graph_palette_light())
+  scale_link_color(cluster)
 ```
 
 Finally you can color links according to the position of nodes at either end. Just as for `scale_node_color_coords`, the coordinates of the nodes must have been computed in order to for this method to apply.
