@@ -30,6 +30,6 @@ In the graph above communities (not in the strict sense) are put to view, withou
 
 Plainly hiding links seems blunt but works surprisingly well, bear with me. Again grapher is only worried about making a beautiful visualisation so if a graph tends towards a "hairball" it makes sense to hide links. The benefits of hiding links are numerous. 
 
-The alternative is often to remove links (e.g.: with minimum spanning tree) but that results in graph layouts that do not resemble the original graph structure at all, it's in essence a totally different graph.
+The alternative is often to remove links (e.g.: with minimum spanning tree) but that results in graph layouts that do not resemble the original graph structure at all, it's in essence a totally different graph. Hiding links allows to keep the global graph structure. 
 
-Hiding links allows to keep the  this method actually keeps all links making the resulting layout more sensible: the link between X and Y might be hidden but they are nonetheless close to one another.
+One question remains, which links do we hide?
