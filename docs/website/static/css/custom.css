@@ -7,7 +7,8 @@ body{
 }
 
 article a,
-.blockContent a{
+.blockContent a,
+.navListItemActive{
   color: #000;
   background: repeating-linear-gradient(
     -55deg,

@@ -30,7 +30,7 @@ class HomeSplash extends React.Component {
     );
 
     const Logo = props => (
-      <div className="projectLogo projectLogo2">
+      <div className="projectLogo">
         <img src={props.img_src} alt="Project Logo" />
       </div>
     );
@@ -131,7 +131,7 @@ class Index extends React.Component {
     );
 
     const LearnHow = () => (
-      <Block background="light">
+      <Block>
         {[
           {
             content:
@@ -160,6 +160,7 @@ class Index extends React.Component {
             //image: `${baseUrl}img/undraw_operating_system.svg`,
             imageAlign: 'top',
             title: 'Scales',
+            href: 'hello'
           },
         ]}
       </Block>
@@ -198,12 +199,12 @@ class Index extends React.Component {
       <div>
         <HomeSplash siteConfig={siteConfig} language={language} />
         <div className="mainContainer">
-          {/* <Features /> */}
           {/* <FeatureCallout /> */}
           <TryOut />
           <LearnHow />
           {/* <Description /> */}
-          <Showcase />
+          {/* <Showcase /> */}
+          {/* <Features /> */}
         </div>
       </div>
     );
