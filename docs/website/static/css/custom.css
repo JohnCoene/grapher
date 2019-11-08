@@ -2,6 +2,10 @@ body{
   font-family: 'Raleway', sans-serif;
 }
 
+code{
+  font-family: 'Ubuntu Mono', monospace;
+}
+
 .projectLogo2{
   min-height:400px;
 }
@@ -17,6 +21,32 @@ article a,
     #e6e6e6 5px,
     #e6e6e6 10px
   );
+}
+
+.homeContainer{
+  background-color: #000000;
+  min-height: 100vh;
+}
+
+.projectTitle{
+  color:white;
+}
+
+.pluginWrapper .button{
+  color: white;
+  border: 1px solid white
+}
+
+.pluginWrapper .button:hover{
+  color: black;
+  border: 1px solid black;
+  background-color: white;
+}
+
+.homeSplashFade{
+  position: absolute;
+  width: 100%;
+  text-align: center;
 }
 
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {

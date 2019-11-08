@@ -8,7 +8,7 @@ This package is at its core an integration of the many works of [Andrei Kashcha]
 
 Therefore, we show the example code but do not render the visualisation since embedded in a document such as this one they can only be underwhelming: you are encouraged to run the examples in your R/RStudio session.
 
-![grapher in RStudio](../img/rstudio.png)
+![grapher in RStudio](/img/rstudio.png)
 
 grapher attempts to combine ease of use and customisation. One can initialise a graph from almost type of graph object with a single line of code but nonetheless greatly customise all visual aspects of the graph later on. 
 
