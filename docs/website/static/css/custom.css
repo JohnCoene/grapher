@@ -25,7 +25,11 @@ article a,
 
 .homeContainer{
   background-color: #000000;
-  min-height: 100vh;
+  height: 100vh;
+}
+
+.particles-js-canvas-el{
+  height: 100vh;
 }
 
 .projectTitle{

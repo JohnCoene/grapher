@@ -106,7 +106,7 @@ class Index extends React.Component {
           {
             content:
               'Accepts all common graph objects (gexf, igraph, tidygraph, etc.). ' +
-              'Initialise a graph in a single line.',
+              'Initialise a graph in a single line, then customise later if needed.',
             image: `${baseUrl}img/grapher-demo.png`,
             imageAlign: 'left',
             title: 'Easy to use',
@@ -136,8 +136,7 @@ class Index extends React.Component {
           {
             content:
               'Easily renders large graphs.' + 
-              '<br/>' +
-              'Simple heuristic to improve performances',
+              'with simple heuristics to improve performances',
             image: `${baseUrl}img/fkg.png`,
             imageAlign: 'right',
             title: 'Scale',

@@ -14,8 +14,8 @@ const users = [
     caption: 'John Coene',
     // You will need to prepend the image path with your baseUrl
     // if it is not '/', like: '/test-site/img/image.jpg'.
-    image: '/img/undraw_open_source.svg',
-    infoLink: 'https://www.facebook.com',
+    image: 'https://avatars0.githubusercontent.com/u/7833796?s=460&v=4',
+    infoLink: 'https://john-coene.com',
     pinned: true,
   },
 ];
@@ -41,8 +41,8 @@ const siteConfig = {
     {doc: 'install', label: 'Install'},
     {doc: 'get-started', label: 'Guide'},
     {doc: 'graph', label: 'Docs'},
-    //{page: 'help', label: 'Help'},
     {blog: true, label: 'Blog'},
+    // {page: 'help', label: 'Help'},
     {href: 'https://github.com/JohnCoene/grapher', label: 'Github'},
   ],
 

@@ -49,12 +49,6 @@ class Footer extends React.Component {
             <a href={this.pageUrl('users.html', this.props.language)}>
               User Showcase
             </a>
-            <a
-              href="https://stackoverflow.com/questions/tagged/grapher"
-              target="_blank"
-              rel="noreferrer noopener">
-              Stack Overflow
-            </a>
             <a href="https://github.com/JohnCoene/grapher/issues/">Issues</a>
             <a
               href="https://twitter.com/jdatap"
@@ -66,7 +60,6 @@ class Footer extends React.Component {
           <div>
             <h5>More</h5>
             <a href={`${this.props.config.baseUrl}blog`}>Blog</a>
-            <a href="https://github.com/JohnCoene/grapher">GitHub</a>
             <a
               className="github-button"
               href={this.props.config.repoUrl}
@@ -82,7 +75,7 @@ class Footer extends React.Component {
                 <a
                   href={`https://twitter.com/${this.props.config.twitterUsername}`}
                   className="twitter-follow-button">
-                  Follow @{this.props.config.twitterUsername}
+                  @{this.props.config.twitterUsername}
                 </a>
               </div>
             )}
