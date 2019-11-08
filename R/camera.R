@@ -54,7 +54,9 @@ graph_camera_fov.graph_proxy <- function(g, fov = 75L) {
 #' Camera Position
 #' 
 #' Position the camera, \emph{this only works on a stable graph}:
-#' see \code{\link{graph_stable_layout}} and examples.
+#' see \code{\link{graph_stable_layout}} and examples. The 
+#' \code{graph_camera_lookat} let's define what position the camera
+#' looks at.
 #' 
 #' @inheritParams graph_nodes
 #' @param x,y,z Coordinates of camera position.
@@ -87,6 +89,7 @@ graph_camera_fov.graph_proxy <- function(g, fov = 75L) {
 #' 
 #' \dontrun{shinyApp(ui, server)}
 #' 
+#' @name graph_camera_position
 #' @export
 graph_camera_position <- function(g, x = NULL, y = NULL, z = NULL) UseMethod("graph_camera_position")
 
@@ -105,6 +108,29 @@ graph_camera_position.graph_proxy <- function(g, x = NULL, y = NULL, z = NULL){
 
   msg <- list(id = g$id, x = x, y = y, z = z)
   g$session$sendCustomMessage("position-camera", msg)
+
+  return(g)
+}
+
+#' @rdname graph_camera_position
+#' @export
+graph_camera_lookat <- function(g, x = NULL, y = NULL, z = NULL) UseMethod("graph_camera_lookat")
+
+#' @export
+#' @method graph_camera_lookat graph
+graph_camera_lookat.graph <- function(g, x = NULL, y = NULL, z = NULL){
+
+  g$x$camera <- list(x = x, y = y, z = z)
+
+  return(g)
+}
+
+#' @export
+#' @method graph_camera_lookat graph_proxy
+graph_camera_lookat.graph_proxy <- function(g, x = NULL, y = NULL, z = NULL){
+
+  msg <- list(id = g$id, pos = list(x = x, y = y, z = z))
+  g$session$sendCustomMessage("lookat-camera", msg)
 
   return(g)
 }

@@ -2,9 +2,12 @@
 % Please edit documentation in R/camera.R
 \name{graph_camera_position}
 \alias{graph_camera_position}
+\alias{graph_camera_lookat}
 \title{Camera Position}
 \usage{
 graph_camera_position(g, x = NULL, y = NULL, z = NULL)
+
+graph_camera_lookat(g, x = NULL, y = NULL, z = NULL)
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 
@@ -15,7 +18,9 @@ as returned by a function of the same name.}
 }
 \description{
 Position the camera, \emph{this only works on a stable graph}:
-see \code{\link{graph_stable_layout}} and examples.
+see \code{\link{graph_stable_layout}} and examples. The 
+\code{graph_camera_lookat} let's define what position the camera
+looks at.
 }
 \examples{
 library(shiny)

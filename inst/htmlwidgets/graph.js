@@ -313,7 +313,17 @@ if (HTMLWidgets.shinyMode) {
       }
   });
 
-  // stable
+  // camera postion
+  Shiny.addCustomMessageHandler('lookat-camera',
+    function(msg) {
+      var r = get_renderer(msg.id);
+      var g = get_renderer(msg.id);
+      if (typeof g != 'undefined') {
+        r.camera(g).lookAt(x.pos);
+      }
+  });
+
+  // focus
   Shiny.addCustomMessageHandler('focus-node',
     function(msg) {
       var r = get_renderer(msg.id);

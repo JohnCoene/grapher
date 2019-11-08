@@ -45,4 +45,16 @@ graph(g) %>%
   hide_long_links(75)
 ```
 
+To determine the appropriate length of links to keep you can use the function `compute_links_length` which returns a data.frame of links and their lengths given the computed layout.
+
+```r
+g <- graph(g) %>% 
+  graph_offline_layout(steps = 100) %>% 
+  scale_link_color_coords()
+
+lengths <- compute_links_length(g)
+```
+
+![Histogram of links length](../img/length_histogram.png)
+
 The last trick in the book is explained in the [Shiny part of the guide](shiny.md#json).

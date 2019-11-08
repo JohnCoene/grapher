@@ -42,7 +42,7 @@ const siteConfig = {
     {doc: 'get-started', label: 'Guide'},
     {doc: 'graph', label: 'Docs'},
     //{page: 'help', label: 'Help'},
-    // {blog: true, label: 'Blog'},
+    {blog: true, label: 'Blog'},
     {href: 'https://github.com/JohnCoene/grapher', label: 'Github'},
   ],
 
