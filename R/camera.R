@@ -120,7 +120,7 @@ graph_camera_lookat <- function(g, x = NULL, y = NULL, z = NULL) UseMethod("grap
 #' @method graph_camera_lookat graph
 graph_camera_lookat.graph <- function(g, x = NULL, y = NULL, z = NULL){
 
-  g$x$camera <- list(x = x, y = y, z = z)
+  g$x$cameraLookat <- list(x = x, y = y, z = z)
 
   return(g)
 }

@@ -125,6 +125,10 @@ HTMLWidgets.widget({
             renderer.camera(g).position.setZ(x.camera.z);
         }
 
+        if(x.cameraLookat){
+          renderer.camera(g).lookAt(x.cameraLookat);
+        }
+
         if (HTMLWidgets.shinyMode) {
           if(x.on_node_click)
             renderer.on('nodeclick', function(node) {
