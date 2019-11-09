@@ -4,7 +4,13 @@ title: Shiny
 sidebar_label: Shiny
 ---
 
-grapher has a number of functions to work hand in hand with [Shiny](https://shiny.rstudio.com/). A basic Shiny app with grapher might look like this.
+grapher has a number of functions to work hand in hand with [Shiny](https://shiny.rstudio.com/). 
+
+![](/img/features.png)
+
+In Rmarkdown there is nothing specific to note, create visualisation in code chunks as you normally would.
+
+A basic Shiny app with grapher might look like this.
 
 ```r
 library(shiny)

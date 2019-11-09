@@ -91,6 +91,24 @@ class Index extends React.Component {
       </Container>
     );
 
+    const BlockButton = props => (
+      <Container
+        padding={['bottom', 'top']}
+        id={props.id}
+        background={props.background}>
+        <GridBlock
+          align="center"
+          contents={props.children}
+          layout={props.layout}
+        />
+        <div class="btnwrap"> 
+          <a className="button" href='docs/get-started.md'>
+            Get Started
+          </a>   
+        </div>     
+      </Container>
+    );
+
     const FeatureCallout = () => (
       <div
         className="productShowcaseSection paddingBottom"
@@ -115,7 +133,7 @@ class Index extends React.Component {
     );
 
     const Third = () => (
-      <Block id="third">
+      <BlockButton id="third">
         {[
           {
             content:
@@ -125,7 +143,7 @@ class Index extends React.Component {
             title: 'Flexible',
           },
         ]}
-      </Block>
+      </BlockButton>
     );
 
     const LearnHow = () => (

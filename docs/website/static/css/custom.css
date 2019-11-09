@@ -12,7 +12,8 @@ code{
 
 article a,
 .blockContent a,
-.navListItemActive{
+.navListItemActive,
+.post a{
   color: #000;
   background: repeating-linear-gradient(
     -55deg,
@@ -51,6 +52,15 @@ article a,
   position: absolute;
   width: 100%;
   text-align: center;
+}
+
+.btnwrap{
+  width: 100%;
+  text-align: center;
+}
+
+.btnwrap a{
+  font-size: 20px;
 }
 
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
