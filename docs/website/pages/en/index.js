@@ -105,8 +105,7 @@ class Index extends React.Component {
         {[
           {
             content:
-              'Accepts all common graph objects (gexf, igraph, tidygraph, etc.). ' +
-              'Initialise a graph in a single line, then customise later if needed.',
+              'Initialise a graph in a single line, customise later if needed.',
             image: `${baseUrl}img/grapher-demo.png`,
             imageAlign: 'left',
             title: 'Easy to use',
@@ -115,31 +114,30 @@ class Index extends React.Component {
       </Block>
     );
 
-    const Description = () => (
-      <Block>
+    const Third = () => (
+      <Block id="third">
         {[
           {
             content:
-              'Easily renders large graphs.' +
-              'Simple heuristic to improve performances',
-            image: `${baseUrl}img/grapher-demo.png`,
-            imageAlign: 'right',
-            title: 'Scale',
+              'Accepts all common graph objects (gexf, igraph, tidygraph, etc.).',
+            image: `${baseUrl}img/twitter-demo.png`,
+            imageAlign: 'bottom',
+            title: 'Flexible',
           },
         ]}
       </Block>
     );
 
     const LearnHow = () => (
-      <Block>
+      <Block background="light">
         {[
           {
             content:
-              'Easily renders large graphs.' + 
-              'with simple heuristics to improve performances',
+              'Easily renders large graphs using ' + 
+              'simple heuristics to improve performances.',
             image: `${baseUrl}img/fkg.png`,
             imageAlign: 'right',
-            title: 'Scale',
+            title: 'Handles Large Graphs',
           },
         ]}
       </Block>
@@ -201,6 +199,7 @@ class Index extends React.Component {
           {/* <FeatureCallout /> */}
           <TryOut />
           <LearnHow />
+          <Third />
           {/* <Description /> */}
           {/* <Showcase /> */}
           {/* <Features /> */}
