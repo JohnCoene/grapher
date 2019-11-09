@@ -57,4 +57,6 @@ lengths <- compute_links_length(g)
 
 ![Histogram of links length](../img/length_histogram.png)
 
+The `make_data` function generates hub and spoke graphs with distinct power law distributions.
+
 The last trick in the book is explained in the [JSON part of the guide](shiny.md#json).

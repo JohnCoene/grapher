@@ -29,7 +29,8 @@ make_data(
 \code{tibble} of nodes or links or a \code{list} of the latter.
 }
 \description{
-Generate nodes and links.
+Generate nodes and links. Forms a hub and spoke graph with
+power law distribution.
 }
 \section{Functions}{
 

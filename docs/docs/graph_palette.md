@@ -25,6 +25,10 @@ A vector of hex colors.
 ## Examples
 
 ```r
+# preview_palettes
+graph_palette()
+graph_palette_light()
+
 graph_data <- make_data(200)
 
 graph_data %>%

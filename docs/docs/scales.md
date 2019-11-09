@@ -51,7 +51,7 @@ head(g)
 
 ## Node size
 
-If we want to scale the node size given the data we generated we could (I say "could" because in this case there is another way we shall cover later) use `scale_node_size` which takes two arguments, 1) the `variable` the bare variable to scale, 2) and the `range` of node size to which `variable` should be scaled.
+If we want to scale the node size given the data we generated we could use `scale_node_size` which takes two arguments, 1) the bare `variable` to scale, 2) and the `range` of node size to which `variable` should be scaled.
 
 ```r
 graph(g) %>% 
@@ -62,7 +62,7 @@ graph(g) %>%
 
 We can also scale the color of the nodes to given `variable`, we've actually already used this in the [guide on clustering](cluster.md). We'll repeat that example below.
 
-Note the `palette` argument which takes any vector of color of your choosing, though it must be said that it is strict with hexadecimals; use the full hex e.g.: use `#ffffff` for white rather than the shorter `#fff` or it will produce an error.
+Note the `palette` argument which takes any vector of colors of your choosing, though it must be said that it is strict with hexadecimals; use the full hex e.g.: `#ffffff` for white rather than the shorter `#fff` or it will produce an error.
 
 ```r
 graph(g) %>% 

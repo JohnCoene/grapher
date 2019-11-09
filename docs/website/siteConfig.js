@@ -1,25 +1,18 @@
-/**
- * Copyright (c) 2017-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
 
-// See https://docusaurus.io/docs/site-config for all the possible
-// site configuration options.
 
 // List of projects/orgs using your project for the users page.
 const users = [
   {
-    caption: 'John Coene',
+    caption: 'CRAN Dependency Graph',
     // You will need to prepend the image path with your baseUrl
     // if it is not '/', like: '/test-site/img/image.jpg'.
-    image: 'https://avatars0.githubusercontent.com/u/7833796?s=460&v=4',
-    infoLink: 'https://john-coene.com',
+    image: 'https://grapher.network/img/grapher-demo.png',
+    infoLink: 'https://shiny.john-coene.com/cran',
     pinned: true,
   },
 ];
 
+// Internal
 const siteConfig = {
   title: 'grapher', // Title for your website.
   tagline: 'Interactive Graphs',

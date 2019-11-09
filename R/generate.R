@@ -1,6 +1,7 @@
 #' Generate data
 #' 
-#' Generate nodes and links.
+#' Generate nodes and links. Forms a hub and spoke graph with
+#' power law distribution.
 #'
 #' @param n Number of nodes.
 #' @param colors Color palette to use.

@@ -28,7 +28,7 @@ shinyApp(ui, server)
 
 ## Events
 
-Events send data from the JavaScript visualisation back to R to let you know how user interact with the latter. You can capture the following events:
+Events send data from the JavaScript visualisation back to R to let you know how user interact with the graph. You can capture the following events:
 
 - Node click
 - Node double click
@@ -139,3 +139,7 @@ server <- function(input, output){
 
 shinyApp(ui, server)
 ```
+
+Using the above trick I have Shiny apps that load graphs of over 600,000 edges in 2-3 seconds.
+
+When using this method make sure you prepare the graph correctly as you will not be able to customise after it has been saved.

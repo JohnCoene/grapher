@@ -4,7 +4,7 @@ title: Cluster
 sidebar_label: Cluster
 ---
 
-Grapher also lets you compute clusters, also known as communities. Note that internally, as for static layouts, grapher uses [igraph](https://igraph.org/r/). You are by no means forced to use grapher's clustering methods, you can always compute these yourself before initialising the graph.
+Grapher also lets you compute clusters, also known as communities. Note that internally, as for static layouts, grapher uses [igraph](https://igraph.org/r/). You are by no means forced to use grapher's clustering methods, you can always compute these yourself prior to initialising the graph.
 
 Community detection is included in the package as it is often used to define visual aspects of a graph (e.g.: node color), but in fact does not directly pertain to graph visualisation. Therefore assigning nodes to communities using `graph_cluster` has no direct effect on the visualisation.
 

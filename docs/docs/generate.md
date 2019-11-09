@@ -6,7 +6,8 @@ sidebar_label: Generate
 
 ## Description
 
-Generate nodes and links.
+Generate nodes and links. Forms a hub and spoke graph with
+ power law distribution.
 
 
 ## Usage

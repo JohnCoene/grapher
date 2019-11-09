@@ -6,9 +6,9 @@ sidebar_label: Layout
 
 There are multiple ways to layout your graph with grapher, though those can be broken down into two broad categories: static and live. The former pre-computes the positions of the nodes before rendering the visualisation to produce a _static_ graph. The latter does the layout _live_ in the browser.
 
-Computing the layout is computationally expensive and though the live layout looks fancy it quickly becomes unmanageable for the browser as graphs grow become larger. You will therefore often pre-compute those in R or node js.
+Computing the layout is computationally expensive and though the live layout looks fancy it quickly becomes unmanageable for the browser as graphs become larger. You will therefore often pre-compute those in R or node js.
 
-By default the graph will use the live layout: it will layout the graph in the browser, unless the object you used to initialise the graph contained nodes coordinates as `x`, `y`, and `z` in which case it will use those to position the nodes on the canvas. If you have those coordinates but do not wish to use them in to position the nodes you can remove them with `remove_coordinates`.
+By default the graph will use the live layout: it will layout the graph in the browser, unless the object you used to initialise the graph contained nodes coordinates as `x`, `y`, and `z` in which case it will use those to position the nodes on the canvas. If you have those coordinates but do not wish to use them to position the nodes you can remove them with `remove_coordinates`.
 
 When it comes to pre-computing the layout you have two main choices, 1) use R and compute the coordinates using an [igraph](https://igraph.org/r/doc/layout_.html) layout function, or, if you have the full installation of grapher which includes V8, you can also use the same algorithm as used in the browser but _offline_. Though there is a suboptimal third option: if you have used the node js [ngraph.offline.layout](https://github.com/anvaka/ngraph.offline.layout) library to compute the layout, you can read the `positions.bin` file with `graph_bin_layout`.
 
@@ -28,7 +28,7 @@ graph(g) %>%
   graph_live_layout(gravity = -3)
 ```
 
-Since the above is draining on the browser you can stabilise the network after some time by using `graph_stable_layout` and specifying the number of milliseconds to let the layout algorithm run before stabilising it.
+Since the above is draining on the browser you can stabilise the network after some time by using `graph_stable_layout` and specifying the number of milliseconds before the layout algorithm is stopped.
 
 ```r
 graph(g) %>% 

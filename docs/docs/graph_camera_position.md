@@ -7,13 +7,16 @@ sidebar_label: Graph Camera Position
 ## Description
 
 Position the camera, this only works on a stable graph :
- see [`graph_stable_layout`](#graphstablelayout) and examples.
+ see [`graph_stable_layout`](#graphstablelayout) and examples. The
+ `graph_camera_lookat` let's define what position the camera
+ looks at.
 
 
 ## Usage
 
 ```r
 graph_camera_position(g, x = NULL, y = NULL, z = NULL)
+graph_camera_lookat(g, x = NULL, y = NULL, z = NULL)
 ```
 
 

@@ -4,9 +4,9 @@ title: Get Started
 sidebar_label: Get Started
 ---
 
-This package is at its core an integration of the many works of [Andrei Kashcha](credits.md) that form [ngraph](https://github.com/anvaka/ngraph). It is intended to make large visualisations, such as [this visualisation of CRAN dependencies](http://shiny.john-coene.com/cran), where the user uses the keyboard and mouse to explore the galaxy-looking graph (<kbd>w</kbd>, <kbd>a</kbd>, <kbd>s</kbd>, <kbd>d</kbd>, and the arrow keys).
+This package is at its core an integration of many of the works of [Andrei Kashcha](credits.md) that form [ngraph](https://github.com/anvaka/ngraph). It is intended to make large visualisations of simple monopartite graphs, such as this visualisation of [CRAN dependencies](http://shiny.john-coene.com/cran), where the user uses the keyboard and mouse to explore the galaxy-looking graph (<kbd>w</kbd>, <kbd>a</kbd>, <kbd>s</kbd>, <kbd>d</kbd>, and the arrow keys). At its core grapher is an htmlwidget like any other (e.g.: plotly, and highcharter) and will work with [R Markdown](https://rmarkdown.rstudio.com/) and [Shiny](https://shiny.rstudio.com/).
 
-Therefore, we show the example code but do not render the visualisation since embedded in a document such as this one they can only be underwhelming: you are encouraged to run the examples in your R/RStudio session.
+In this guide, we show example code but do not render the visualisation since embedded in a document such as this one they can only be underwhelming: you are encouraged to run the examples in your R/RStudio session.
 
 ![grapher in RStudio](/img/rstudio.png)
 
