@@ -54,7 +54,7 @@ This method is not necessarily faster than rendering
  algorithm then reimported in grapher.
 
 
-## Seealso
+## See Also
 
 [`graph_static_layout`](#graphstaticlayout) for other "offline" layout methods.
 

@@ -34,7 +34,7 @@ Argument      |Description
 `...`     |     Any other argument to pass to `method` .
 
 
-## Seealso
+## See Also
 
 [`graph_offline_layout`](#graphofflinelayout) to compute the same layout as
  [`graph_live_layout`](#graphlivelayout) but in R rather than in the browser.

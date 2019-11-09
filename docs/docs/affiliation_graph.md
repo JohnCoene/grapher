@@ -47,7 +47,7 @@ Note: setting weight to 0 will prohibit the model from building
 A data.frame of `member` links.
 
 
-## Seealso
+## See Also
 
 [https://github.com/anvaka/ngraph.agmgen](official documentation)
 

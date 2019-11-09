@@ -33,7 +33,7 @@ if the variables `x` , `y` , and `z`
  the force layout algorithm is not run.
 
 
-## Seealso
+## See Also
 
 [`graph_links`](#graphlinks) to add links.
 

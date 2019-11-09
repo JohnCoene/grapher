@@ -41,7 +41,7 @@ if the variables `x` , `y` , and `z`
  is stable 2/3 dimensional and the force layout algorithm is not run.
 
 
-## Seealso
+## See Also
 
 [`graph_nodes`](#graphnodes) and [`graph_links`](#graphlinks) to add nodes and links.
 

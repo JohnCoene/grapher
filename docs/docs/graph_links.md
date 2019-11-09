@@ -26,7 +26,7 @@ Argument      |Description
 `...`     |     Any other bare named column containing meta data to attach to the links.
 
 
-## Seealso
+## See Also
 
 [`graph_nodes`](#graphnodes) to add nodes.
 

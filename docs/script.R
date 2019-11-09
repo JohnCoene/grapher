@@ -38,6 +38,7 @@ purrr::map(docs, function(x){
   )
   file <- readLines(x$output)
   file <- file[-c(1:5)]
+  file <- gsub("Seealso", "See Also", file)
   file <- c(yaml, file)
   fileConn <- file(x$output)
   writeLines(file, fileConn)
@@ -51,6 +52,6 @@ json <- jsonlite::read_json(fl)
 json_functions <- purrr::map(docs, "name") %>% 
   purrr::map(get_id) 
 
-json$docs$Reference <- json_functions
+json$docs$Docs <- json_functions
 
 jsonlite::write_json(json, path = fl, pretty = TRUE, auto_unbox = TRUE)
