@@ -7,3 +7,4 @@ srcjs
 ^index\.Rmd$
 ^data-raw$
 vignettes
+FUNDING.yml
