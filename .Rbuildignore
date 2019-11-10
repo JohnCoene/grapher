@@ -11,3 +11,4 @@ FUNDING.yml
 .gitattributes
 ^\.travis\.yml$
 ^appveyor\.yml$
+^\.circleci/config\.yml$
