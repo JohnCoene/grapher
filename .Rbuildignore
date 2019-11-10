@@ -8,3 +8,4 @@ srcjs
 ^data-raw$
 vignettes
 FUNDING.yml
+.gitattributes
