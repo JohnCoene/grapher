@@ -95,7 +95,7 @@ class Footer extends React.Component {
           </div>
         </section>
         <section className="copyright">
-        <a class="github-button" href="https://github.com/sponsors/JohnCoene" data-icon="octicon-heart" aria-label="Sponsor @JohnCoene on GitHub">Sponsor</a>
+        <a className="github-button" href="https://github.com/sponsors/JohnCoene" data-icon="octicon-heart" aria-label="Sponsor @JohnCoene on GitHub">Sponsor</a>
         <br/>
         {this.props.config.copyright}
         </section>

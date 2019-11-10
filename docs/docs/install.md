@@ -4,6 +4,9 @@ title: Installation
 sidebar_label: Installation
 ---
 
+[![Travis build status](https://travis-ci.org/JohnCoene/grapher.svg?branch=master)](https://travis-ci.org/JohnCoene/grapher)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/JohnCoene/grapher?branch=master&svg=true)](https://ci.appveyor.com/project/JohnCoene/grapher)
+
 grapher is not yet on [CRAN](https://cran.r-project.org/), it will have go through a thorough testing phase before being submitted. The code is hosted on [Github](http://github.com/JohnCoene/grapher) and can be installed using either `devtools` or `remotes`.
 
 Some functions rely on Jeroen Ooms' [V8](https://github.com/jeroen/V8) package which requires Google's V8 JavaScript engine installed, the installation instructions are available in the [README of V8](https://github.com/jeroen/V8) and below. If you do not want to install V8 skip this step but that is not recommended.

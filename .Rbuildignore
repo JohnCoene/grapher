@@ -9,3 +9,5 @@ srcjs
 vignettes
 FUNDING.yml
 .gitattributes
+^\.travis\.yml$
+^appveyor\.yml$
