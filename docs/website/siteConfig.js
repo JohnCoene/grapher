@@ -16,7 +16,7 @@ const users = [
 const siteConfig = {
   title: 'grapher', // Title for your website.
   tagline: 'Interactive Graphs',
-  url: 'https://grapher.john-coene.com', // Your website URL
+  url: 'https://grapher.network', // Your website URL
   baseUrl: '/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
