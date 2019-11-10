@@ -273,8 +273,9 @@ graph_palette <- function() {
 #' @export
 graph_palette_light <- function(){
   pal <- c(
-    "#8dcabd", "#e3b1b8", "#caecbc", "#d1bbdf", "#d6ecc6", "#9db8da", 
-    "#e0bf9d", "#8ad6e4", "#e6d2c7", "#b9d7eb", "#aac5a4", "#cdebdd", "#a2bebd"
+    "#C70E7B", "#FC6882","#007BC3","#54BCD1","#EF7C12","#F4B95A",
+    "#009F3F","#8FDA04", "#AF6125","#F4E3C7","#B25D91","#EFC7E6", 
+    "#EF7C12","#F4B95A"
   )
   structure(pal, class = c("pal", class(pal)))
 }

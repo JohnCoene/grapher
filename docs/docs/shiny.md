@@ -8,7 +8,7 @@ grapher has a number of functions to work hand in hand with [Shiny](https://shin
 
 ![](/img/features.png)
 
-In Rmarkdown there is nothing specific to note, create visualisation in code chunks as you normally would.
+In Rmarkdown there is nothing specific to note, create visualisation in code chunks as you normally would. If you want to save the visualisation you can use `save_graph_html`.
 
 A basic Shiny app with grapher might look like this.
 
