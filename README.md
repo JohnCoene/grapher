@@ -1,6 +1,7 @@
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.org/JohnCoene/grapher.svg?branch=master)](https://travis-ci.org/JohnCoene/grapher)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/JohnCoene/grapher?branch=master&svg=true)](https://ci.appveyor.com/project/JohnCoene/grapher)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9a66e9c6-dc5d-4bd6-9cda-e7eb0af3e8f7/deploy-status)](https://app.netlify.com/sites/ecstatic-mirzakhani-9fbd0e/deploys)
 <!-- badges: end -->
 
 # grapher
