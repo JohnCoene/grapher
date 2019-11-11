@@ -5,7 +5,7 @@
 
 # grapher
 
-Create 3D and 2D interactive graphs: an R integration of many of the amazing works of [Andrei Kashcha](https://github.com/anvaka). PLease visit the [website](https://grapher.network) for more details.
+Create 3D and 2D interactive graphs: an R integration of many of the amazing works of [Andrei Kashcha](https://github.com/anvaka). Please visit the [website](https://grapher.network) for more details.
 
 [![](/man/figures/cran.png)](https://shiny.john-coene.com/cran/)
 
