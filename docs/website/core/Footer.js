@@ -43,6 +43,9 @@ class Footer extends React.Component {
             <a href={this.docUrl('graph.html', this.props.language)}>
               Docs
             </a>
+            <img src="https://travis-ci.org/JohnCoene/grapher.svg?branch=master"/>
+            <br />
+            <img src="https://ci.appveyor.com/api/projects/status/0s3dodu334d5flp2?svg=true"/>
           </div>
           <div>
             <h5>Community</h5>
@@ -50,12 +53,6 @@ class Footer extends React.Component {
               Showcase
             </a>
             <a href="https://github.com/JohnCoene/grapher/issues/">Issues</a>
-            <a
-              href="https://twitter.com/jdatap"
-              target="_blank"
-              rel="noreferrer noopener">
-              Twitter
-            </a>
           </div>
           <div>
             <h5>More</h5>
@@ -95,9 +92,9 @@ class Footer extends React.Component {
           </div>
         </section>
         <section className="copyright">
-        <a className="github-button" href="https://github.com/sponsors/JohnCoene" data-icon="octicon-heart" aria-label="Sponsor @JohnCoene on GitHub">Sponsor</a>
-        <br/>
-        {this.props.config.copyright}
+          <a className="github-button" href="https://github.com/sponsors/JohnCoene" data-icon="octicon-heart" aria-label="Sponsor @JohnCoene on GitHub">Sponsor</a>
+          <br/>
+          {this.props.config.copyright}
         </section>
       </footer>
     );
