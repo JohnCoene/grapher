@@ -102,6 +102,25 @@ fl <- system.file("example/dotfile.gv", package = "grapher")
 graph(fl)
 ```
 
+## graphframe
+
+You can also initialise a graph from an object of class `graphframe` as returned by the [graphframes](https://spark.rstudio.com/graphframes/) package.
+
+```r
+library(sparklyr)
+library(graphframes)
+
+# create graphframe
+sc <- spark_connect(master = "local", version = "2.3.0")
+
+spark_links <- copy_to(sc, g$links, "links")
+spark_nodes <- copy_to(sc, g$nodes, "nodes")
+
+g <- gf_graphframe(spark_nodes, spark_links)
+
+graph(g)
+```
+
 ## Data.frame
 
 From a single data.frame, it assumes those are links.

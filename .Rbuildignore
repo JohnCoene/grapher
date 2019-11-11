@@ -12,3 +12,5 @@ FUNDING.yml
 ^\.travis\.yml$
 ^appveyor\.yml$
 ^\.circleci/config\.yml$
+^derby\.log$
+^logs$

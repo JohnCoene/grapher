@@ -236,8 +236,8 @@ graph.character <- function(data = NULL, directed = TRUE, draw = TRUE, width = "
 }
 
 #' @export
-#' @method graph graphframes
-graph.graphframes <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = NULL, elementId = NULL){
+#' @method graph graphframe
+graph.graphframe <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = NULL, elementId = NULL){
 
   links <- data %>% 
     graphframes::gf_edges() %>% 
