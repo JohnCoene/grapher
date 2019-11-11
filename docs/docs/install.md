@@ -4,8 +4,7 @@ title: Installation
 sidebar_label: Installation
 ---
 
-[![Travis build status](https://travis-ci.org/JohnCoene/grapher.svg?branch=master)](https://travis-ci.org/JohnCoene/grapher)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/JohnCoene/grapher?branch=master&svg=true)](https://ci.appveyor.com/project/JohnCoene/grapher)
+[![Travis build status](https://travis-ci.org/JohnCoene/grapher.svg?branch=master)](https://travis-ci.org/JohnCoene/grapher) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/JohnCoene/grapher?branch=master&svg=true)](https://ci.appveyor.com/project/JohnCoene/grapher)
 
 grapher is not yet on [CRAN](https://cran.r-project.org/), it will have go through a thorough testing phase before being submitted. The code is hosted on [Github](http://github.com/JohnCoene/grapher) and can be installed using either `devtools` or `remotes`.
 
@@ -37,12 +36,12 @@ If you skipped the step above set the parameter `dependencies` to `c("Depends", 
 <!--remotes-->
 ```r
 install.packages("remotes", repos = "https://cran.rstudio.com")
-remotes::install_github('JohnCoene/grapher')
+remotes::install_github('JohnCoene/grapher', dependencies = c("Depends", "Imports", "Suggests"))
 ```
 <!--devtools-->
 ```r
 install.packages("devtools", repos = "https://cran.rstudio.com")
-devtools::install_github('JohnCoene/grapher')
+devtools::install_github('JohnCoene/grapher', dependencies = c("Depends", "Imports", "Suggests"))
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
