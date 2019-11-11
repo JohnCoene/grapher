@@ -25,7 +25,8 @@ assumed to be the path to either a \code{.gexf} file or a \code{.gv}
 The thrid file type acceted is JSON, it must be the output of 
 \code{\link{save_graph_json}}. If a \code{data.frame} is passed it is assumed
 to be links where the first column indicates the source, and the second the 
-target of the links.
+target of the links. This argument can also be of class \code{graphframe} from the 
+\href{graphframes}{https://spark.rstudio.com/graphframes/} package.
 If \code{NULL} data \emph{must} be later supplied with \code{\link{graph_nodes}}
 and \code{\link{graph_links}}.}
 

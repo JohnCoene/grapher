@@ -13,7 +13,8 @@
 #' The thrid file type acceted is JSON, it must be the output of 
 #' \code{\link{save_graph_json}}. If a \code{data.frame} is passed it is assumed
 #' to be links where the first column indicates the source, and the second the 
-#' target of the links.
+#' target of the links. This argument can also be of class \code{graphframe} from the 
+#' \href{graphframes}{https://spark.rstudio.com/graphframes/} package.
 #' If \code{NULL} data \emph{must} be later supplied with \code{\link{graph_nodes}}
 #' and \code{\link{graph_links}}.
 #' @param width,height Must be a valid CSS unit (like \code{'100\%'},
@@ -234,6 +235,31 @@ graph.character <- function(data = NULL, directed = TRUE, draw = TRUE, width = "
   as_widget(x, width, height, elementId)
 }
 
+#' @export
+#' @method graph graphframes
+graph.graphframes <- function(data = NULL, directed = TRUE, draw = TRUE, width = "100%", height = NULL, elementId = NULL){
+
+  links <- data %>% 
+    graphframes::gf_edges() %>% 
+    sparklyr::collect()
+
+  nodes <- data %>% 
+    graphframes::gf_vertices() %>% 
+    sparklyr::collect()
+
+  nodes <- .prepare_graph(nodes, 1, "id")
+  links <- .prepare_graph(links, 1:2, c("source", "target"))
+
+  x = list(
+    links = links,
+    nodes = nodes,
+    directed = directed,
+    draw = draw,
+    layout = list()
+  )
+
+  as_widget(x, width, height, elementId)
+}
 
 #' Shiny bindings for graph
 #'

@@ -1,6 +1,6 @@
 Package: grapher
 Title: Interactive Graphs
-Version: 0.1.0
+Version: 0.1.1.9000
 Authors@R: person("John", "Coene", email = "jcoenep@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6637-4107"))
 Description: Interactive Graphs.
 License: MIT + file LICENSE
@@ -23,8 +23,7 @@ Imports:
     htmlwidgets
 Suggests:
     V8,
+    sparklyr,
     tidygraph,
-    knitr,
-    rmarkdown
+    graphframes
 RoxygenNote: 6.1.99.9001
-VignetteBuilder: knitr
