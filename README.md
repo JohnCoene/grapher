@@ -4,13 +4,16 @@
 
 # grapher
 
-Create 3D and 2D interactive graphs: an R integration of many of the amazing works of [Andrei Kashcha](https://github.com/anvaka). Please visit the [website](https://grapher.network) for more details.
+Create 3D interactive graphs.
 
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.org/JohnCoene/grapher.svg?branch=master)](https://travis-ci.org/JohnCoene/grapher)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/JohnCoene/grapher?branch=master&svg=true)](https://ci.appveyor.com/project/JohnCoene/grapher)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://graph.network)
 <!-- badges: end -->
+
+[Website](https://grapher.network) | [Install](https://grapher.network/docs/install) | [Get Started](https://grapher.network/docs/get-started) | [Blog](https://grapher.network/blog/)
+
 </div>
 
 ## Usage
