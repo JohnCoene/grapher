@@ -8,6 +8,13 @@ sidebar_label: Changelog
 
 - `graph` now accepts object of class `graphframes` as returned by [graphframes](https://github.com/rstudio/graphframes).
 
+## Shiny
+
+A new family of `update_*` functions to easily update graph aspects on the fly.
+
+- `update_node_size` and `update_node_color` to update a single node.
+- `update_link_source_color` and `update_link_target_color` to update a link source and target color.
+
 # 0.1.0
 
 Initial Version.

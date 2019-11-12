@@ -341,4 +341,37 @@ if (HTMLWidgets.shinyMode) {
         r.camera(g).lookAt(node_pos);
       }
   });
+
+  // Update node
+  Shiny.addCustomMessageHandler('update-node',
+    function(msg) {
+      var r = get_renderer(msg.id);
+      if (typeof r != 'undefined') {
+        var node = r.getNode(msg.node_id);
+        node[msg.var] = msg.val;
+      }
+  });
+
+  // Update link
+  Shiny.addCustomMessageHandler('update-link-source-color',
+    function(msg) {
+      var r = get_renderer(msg.id);
+      if (typeof r != 'undefined') {
+        var link_id = msg.source + '👉 ' + msg.target;
+        var link = r.getLink(link_id);
+        console.log(link);
+        link.fromColor = msg.val;
+      }
+  });
+
+  Shiny.addCustomMessageHandler('update-link-target-color',
+    function(msg) {
+      var r = get_renderer(msg.id);
+      if (typeof r != 'undefined') {
+        var link_id = msg.source + '👉 ' + msg.target;
+        var link = r.getLink(link_id);
+        console.log(link);
+        link.toColor = msg.val;
+      }
+  });
 }

@@ -29,4 +29,5 @@ graph_draw.graph <- function(g) {
 graph_draw.graph_proxy <- function(g) {
   msg <- list(id = g$id)
   g$session$sendCustomMessage("draw", msg)
+  return(g)
 }

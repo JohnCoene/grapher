@@ -31,7 +31,9 @@ define_node_color <- function(g, var) UseMethod("define_node_color")
 #' @method define_node_color graph
 define_node_color.graph <- function(g, var) {
   assert_that(has_it(var))
-  g$x$style$nodes$color <- deparse(substitute(var))
+  deparsed_var <- deparse(substitute(var))
+  g$x$nodes[[deparsed_var]] <- to_hex(g$x$nodes[[deparsed_var]])
+  g$x$style$nodes$color <- deparsed_var
   return(g)
 }
 
@@ -55,7 +57,9 @@ define_link_source_color <- function(g, var) UseMethod("define_link_source_color
 #' @method define_link_source_color graph
 define_link_source_color.graph <- function(g, var) {
   assert_that(has_it(var))
-  g$x$style$links$fromColor <- deparse(substitute(var))
+  deparsed_var <- deparse(substitute(var))
+  g$x$links[[deparsed_var]] <- to_hex(g$x$links[[deparsed_var]])
+  g$x$style$links$fromColor <- deparsed_var
   return(g)
 }
 
@@ -67,7 +71,9 @@ define_link_target_color <- function(g, var) UseMethod("define_link_target_color
 #' @method define_link_target_color graph
 define_link_target_color.graph <- function(g, var) {
   assert_that(has_it(var))
-  g$x$style$links$toColor <- deparse(substitute(var))
+  deparsed_var <- deparse(substitute(var))
+  g$x$links[[deparsed_var]] <- to_hex(g$x$links[[deparsed_var]])
+  g$x$style$links$toColor <- deparsed_var
   return(g)
 }
 
