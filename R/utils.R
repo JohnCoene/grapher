@@ -4,7 +4,8 @@ globalVariables(
     "Depends", "Imports", "LinkingTo", "Package",
     "activate", "from", "id.x", "id.y", "name", "tg_id", "to",
     "x.source", "y.source", "z.source", "x.target", "y.target", "z.target",
-    "distance", "x", "y", "z", "hidden", "fromColor", "toColor"
+    "distance", "x", "y", "z", "hidden", "fromColor", "toColor",
+    "value"
   )
 )
 

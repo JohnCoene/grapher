@@ -187,7 +187,7 @@ update_nodes_size.graph_proxy <- function(g, data, id, val, var = "size"){
 #' Update a link source, and target color.
 #' 
 #' @inheritParams graph_nodes
-#' @param source,target Source and Target ids of link to update.
+#' @param source,target Source and target ids of link to update.
 #' @param val The updated value to assign.
 #' 
 #' @examples 
@@ -259,5 +259,118 @@ update_link_target_color.graph_proxy <- function(g, source, target, val){
     val = gsub("\\#", "0x", val)
   )
   g$session$sendCustomMessage("update-link-target-color", msg)
+  return(g)
+}
+
+#' Update Links
+#' 
+#' Update multiple links source and target color.
+#' 
+#' @inheritParams graph_nodes
+#' @param source,target Source and target ids of link to update.
+#' @param val The updated value to assign.
+#' 
+#' @examples 
+#' library(shiny)
+#' 
+#' g <- make_data(200)
+#' 
+#' colors <- c("red", "green", "blue", "yellow")
+#' 
+#' ui <- fluidPage(
+#'  actionButton("update", "Update random links"),
+#'  graphOutput("g", height = "80vh")
+#' )
+#' 
+#' server <- function(input, output) {
+#'  output$g <- render_graph({
+#'    graph(g) %>% 
+#'      graph_stable_layout(ms = 2500)
+#'  })
+#' 
+#'  observeEvent(input$update, {
+#'    links_sample <- g$links %>% 
+#'      dplyr::sample_n(100) %>% 
+#'      dplyr::mutate(
+#'        source_color = sample(colors, 100, replace = TRUE),
+#'        target_color = sample(colors, 100, replace = TRUE)
+#'      )
+#' 
+#'    graph_proxy("g") %>% 
+#'      update_links_source_color(links_sample, source, target, source_color) %>% 
+#'      update_links_target_color(links_sample, source, target, target_color)
+#'  })
+#' }
+#' 
+#' if(interactive()) shinyApp(ui, server)
+#' 
+#' @name update_links
+#' @export 
+update_links_source_color <- function(g, data, source, target, val) UseMethod("update_links_source_color")
+
+#' @export 
+#' @method update_links_source_color graph_proxy
+update_links_source_color.graph_proxy <- function(g, data, source, target, val){
+  assert_that(has_it(source))
+  assert_that(has_it(target))
+  assert_that(has_it(val))
+  assert_that(has_it(data))
+  
+  source_enquo <- dplyr::enquo(source)
+  target_enquo <- dplyr::enquo(target)
+  val_enquo <- dplyr::enquo(val)
+
+  data <- data %>% 
+    dplyr::select(
+      source = !!source_enquo, 
+      target = !!target_enquo, 
+      value = !!val_enquo
+    ) %>% 
+    mutate_all(as.character) %>% 
+    mutate(
+      value = to_hex(value),
+      value = gsub("\\#", "0x", value)
+    ) %>% 
+    transpose()
+
+
+  msg <- list(id = g$id, data = data)
+
+  g$session$sendCustomMessage("update-links-source-color", msg)
+  return(g)
+}
+
+#' @rdname update_links
+#' @export 
+update_links_target_color <- function(g, data, source, target, val) UseMethod("update_links_target_color")
+
+#' @export 
+#' @method update_links_target_color graph_proxy
+update_links_target_color.graph_proxy <- function(g, data, source, target, val){
+  assert_that(has_it(source))
+  assert_that(has_it(target))
+  assert_that(has_it(val))
+  assert_that(has_it(data))
+  
+  source_enquo <- dplyr::enquo(source)
+  target_enquo <- dplyr::enquo(target)
+  val_enquo <- dplyr::enquo(val)
+
+  data <- data %>% 
+    dplyr::select(
+      source = !!source_enquo, 
+      target = !!target_enquo, 
+      value = !!val_enquo
+    ) %>% 
+    mutate_all(as.character) %>% 
+    mutate(
+      value = to_hex(value),
+      value = gsub("\\#", "0x", value)
+    ) %>% 
+    transpose()
+
+  msg <- list(id = g$id, data = data)
+
+  g$session$sendCustomMessage("update-links-target-color", msg)
   return(g)
 }

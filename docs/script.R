@@ -1,5 +1,7 @@
 library(purrr)
 
+setwd("./docs")
+
 # ------------------------------------------- REFERENCE
 # functions
 get_id <- function(x){

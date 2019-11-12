@@ -22,7 +22,7 @@ update_link_target_color(g, source, target, val)
 Argument      |Description
 ------------- |----------------
 `g`     |     An object of class `graph` as returned by [`graph`](#graph) or a `graph_proxy`  as returned by a function of the same name.
-`source, target`     |     Source and Target ids of link to update.
+`source, target`     |     Source and target ids of link to update.
 `val`     |     The updated value to assign.
 
 

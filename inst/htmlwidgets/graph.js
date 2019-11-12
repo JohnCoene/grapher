@@ -360,7 +360,7 @@ if (HTMLWidgets.shinyMode) {
         msg.data.forEach(function(row){
           var node = r.getNode(row.id);
           node[msg.var] = row.val;
-        })
+        });
       }
   });
 
@@ -371,7 +371,6 @@ if (HTMLWidgets.shinyMode) {
       if (typeof r != 'undefined') {
         var link_id = msg.source + '👉 ' + msg.target;
         var link = r.getLink(link_id);
-        console.log(link);
         link.fromColor = msg.val;
       }
   });
@@ -382,8 +381,32 @@ if (HTMLWidgets.shinyMode) {
       if (typeof r != 'undefined') {
         var link_id = msg.source + '👉 ' + msg.target;
         var link = r.getLink(link_id);
-        console.log(link);
         link.toColor = msg.val;
+      }
+  });
+
+  // Update links
+  Shiny.addCustomMessageHandler('update-links-source-color',
+    function(msg) {
+      var r = get_renderer(msg.id);
+      if (typeof r != 'undefined') {
+        msg.data.forEach(function(row){
+          var link_id = row.source + '👉 ' + row.target;
+          var link = r.getLink(link_id);
+          link.fromColor = row.value;
+        });
+      }
+  });
+
+  Shiny.addCustomMessageHandler('update-links-target-color',
+    function(msg) {
+      var r = get_renderer(msg.id);
+      if (typeof r != 'undefined') {
+        msg.data.forEach(function(row){
+          var link_id = row.source + '👉 ' + row.target;
+          var link = r.getLink(link_id);
+          link.toColor = row.value;
+        });
       }
   });
 }

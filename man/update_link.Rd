@@ -15,7 +15,7 @@ update_link_target_color(g, source, target, val)
 returned by \code{\link{graph}} or a \code{graph_proxy}
 as returned by a function of the same name.}
 
-\item{source, target}{Source and Target ids of link to update.}
+\item{source, target}{Source and target ids of link to update.}
 
 \item{val}{The updated value to assign.}
 }
