@@ -21,20 +21,20 @@ function Help(props) {
 
   const supportLinks = [
     {
+      content: "Find out what's new with this project",
+      title: 'Go to the homepage',
+    },
+    {
       content: `Learn more using the package by going through the [guide](${docUrl(
         'get-started.html',
       )}).`,
-      title: 'Browse Guide',
+      title: 'Browse the guide',
     },
     {
       content: `Learn about the many [functions](${docUrl(
         'graph.html',
       )}) that comprise grapher.`,
-      title: 'Check the Documentation',
-    },
-    {
-      content: "Find out what's new with this project",
-      title: 'Stay up to date',
+      title: 'Read the docs',
     },
   ];
 
@@ -43,9 +43,9 @@ function Help(props) {
       <Container className="mainContainer documentContainer postContainer">
         <div className="post">
           <header className="postHeader">
-            <h1>Need help?</h1>
+            <h1>Graph not found</h1>
           </header>
-          <p>Try one of the links below.</p>
+          <p>Whoops, nothing to see here.</p>
           <GridBlock contents={supportLinks} layout="threeColumn" />
         </div>
       </Container>

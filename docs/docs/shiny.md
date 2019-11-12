@@ -46,6 +46,8 @@ By default none of this data is sent back to the shiny server, you need to use o
 - `graphId_node_double_click`
 - `graphId_node_hover`
 
+Note that the reason this is not enabled by default is that it can be costly depending on the number of events triggered and the amount of data these carry, they can greatly slow down the visualisation. One should refrain from using capturing node hover on larger graphs.
+
 An example of an app that makes use of events could look like this.
 
 ```r
