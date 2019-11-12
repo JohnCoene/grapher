@@ -6,9 +6,9 @@
 \alias{update_node_color}
 \title{Update Node}
 \usage{
-update_node_size(g, id, var, val)
+update_node_size(g, id, val, var = "size")
 
-update_node_color(g, id, var, val)
+update_node_color(g, id, val, var = "color")
 }
 \arguments{
 \item{g}{An object of class \code{graph} as 
@@ -17,9 +17,9 @@ as returned by a function of the same name.}
 
 \item{id}{Id of node to update.}
 
-\item{var}{Variable name to update.}
-
 \item{val}{New value to assign to \code{var}.}
+
+\item{var}{Variable name to update.}
 }
 \description{
 Update a node's color or size, works with /code{\link{graph_proxy}}.
@@ -43,10 +43,13 @@ server <- function(input, output) {
 
  observeEvent(c(input$color, input$node), {
    graph_proxy("g") \%>\% 
-     update_node_color(input$node, "color", input$color)
+     update_node_color(input$node, input$color, "color")
  })
 }
 
 if(interactive()) shinyApp(ui, server)
 
+}
+\seealso{
+\code{\link{update_nodes}} to update multiple nodes at once.
 }

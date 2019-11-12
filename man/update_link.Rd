@@ -22,3 +22,30 @@ as returned by a function of the same name.}
 \description{
 Update a link source, and target color.
 }
+\examples{
+library(shiny)
+
+N <- 200
+g <- make_data(N)
+
+ui <- fluidPage(
+ numericInput("link", "link", 5, min = 1, max = N, step = 1L),
+ graphOutput("g", height = "80vh")
+)
+
+server <- function(input, output) {
+ output$g <- render_graph({
+   graph(g)
+ })
+
+ observeEvent(input$link, {
+   sel <- dplyr::slice(g$links, input$link)
+   graph_proxy("g") \%>\% 
+     update_link_source_color(sel$source, sel$target, "blue") \%>\% 
+     update_link_target_color(sel$source, sel$target, "red")
+ })
+}
+
+if(interactive()) shinyApp(ui, server)
+
+}

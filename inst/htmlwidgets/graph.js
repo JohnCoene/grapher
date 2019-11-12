@@ -352,6 +352,18 @@ if (HTMLWidgets.shinyMode) {
       }
   });
 
+  // Update nodes
+  Shiny.addCustomMessageHandler('update-nodes',
+    function(msg) {
+      var r = get_renderer(msg.id);
+      if (typeof r != 'undefined') {
+        msg.data.forEach(function(row){
+          var node = r.getNode(row.id);
+          node[msg.var] = row.val;
+        })
+      }
+  });
+
   // Update link
   Shiny.addCustomMessageHandler('update-link-source-color',
     function(msg) {
