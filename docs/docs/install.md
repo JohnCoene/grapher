@@ -4,7 +4,7 @@ title: Installation
 sidebar_label: Installation
 ---
 
-grapher is not yet on [CRAN](https://cran.r-project.org/), it will have go through a thorough testing phase before being submitted. The code is hosted on [Github](http://github.com/JohnCoene/grapher) and can be installed using either `devtools` or `remotes`.
+grapher is not yet on [CRAN](https://cran.r-project.org/), it will have go through a thorough testing phase before being submitted, its functions and installation are continuously tested on Linux, Mac and Windows. The code is hosted on [Github](http://github.com/JohnCoene/grapher) and can be installed using either `devtools` or `remotes`.
 
 Some functions rely on Jeroen Ooms' [V8](https://github.com/jeroen/V8) package which requires Google's V8 JavaScript engine installed, the installation instructions are available in the [README of V8](https://github.com/jeroen/V8) and below. If you do not want to install V8 skip this step but that is not recommended.
 
