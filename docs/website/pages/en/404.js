@@ -21,7 +21,7 @@ function Help(props) {
 
   const supportLinks = [
     {
-      content: "Find out what's new with this project",
+      content: `Return to the [homepage](/).`,
       title: 'Go to the homepage',
     },
     {
