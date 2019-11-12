@@ -112,6 +112,46 @@ server <- function(input, output){
 shinyApp(ui, server)
 ```
 
+## Updates
+
+Updates a subtype of "proxies" detailed above, which are rather useful. It allows you to update visual aspects of the graph on the fly. For instance, the app below provides a button that randomly changes links source and target color.
+
+```r
+library(shiny)
+library(grapher)
+
+g <- make_data(200)
+
+colors <- c("red", "green", "blue", "yellow")
+
+ui <- fluidPage(
+  actionButton("update", "Update random links"),
+  graphOutput("g", height = "80vh")
+)
+
+server <- function(input, output) {
+  output$g <- render_graph({
+    graph(g) %>% 
+      graph_stable_layout(ms = 2500)
+  })
+
+  observeEvent(input$update, {
+    links_sample <- g$links %>% 
+      dplyr::sample_n(100) %>% 
+      dplyr::mutate(
+        source_color = sample(colors, 100, replace = TRUE),
+        target_color = sample(colors, 100, replace = TRUE)
+      )
+    
+    graph_proxy("g") %>% 
+      update_links_source_color(links_sample, source, target, source_color) %>% 
+      update_links_target_color(links_sample, source, target, target_color)
+  })
+}
+
+shinyApp(ui, server)
+```
+
 ## JSON
 
 Using a JSON graph is neat trick to immensely improve rendering speed in Shiny. When you build the visualisation in R, the data is at some point converted from R to a format JavaScript can read, JSON, then the JSON is read by JavaScript to produce the visualisation. This can be a time consuming process which is fine for a one off visualisation but not for Shiny. 
