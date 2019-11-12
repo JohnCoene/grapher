@@ -11,6 +11,8 @@ jobs:
             - r-pkg-cache--
             - r-pkg-cache--
       - checkout
+      - run: Install V8
+          command: sudo apt-get install -y libv8-dev
       - run:
           name: Install package dependencies
           command: |
