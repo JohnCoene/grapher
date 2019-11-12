@@ -102,7 +102,7 @@ fl <- system.file("example/dotfile.gv", package = "grapher")
 graph(fl)
 ```
 
-## graphframe
+## Graphframe
 
 You can also initialise a graph from an object of class `graphframe` as returned by the [graphframes](https://spark.rstudio.com/graphframes/) package.
 
