@@ -69,6 +69,8 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
 #' @param dim Number of dimensions to use, passed to \code{method}.
 #' @param scaling A vector or 2 values defining the output range to
 #' rescale the coordinates, set \code{NULL} to not use any scaling.
+#' @param weights Bare column name of links weight if \code{NULL}
+#' no weight is taken into account.
 #' @param ... Any other argument to pass to \code{method}.
 #' 
 #' @examples 
@@ -82,6 +84,9 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
 #' # layout with scaling
 #' graph_static_layout(g)
 #' 
+#' # layout with weight
+#' graph_static_layout(g, method = igraph::layout_with_fr, weight = weight)
+#' 
 #' @note This function will overwrite \code{x}, \code{y}, \code{z} variables 
 #' previously passed to \code{\link{graph_nodes}}. 
 #' 
@@ -89,11 +94,13 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
 #' \code{\link{graph_live_layout}} but in R rather than in the browser.
 #' 
 #' @export 
-graph_static_layout <- function(g, method = igraph::layout_nicely, dim = 3, scaling = c(-200, 200), ...) UseMethod("graph_static_layout")
+graph_static_layout <- function(g, method = igraph::layout_nicely, dim = 3, 
+  scaling = c(-200, 200), weights = NULL, ...) UseMethod("graph_static_layout")
 
 #' @export
 #' @method graph_static_layout graph
-graph_static_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3, scaling = c(-200, 200), ...){
+graph_static_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3, 
+  scaling = c(-200, 200), weights = NULL, ...){
 
   if(!length(g$x$igraph)){
     assert_that(was_passed(g$x$links))
@@ -103,8 +110,12 @@ graph_static_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3
       igraph::graph_from_data_frame(directed = g$x$directed)
   }
 
+  w <- enquo(weights)
+  if(!rlang::quo_is_null(w))
+    weights <- pull(g$x$links, !!w)
+  
   vertices <- igraph::as_data_frame(g$x$igraph, "vertices")
-  lay_out <- method(g$x$igraph, dim = dim, ...) %>% 
+  lay_out <- method(g$x$igraph, dim = dim, weights = weights, ...) %>% 
     as.data.frame() %>% 
     bind_cols(vertices) %>% 
     purrr::set_names(c("x", "y", "z", "id"))

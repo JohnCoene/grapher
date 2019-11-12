@@ -29,32 +29,32 @@ head(g)
 #> # A tibble: 100 x 4
 #>    id    label  size color  
 #>    <chr> <chr> <dbl> <chr>  
-#>  1 1     U47      15 #ffaa0e
-#>  2 2     Y77      39 #2ca030
-#>  3 3     C3       35 #ba43b4
-#>  4 4     K37      17 #78a641
-#>  5 5     N14      33 #78a641
-#>  6 6     A27      12 #8a60b0
-#>  7 7     K37      15 #6f63bb
-#>  8 8     R44      45 #6f63bb
-#>  9 9     O41      24 #ffaa0e
-#> 10 10    L64      39 #78a641
+#>  1 1     A79      13 #12a2a8
+#>  2 2     S19      23 #ffbf50
+#>  3 3     A79      39 #8a60b0
+#>  4 4     I61      28 #6f63bb
+#>  5 5     D30      17 #2ca030
+#>  6 6     D82      13 #ff7f0e
+#>  7 7     W75      15 #c7519c
+#>  8 8     K63      22 #2ca030
+#>  9 9     W75      40 #bcbd22
+#> 10 10    I61      15 #c7519c
 #> # … with 90 more rows
 #> 
 #> $links
-#> # A tibble: 100 x 3
-#>    source target hidden
-#>    <chr>  <chr>  <lgl> 
-#>  1 1      41     FALSE 
-#>  2 2      63     FALSE 
-#>  3 3      55     FALSE 
-#>  4 4      15     FALSE 
-#>  5 5      8      FALSE 
-#>  6 6      95     FALSE 
-#>  7 7      33     FALSE 
-#>  8 8      33     FALSE 
-#>  9 9      27     FALSE 
-#> 10 10     18     FALSE 
+#> # A tibble: 100 x 4
+#>    source target weight hidden
+#>    <chr>  <chr>   <dbl> <lgl> 
+#>  1 1      85       6.68 FALSE 
+#>  2 2      69       6.48 FALSE 
+#>  3 3      22       4.03 FALSE 
+#>  4 4      93       2.55 FALSE 
+#>  5 5      89       6.42 FALSE 
+#>  6 6      51       4.51 FALSE 
+#>  7 7      54       6.68 FALSE 
+#>  8 8      93       3.60 FALSE 
+#>  9 9      54       4.98 FALSE 
+#> 10 10     42       8.22 FALSE 
 #> # … with 90 more rows
 ```
 

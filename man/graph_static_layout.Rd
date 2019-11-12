@@ -9,6 +9,7 @@ graph_static_layout(
   method = igraph::layout_nicely,
   dim = 3,
   scaling = c(-200, 200),
+  weights = NULL,
   ...
 )
 }
@@ -23,6 +24,9 @@ as returned by a function of the same name.}
 
 \item{scaling}{A vector or 2 values defining the output range to
 rescale the coordinates, set \code{NULL} to not use any scaling.}
+
+\item{weights}{Bare column name of links weight if \code{NULL}
+no weight is taken into account.}
 
 \item{...}{Any other argument to pass to \code{method}.}
 }
@@ -44,6 +48,9 @@ graph_static_layout(g, scaling = NULL)
 
 # layout with scaling
 graph_static_layout(g)
+
+# layout with weight
+graph_static_layout(g, method = igraph::layout_with_fr, weight = weight)
 
 }
 \seealso{

@@ -44,6 +44,7 @@ make_links <- function(nodes) {
 	dplyr::tibble(
 		source = ids,
 		target = sample(ids, length(ids), replace = TRUE),
+    weight = runif(length(ids), 1, 10),
     hidden = FALSE
 	)
 }

@@ -8,6 +8,7 @@ graph_cluster(
   g,
   method = igraph::cluster_walktrap,
   quiet = !interactive(),
+  weights = NULL,
   ...
 )
 }
@@ -21,8 +22,11 @@ as returned by a function of the same name.}
 \item{quiet}{Set to \code{TRUE} to \emph{not print} number 
 of clusters in the console.}
 
-\item{...}{Any other bare named column containing 
-meta data to attach to the nodes.}
+\item{weights}{Bare column name of links weight if \code{NULL}
+no weight is taken into account.}
+
+\item{...}{Other arguments passed to function specified as 
+\code{method} argument.}
 }
 \description{
 Cluster nodes on the graph. This ultimately adds a \code{cluster}
@@ -33,6 +37,6 @@ e.g.: \code{\link{scale_node_color}}.
 graph_data <- make_data(200)
 
 graph(graph_data) \%>\% 
-  graph_cluster() 
+  graph_cluster(weights = weight) 
 
 }

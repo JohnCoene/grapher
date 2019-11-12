@@ -7,6 +7,7 @@ sidebar_label: Changelog
 # 0.1.1.9000
 
 - `graph` now accepts object of class `graphframes` as returned by [graphframes](https://github.com/rstudio/graphframes).
+- `graph_cluster` and `graph_static_layout` now accept a `weights` argument.
 
 ## Shiny
 
