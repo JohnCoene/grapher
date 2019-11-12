@@ -14,3 +14,4 @@ FUNDING.yml
 ^\.circleci/config\.yml$
 ^derby\.log$
 ^logs$
+README.md
