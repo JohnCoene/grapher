@@ -49,7 +49,10 @@
       "save_graph",
       "scale_link_color",
       "scale_node_color",
-      "scale_node_size"
+      "scale_node_size",
+      "update_link",
+      "update_node",
+      "update_nodes"
     ]
   }
 }

@@ -28,7 +28,7 @@ graph(g) %>%
   graph_live_layout(gravity = -3)
 ```
 
-Since the above is draining on the browser you can stabilise the network after some time by using `graph_stable_layout` and specifying the number of milliseconds before the layout algorithm is stopped.
+Since the above is draining on the browser you can stabilise the network after some time by using `graph_stable_layout` and specifying the number of milliseconds before the layout algorithm is stopped. 
 
 ```r
 graph(g) %>% 
@@ -38,7 +38,7 @@ graph(g) %>%
 
 ## Static
 
-By default grapher will use the `igraph::layout_nicely` function to compute the position of nodes but you can specify any other as `method` argument.
+By default grapher will use the `igraph::layout_nicely` function to compute the position of nodes but you can specify any other as `method` argument. The function also optionally takes a `weights` argument to specify links weights to take into account.
 
 ```r
 graph(g) %>% 

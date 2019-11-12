@@ -27,6 +27,14 @@ graph(g) %>%
   scale_node_color(cluster)
 ```
 
+You may also specify a `weights` argument in the event you want the clustering algorithm to take those into account.
+
+```r
+graph(g) %>% 
+  graph_cluster(weights = weight) %>% 
+  scale_node_color(cluster)
+```
+
 Just to reiterate, you can compute those outside of the grapher pipe, using [tidygraph](https://github.com/thomasp85/tidygraph).
 
 ```r

@@ -18,6 +18,7 @@ graph_static_layout(
   method = igraph::layout_nicely,
   dim = 3,
   scaling = c(-200, 200),
+  weights = NULL,
   ...
 )
 ```
@@ -31,6 +32,7 @@ Argument      |Description
 `method`     |     The igraph function to compute node positions.
 `dim`     |     Number of dimensions to use, passed to `method` .
 `scaling`     |     A vector or 2 values defining the output range to rescale the coordinates, set `NULL` to not use any scaling.
+`weights`     |     Bare column name of links weight if `NULL`  no weight is taken into account.
 `...`     |     Any other argument to pass to `method` .
 
 
@@ -58,6 +60,9 @@ graph_static_layout(g, scaling = NULL)
 
 # layout with scaling
 graph_static_layout(g)
+
+# layout with weight
+graph_static_layout(g, method = igraph::layout_with_fr, weight = weight)
 ```
 
 

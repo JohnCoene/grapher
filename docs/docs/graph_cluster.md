@@ -18,6 +18,7 @@ graph_cluster(
   g,
   method = igraph::cluster_walktrap,
   quiet = !interactive(),
+  weights = NULL,
   ...
 )
 ```
@@ -30,7 +31,8 @@ Argument      |Description
 `g`     |     An object of class `graph` as returned by [`graph`](#graph) or a `graph_proxy`  as returned by a function of the same name.
 `method`     |     The igraph function to create the cluster.
 `quiet`     |     Set to `TRUE` to not print number of clusters in the console.
-`...`     |     Any other bare named column containing meta data to attach to the nodes.
+`weights`     |     Bare column name of links weight if `NULL`  no weight is taken into account.
+`...`     |     Other arguments passed to function specified as `method` argument.
 
 
 ## Examples
@@ -39,7 +41,7 @@ Argument      |Description
 graph_data <- make_data(200)
 
 graph(graph_data) %>%
-graph_cluster()
+graph_cluster(weights = weight)
 ```
 
 
