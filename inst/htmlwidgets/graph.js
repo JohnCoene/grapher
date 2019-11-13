@@ -113,8 +113,11 @@ HTMLWidgets.widget({
         }
 
         // background 
-        renderer.clearColor('0x' + layout.clearColor.substr(1));
-        renderer.clearAlpha(x.clearAlpha);
+        if(layout.clearColor)
+          renderer.clearColor('0x' + layout.clearColor.substr(1));
+        
+        if(layout.clearAlpha)
+          renderer.clearAlpha(x.clearAlpha);
 
         if(x.camera){
           if(x.camera.x)

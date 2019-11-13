@@ -125,9 +125,12 @@ graph_static_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3
 
   if(!is.null(scaling)){
     dom <- .get_domain(lay_out)
-    lay_out$x <- scales::rescale(lay_out$x, to = scaling, from = dom)
-    lay_out$y <- scales::rescale(lay_out$y, to = scaling, from = dom)
-    lay_out$z <- scales::rescale(lay_out$z, to = scaling, from = dom)
+    lay_out$x <- scales::rescale(lay_out$x, to = scaling, from = dom) %>% 
+      round(2)
+    lay_out$y <- scales::rescale(lay_out$y, to = scaling, from = dom) %>% 
+      round(2)
+    lay_out$z <- scales::rescale(lay_out$z, to = scaling, from = dom) %>% 
+      round(2)
   }
 
   if(length(g$x$nodes))
@@ -622,20 +625,12 @@ rescale_layout.graph <- function(g, scale = c(-1000, 1000)){
 
   dom <- .get_domain(g$x$nodes)
 
-  g$x$nodes$x <- scales::rescale(g$x$nodes$x, to = scale, from = dom)
-  g$x$nodes$y <- scales::rescale(g$x$nodes$y, to = scale, from = dom)
-  g$x$nodes$z <- scales::rescale(g$x$nodes$z, to = scale, from = dom)
+  g$x$nodes$x <- scales::rescale(g$x$nodes$x, to = scale, from = dom) %>% 
+    round(2)
+  g$x$nodes$y <- scales::rescale(g$x$nodes$y, to = scale, from = dom) %>% 
+    round(2)
+  g$x$nodes$z <- scales::rescale(g$x$nodes$z, to = scale, from = dom) %>% 
+    round(2)
 
   return(g)
-}
-
-.get_domain <- function(nodes){
-  rngx <- range(nodes$x)
-  rngy <- range(nodes$y)
-  rngz <- range(nodes$z)
-
-  mn <- min(rngx[1], rngy[1], rngz[1])
-  mx <- max(rngx[2], rngy[2], rngz[2])
-
-  c(mn, mx)
 }

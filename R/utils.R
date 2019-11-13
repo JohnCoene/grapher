@@ -53,3 +53,14 @@ scale_rgb <- function(x, y, z, r, g, b) {
   z <- scales::rescale(z, to = b)
   rgb(x, y, z)
 }
+
+.get_domain <- function(nodes){
+  rngx <- range(nodes$x)
+  rngy <- range(nodes$y)
+  rngz <- range(nodes$z)
+
+  mn <- min(rngx[1], rngy[1], rngz[1])
+  mx <- max(rngx[2], rngy[2], rngz[2])
+
+  c(mn, mx)
+}
