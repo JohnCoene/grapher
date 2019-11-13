@@ -33,10 +33,10 @@ Builds the CRAN dependency graph.
 g <- cran_deps_graph(500, format = "igraph")
 min_g <- igraph::mst(g)
 
-min_g \%>\% 
-  graph() \%>\% 
-  graph_cluster() \%>\% 
-  scale_link_color(cluster) \%>\% 
+min_g %>% 
+  graph() %>% 
+  graph_cluster() %>% 
+  scale_link_color(cluster) %>% 
   scale_node_size(degree, c(20, 100))
 }
 
