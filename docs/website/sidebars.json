@@ -46,6 +46,7 @@
       "pipe",
       "remove_coordinates",
       "remove",
+      "rescale_layout",
       "save_graph",
       "scale_link_color",
       "scale_node_color",

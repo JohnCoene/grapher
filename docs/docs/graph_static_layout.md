@@ -31,7 +31,7 @@ Argument      |Description
 `g`     |     An object of class `graph` as returned by [`graph`](#graph) or a `graph_proxy`  as returned by a function of the same name.
 `method`     |     The igraph function to compute node positions.
 `dim`     |     Number of dimensions to use, passed to `method` .
-`scaling`     |     A vector or 2 values defining the output range to rescale the coordinates, set `NULL` to not use any scaling.
+`scaling`     |     A vector or 2 values defining the output range to rescale the coordinates, set `NULL` to not use any scaling. The layout can also be later rescaled with [`rescale_layout`](#rescalelayout) .
 `weights`     |     Bare column name of links weight if `NULL`  no weight is taken into account.
 `...`     |     Any other argument to pass to `method` .
 
@@ -40,6 +40,8 @@ Argument      |Description
 
 [`graph_offline_layout`](#graphofflinelayout) to compute the same layout as
  [`graph_live_layout`](#graphlivelayout) but in R rather than in the browser.
+ [`rescale_layout`](#rescalelayout) to rescale the layout, similar to `scaling` 
+ argument.
 
 
 ## Note

@@ -23,7 +23,8 @@ as returned by a function of the same name.}
 \item{dim}{Number of dimensions to use, passed to \code{method}.}
 
 \item{scaling}{A vector or 2 values defining the output range to
-rescale the coordinates, set \code{NULL} to not use any scaling.}
+rescale the coordinates, set \code{NULL} to not use any scaling.
+The layout can also be later rescaled with \code{\link{rescale_layout}}.}
 
 \item{weights}{Bare column name of links weight if \code{NULL}
 no weight is taken into account.}
@@ -55,5 +56,7 @@ graph_static_layout(g, method = igraph::layout_with_fr, weight = weight)
 }
 \seealso{
 \code{\link{graph_offline_layout}} to compute the same layout as
-\code{\link{graph_live_layout}} but in R rather than in the browser.
+\code{\link{graph_live_layout}} but in R rather than in the browser. 
+\code{\link{rescale_layout}} to rescale the layout, similar to \code{scaling}
+argument.
 }

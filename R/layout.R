@@ -69,6 +69,7 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
 #' @param dim Number of dimensions to use, passed to \code{method}.
 #' @param scaling A vector or 2 values defining the output range to
 #' rescale the coordinates, set \code{NULL} to not use any scaling.
+#' The layout can also be later rescaled with \code{\link{rescale_layout}}.
 #' @param weights Bare column name of links weight if \code{NULL}
 #' no weight is taken into account.
 #' @param ... Any other argument to pass to \code{method}.
@@ -91,7 +92,9 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
 #' previously passed to \code{\link{graph_nodes}}. 
 #' 
 #' @seealso \code{\link{graph_offline_layout}} to compute the same layout as
-#' \code{\link{graph_live_layout}} but in R rather than in the browser.
+#' \code{\link{graph_live_layout}} but in R rather than in the browser. 
+#' \code{\link{rescale_layout}} to rescale the layout, similar to \code{scaling}
+#' argument.
 #' 
 #' @export 
 graph_static_layout <- function(g, method = igraph::layout_nicely, dim = 3, 
@@ -121,9 +124,10 @@ graph_static_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3
     purrr::set_names(c("x", "y", "z", "id"))
 
   if(!is.null(scaling)){
-    lay_out$x <- scales::rescale(lay_out$x, to = scaling)
-    lay_out$y <- scales::rescale(lay_out$y, to = scaling)
-    lay_out$z <- scales::rescale(lay_out$z, to = scaling)
+    dom <- .get_domain(lay_out)
+    lay_out$x <- scales::rescale(lay_out$x, to = scaling, from = dom)
+    lay_out$y <- scales::rescale(lay_out$y, to = scaling, from = dom)
+    lay_out$z <- scales::rescale(lay_out$z, to = scaling, from = dom)
   }
 
   if(length(g$x$nodes))
@@ -591,4 +595,47 @@ graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, spin
 
   return(g)
   
+}
+
+#' Rescale Layout
+#' 
+#' Rescale the coordinates of the layout.
+#' 
+#' @inheritParams graph_live_layout
+#' @param scale A vector or 2 values defining the output range to
+#' rescale the coordinates.
+#' 
+#' @examples 
+#' g <- make_data()
+#' 
+#' graph(g) %>% 
+#'   graph_static_layout(scaling = NULL) %>% 
+#'   rescale_layout()
+#' 
+#' @export
+rescale_layout <- function(g, scale = c(-1000, 1000)) UseMethod("rescale_layout")
+
+#' @export
+#' @method rescale_layout graph
+rescale_layout.graph <- function(g, scale = c(-1000, 1000)){
+  assert_that(has_coords(g$x$nodes))
+
+  dom <- .get_domain(g$x$nodes)
+
+  g$x$nodes$x <- scales::rescale(g$x$nodes$x, to = scale, from = dom)
+  g$x$nodes$y <- scales::rescale(g$x$nodes$y, to = scale, from = dom)
+  g$x$nodes$z <- scales::rescale(g$x$nodes$z, to = scale, from = dom)
+
+  return(g)
+}
+
+.get_domain <- function(nodes){
+  rngx <- range(nodes$x)
+  rngy <- range(nodes$y)
+  rngz <- range(nodes$z)
+
+  mn <- min(rngx[1], rngy[1], rngz[1])
+  mx <- max(rngx[2], rngy[2], rngz[2])
+
+  c(mn, mx)
 }
