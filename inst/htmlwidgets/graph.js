@@ -35,8 +35,6 @@ HTMLWidgets.widget({
           g = from_json(x.data);
         
         layout = x.layout;
-        layout.clearColor = '0x' + layout.clearColor.substr(1);
-        layout.clearAlpha = x.clearAlpha;
 
         layout.container = document.getElementById(el.id);
 
@@ -113,6 +111,10 @@ HTMLWidgets.widget({
             renderer.stable(true)
           }, x.stable)
         }
+
+        // background 
+        renderer.clearColor('0x' + layout.clearColor.substr(1));
+        renderer.clearAlpha(x.clearAlpha);
 
         if(x.camera){
           if(x.camera.x)
