@@ -414,4 +414,13 @@ if (HTMLWidgets.shinyMode) {
         });
       }
   });
+
+  Shiny.addCustomMessageHandler('retrieve-node',
+    function(msg) {
+      var r = get_graph(msg.id);
+      if (typeof r != 'undefined') {
+        var node = r.getNode(msg.node_id);
+        Shiny.setInputValue(msg.id + '_retrieve_node' + ":grapherParser", node);
+      }
+  });
 }
