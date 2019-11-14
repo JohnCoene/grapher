@@ -423,4 +423,14 @@ if (HTMLWidgets.shinyMode) {
         Shiny.setInputValue(msg.id + '_retrieve_node' + ":grapherParser", node);
       }
   });
+
+  Shiny.addCustomMessageHandler('retrieve-link',
+    function(msg) {
+      var r = get_graph(msg.id);
+      if (typeof r != 'undefined') {
+        var link_id = msg.source + '👉 ' + msg.target;
+        var link = r.getLink(link_id);
+        Shiny.setInputValue(msg.id + '_retrieve_node' + ":grapherParser", link);
+      }
+  });
 }
