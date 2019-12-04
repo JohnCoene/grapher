@@ -39,6 +39,11 @@ const siteConfig = {
     {href: 'https://github.com/JohnCoene/grapher', label: 'Github'},
   ],
 
+  algolia: {
+    apiKey: '907fdb2ead0e9f0226cb44c57b3bb3f7',
+    indexName: 'johncoene_grapher'
+  },
+
   // If you have users set above, you add it here:
   users,
 
