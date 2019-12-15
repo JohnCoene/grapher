@@ -6,7 +6,7 @@ sidebar_label: Link Distance
 
 ## Description
 
-Hide links over a certain length, based on computations by `graph_static_layout` .
+Hide links over a certain length, based on computations by `graph_layout_static` .
  Nodes will actually be hidden in resulting visualisation but not removed.
 
 
@@ -41,7 +41,7 @@ This is the technique used by [https://github.com/anvaka](Andrei Kashcha) ,
 gdata <- make_data(500)
 
 g <- graph(gdata) %>%
-graph_static_layout(scaling = c(-1000, 1000)) %>%
+graph_layout_static(scaling = c(-1000, 1000)) %>%
 graph_cluster() %>%
 scale_link_color(cluster)
 

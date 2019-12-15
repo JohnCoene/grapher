@@ -43,7 +43,7 @@ scale_link_color(cluster)
 
 # color by coordinates
 graph(g) %>%
-graph_offline_layout() %>%
+graph_layout_offline() %>%
 scale_link_color_coords()
 ```
 

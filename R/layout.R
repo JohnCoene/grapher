@@ -33,8 +33,9 @@
 #' data <- make_data(20)
 #' 
 #' graph(data) %>% 
-#'  graph_live_layout(time_step = 5L)
+#'  graph_layout_live(time_step = 5L)
 #' 
+#' @name graph_layout_live
 #' @export 
 graph_live_layout <- function(g, spring_length = 30L, sping_coeff = .0008,
   gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE) UseMethod("graph_live_layout")
@@ -42,6 +43,33 @@ graph_live_layout <- function(g, spring_length = 30L, sping_coeff = .0008,
 #' @export 
 #' @method graph_live_layout graph
 graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
+  gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE) {
+
+  .Deprecated("graph_layout_live", package = "grapher")
+  
+  physics <- list(
+    springLength = spring_length,
+    springCoeff = sping_coeff,
+    gravity = gravity,
+    theta = theta,
+    dragCoeff = drag_coeff,
+    timeStep = time_step,
+    is3d = is_3d
+  ) 
+
+  g$x$layout$physics <- physics
+
+  return(g)
+}
+
+#' @rdname graph_layout_live
+#' @export 
+graph_layout_live <- function(g, spring_length = 30L, sping_coeff = .0008,
+  gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE) UseMethod("graph_layout_live")
+
+#' @export 
+#' @method graph_layout_live graph
+graph_layout_live.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
   gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE) {
   
   physics <- list(
@@ -80,22 +108,23 @@ graph_live_layout.graph <- function(g, spring_length = 30L, sping_coeff = .0008,
 #' g <- graph(graph_data)
 #' 
 #' # layout without scaling
-#' graph_static_layout(g, scaling = NULL)
+#' graph_layout_static(g, scaling = NULL)
 #' 
 #' # layout with scaling
-#' graph_static_layout(g)
+#' graph_layout_static(g)
 #' 
 #' # layout with weight
-#' graph_static_layout(g, method = igraph::layout_with_fr, weight = weight)
+#' graph_layout_static(g, method = igraph::layout_with_fr, weight = weight)
 #' 
 #' @note This function will overwrite \code{x}, \code{y}, \code{z} variables 
 #' previously passed to \code{\link{graph_nodes}}. 
 #' 
-#' @seealso \code{\link{graph_offline_layout}} to compute the same layout as
-#' \code{\link{graph_live_layout}} but in R rather than in the browser. 
+#' @seealso \code{\link{graph_layout_offline}} to compute the same layout as
+#' \code{\link{graph_layout_live}} but in R rather than in the browser. 
 #' \code{\link{rescale_layout}} to rescale the layout, similar to \code{scaling}
 #' argument.
 #' 
+#' @name graph_layout_static
 #' @export 
 graph_static_layout <- function(g, method = igraph::layout_nicely, dim = 3, 
   scaling = c(-200, 200), weights = NULL, ...) UseMethod("graph_static_layout")
@@ -103,6 +132,54 @@ graph_static_layout <- function(g, method = igraph::layout_nicely, dim = 3,
 #' @export
 #' @method graph_static_layout graph
 graph_static_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3, 
+  scaling = c(-200, 200), weights = NULL, ...){
+
+  .Deprecated("graph_layout_static", package = "grapher")
+
+  if(!length(g$x$igraph)){
+    assert_that(was_passed(g$x$links))
+
+    g$x$igraph <- g$x$links %>% 
+      select(source, target) %>% 
+      igraph::graph_from_data_frame(directed = g$x$directed)
+  }
+
+  w <- enquo(weights)
+  if(!rlang::quo_is_null(w))
+    weights <- pull(g$x$links, !!w)
+  
+  vertices <- igraph::as_data_frame(g$x$igraph, "vertices")
+  lay_out <- method(g$x$igraph, dim = dim, weights = weights, ...) %>% 
+    as.data.frame() %>% 
+    bind_cols(vertices) %>% 
+    purrr::set_names(c("x", "y", "z", "id"))
+
+  if(!is.null(scaling)){
+    dom <- .get_domain(lay_out)
+    lay_out$x <- scales::rescale(lay_out$x, to = scaling, from = dom) %>% 
+      round(2)
+    lay_out$y <- scales::rescale(lay_out$y, to = scaling, from = dom) %>% 
+      round(2)
+    lay_out$z <- scales::rescale(lay_out$z, to = scaling, from = dom) %>% 
+      round(2)
+  }
+
+  if(length(g$x$nodes))
+    lay_out <- left_join(g$x$nodes, lay_out, by = "id")
+  
+  g$x$nodes <- lay_out
+
+  return(g)
+}
+
+#' @rdname graph_layout_static
+#' @export 
+graph_layout_static <- function(g, method = igraph::layout_nicely, dim = 3, 
+  scaling = c(-200, 200), weights = NULL, ...) UseMethod("graph_layout_static")
+
+#' @export
+#' @method graph_layout_static graph
+graph_layout_static.graph <- function(g, method = igraph::layout_nicely, dim = 3, 
   scaling = c(-200, 200), weights = NULL, ...){
 
   if(!length(g$x$igraph)){
@@ -144,22 +221,55 @@ graph_static_layout.graph <- function(g, method = igraph::layout_nicely, dim = 3
 #' Offline Layout From File
 #' 
 #' Add layout computed offline via nodejs. 
-#' Note that \code{\link{graph_offline_layout}} uses the same algorithm.
+#' Note that \code{\link{graph_layout_offline}} uses the same algorithm.
 #' 
 #' @inheritParams graph_nodes
 #' @param positions Path to binary positions file as computed
 #' by \href{ngraph.offline.layout}{https://github.com/anvaka/ngraph.offline.layout},
 #' generally \code{positions.bin}.
 #' 
-#' @seealso \code{\link{graph_offline_layout}} to run the same algorithm without 
+#' @seealso \code{\link{graph_layout_offline}} to run the same algorithm without 
 #' having to export the graph and use nodejs.
 #' 
+#' @name graph_layout_bin
 #' @export 
 graph_bin_layout <- function(g, positions) UseMethod("graph_bin_layout")
 
 #' @export 
 #' @method graph_bin_layout graph
 graph_bin_layout.graph <- function(g, positions){
+  assert_that(has_it(positions))
+  assert_that(was_passed(g$x$nodes))
+
+  .Deprecated("graph_layout_bin", package = "grapher")
+
+  # maximum should be n node * x/y/z 
+  MAX <- nrow(g$x$nodes) * 3
+
+  to_read = file(positions, "rb")
+  endian <- readBin(to_read, integer(), n = MAX, endian = "little")
+  close(to_read)
+  m <- matrix(endian, ncol = 3) %>% 
+    as.data.frame() %>% 
+    set_names(c("x", "y", "z")) %>% 
+    transpose()
+
+  g$x$offline_nodes <- m
+
+  # force data to be passed for coordinates to work JS side
+  if(ncol(g$x$nodes) == 1)
+    g$x$nodes$RANDOM <- 0L
+
+  return(g)
+}
+
+#' @name graph_layout_bin
+#' @export 
+graph_layout_bin <- function(g, positions) UseMethod("graph_layout_bin")
+
+#' @export 
+#' @method graph_layout_bin graph
+graph_layout_bin.graph <- function(g, positions){
   assert_that(has_it(positions))
   assert_that(was_passed(g$x$nodes))
 
@@ -211,7 +321,7 @@ graph_bin_layout.graph <- function(g, positions){
 #'   output$graph <- renderGraph({
 #'     graph_data %>% 
 #'       graph() %>% 
-#'       graph_live_layout(time_step = 5)
+#'       graph_layout_live(time_step = 5)
 #'   })
 #' 
 #'   observeEvent(input$pin, {
@@ -288,7 +398,7 @@ pin_node.graph_proxy <- function(g, id){
 #'   output$graph <- renderGraph({
 #'     graph_data %>% 
 #'       graph() %>% 
-#'       graph_live_layout(time_step = 5)
+#'       graph_layout_live(time_step = 5)
 #'   })
 #' 
 #'   observeEvent(input$dims, {
@@ -333,7 +443,7 @@ change_dimensions.graph_proxy <- function(g, is_3d = FALSE){
 #' gdata <- make_data(100)
 #' 
 #' graph(gdata) %>%
-#'  graph_stable_layout(ms = 5000)
+#'  graph_layout_stable(ms = 5000)
 #'  
 #' # as proxy
 #' library(shiny)
@@ -348,7 +458,7 @@ change_dimensions.graph_proxy <- function(g, is_3d = FALSE){
 #' server <- function(input, output){
 #'   output$g <- renderGraph({
 #'     graph(graph_data) %>% 
-#'       graph_live_layout(time_step = 1)
+#'       graph_layout_live(time_step = 1)
 #'   })
 #' 
 #'   gp <- graph_proxy("g")
@@ -360,12 +470,14 @@ change_dimensions.graph_proxy <- function(g, is_3d = FALSE){
 #' 
 #' \dontrun{shinyApp(ui, server)}
 #' 
+#' @name graph_layout_stable
 #' @export 
 graph_stable_layout <- function(g, stable = TRUE, ms = 0L) UseMethod("graph_stable_layout")
 
 #' @export
 #' @method graph_stable_layout graph
 graph_stable_layout.graph <- function(g, stable = TRUE, ms = 0L){
+  .Deprecated("graph_layout_stable", package = "grapher")
   g$x$stable <- ms
   return(g)
 }
@@ -373,6 +485,26 @@ graph_stable_layout.graph <- function(g, stable = TRUE, ms = 0L){
 #' @export
 #' @method graph_stable_layout graph_proxy
 graph_stable_layout.graph_proxy <- function(g, stable = TRUE, ms = 0L){
+  .Deprecated("graph_layout_stable", package = "grapher")
+  msg <- list(id = g$id, stable = stable, ms = ms)
+  g$session$sendCustomMessage("stable", msg)
+  return(g)
+}
+
+#' @rdname graph_layout_stable
+#' @export 
+graph_layout_stable <- function(g, stable = TRUE, ms = 0L) UseMethod("graph_layout_stable")
+
+#' @export
+#' @method graph_layout_stable graph
+graph_layout_stable.graph <- function(g, stable = TRUE, ms = 0L){
+  g$x$stable <- ms
+  return(g)
+}
+
+#' @export
+#' @method graph_layout_stable graph_proxy
+graph_layout_stable.graph_proxy <- function(g, stable = TRUE, ms = 0L){
   msg <- list(id = g$id, stable = stable, ms = ms)
   g$session$sendCustomMessage("stable", msg)
   return(g)
@@ -380,7 +512,7 @@ graph_stable_layout.graph_proxy <- function(g, stable = TRUE, ms = 0L){
 
 #' Hide Links
 #' 
-#' Hide links over a certain length, based on computations by \code{graph_static_layout}.
+#' Hide links over a certain length, based on computations by \code{graph_layout_static}.
 #' Nodes will actually be hidden in resulting visualisation but not removed.
 #' 
 #' @details This is the technique used by \href{Andrei Kashcha}{https://github.com/anvaka},
@@ -396,7 +528,7 @@ graph_stable_layout.graph_proxy <- function(g, stable = TRUE, ms = 0L){
 #' gdata <- make_data(500)
 #' 
 #' g <- graph(gdata) %>%
-#'   graph_static_layout(scaling = c(-1000, 1000)) %>% 
+#'   graph_layout_static(scaling = c(-1000, 1000)) %>% 
 #'   graph_cluster() %>% 
 #'   scale_link_color(cluster) 
 #' 
@@ -466,9 +598,9 @@ compute_links_length <- function(g){
 #' Remove Coordinates
 #' 
 #' Removes coordinates (\code{x}, \code{y}, and \code{z}) from the 
-#' graph. This is useful if you have used the \code{graph_static_layout}
+#' graph. This is useful if you have used the \code{graph_layout_static}
 #' to then \code{hide_long_links} but nonetheless want to use the default 
-#' force layout (\code{graph_live_layout}). 
+#' force layout (\code{graph_layout_live}). 
 #' 
 #' @inheritParams graph_nodes
 #' 
@@ -476,7 +608,7 @@ compute_links_length <- function(g){
 #' gdata <- make_data(500)
 #' 
 #' graph(gdata) %>%
-#'   graph_static_layout() %>% 
+#'   graph_layout_static() %>% 
 #'   hide_long_links(20) %>% # hide links
 #'   remove_coordinates() 
 #' 
@@ -501,10 +633,10 @@ remove_coordinates.graph <- function(g){
 
 #' Offline Layout
 #' 
-#' Compute the force layout (same as \code{\link{graph_live_layout}})
+#' Compute the force layout (same as \code{\link{graph_layout_live}})
 #' but before rendering in the browser.
 #' 
-#' @inheritParams graph_live_layout
+#' @inheritParams graph_layout_live
 #' @param steps Number of steps to run the layout algorithm.
 #' @param quiet Set to \code{FALSE} to print helpful messages 
 #' and progress bar to track computation steps, defaults to \link[base]{interactive}.
@@ -522,10 +654,11 @@ remove_coordinates.graph <- function(g){
 #' 
 #' gdata %>% 
 #'  graph() %>%
-#'  graph_offline_layout(steps = 100) 
+#'  graph_layout_offline(steps = 100) 
 #' 
-#' @seealso \code{\link{graph_static_layout}} for other "offline" layout methods. 
+#' @seealso \code{\link{graph_layout_static}} for other "offline" layout methods. 
 #' 
+#' @name graph_layout_offline
 #' @export
 graph_offline_layout <- function(g, steps = 500, spring_length = 30L, sping_coeff = .0008,
   gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE,
@@ -534,6 +667,83 @@ graph_offline_layout <- function(g, steps = 500, spring_length = 30L, sping_coef
 #' @export
 #' @method graph_offline_layout graph
 graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, sping_coeff = .0008,
+  gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE, 
+  verlet_integration = FALSE, quiet = !interactive()){
+
+  .Deprecated("graph_layout_offline", package = "grapher")
+
+  if(verlet_integration)
+    verlet_integration <- "verlet"
+
+  physics <- list(
+    springLength = spring_length,
+    springCoeff = sping_coeff,
+    gravity = gravity,
+    theta = theta,
+    dragCoeff = drag_coeff,
+    timeStep = time_step,
+    is3d = is_3d,
+    integrator = verlet_integration
+  ) %>% 
+    discard(is.null)
+
+  # initialise V8
+  ctx <- V8::new_context()
+
+  # source dependencies
+  invisible(ctx$source(system.file("offline-layout/layout.js", package = "grapher")))
+  ctx$source(system.file("htmlwidgets/lib/ngraph/ngraph.graph.min.js", package = "grapher"))
+  invisible(ctx$source(system.file("htmlwidgets/lib/fromjson/ngraph.fromjson.js", package = "grapher")))
+  
+  # create graph and settings
+  if(!quiet){
+    pb <- progress::progress_bar$new(
+      format = " Computing coordinates [:bar] :percent eta: :eta",
+      total = steps, clear = FALSE, width= 60
+    )
+    cat("Serializing graph\n")
+  }
+  ctx$assign("json", extract_graph(g, json = TRUE))
+  ctx$assign("settings", physics)
+  ctx$eval("var graph = from_json(json);")
+
+  # create layout
+  ctx$eval("var l = layout(graph, settings);")
+  bin <- purrr::map(1:steps, function(x){
+    if(!quiet)
+      pb$tick()
+   ctx$eval("var step = l.step();") 
+  })
+  rm(bin)
+  ctx$assign("nodes", list())
+  ctx$eval("graph.forEachNode(function(node){
+    var pos = l.getNodePosition(node.id);
+    pos.id = node.id;
+    nodes.push(pos);
+  })")
+
+  # extracted positoned nodes
+  positioned <- ctx$get("nodes") 
+
+  # add to grapher
+  if(!is.null(g$x$nodes))
+    g$x$nodes <- left_join(g$x$nodes, positioned, by = "id")
+  else
+    g$x$nodes <- positioned
+
+  return(g)
+  
+}
+
+#' @name graph_layout_offline
+#' @export
+graph_layout_offline <- function(g, steps = 500, spring_length = 30L, sping_coeff = .0008,
+  gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE,
+  verlet_integration = FALSE, quiet = !interactive()) UseMethod("graph_layout_offline")
+
+#' @export
+#' @method graph_layout_offline graph
+graph_layout_offline.graph <- function(g, steps = 500, spring_length = 30L, sping_coeff = .0008,
   gravity = -1.2, theta = .8, drag_coeff = .02, time_step = 20L, is_3d = TRUE, 
   verlet_integration = FALSE, quiet = !interactive()){
 
@@ -604,7 +814,7 @@ graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, spin
 #' 
 #' Rescale the coordinates of the layout.
 #' 
-#' @inheritParams graph_live_layout
+#' @inheritParams graph_layout_live
 #' @param scale A vector or 2 values defining the output range to
 #' rescale the coordinates.
 #' 
@@ -612,7 +822,7 @@ graph_offline_layout.graph <- function(g, steps = 500, spring_length = 30L, spin
 #' g <- make_data()
 #' 
 #' graph(g) %>% 
-#'   graph_static_layout(scaling = NULL) %>% 
+#'   graph_layout_static(scaling = NULL) %>% 
 #'   rescale_layout()
 #' 
 #' @export

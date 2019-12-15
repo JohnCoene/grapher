@@ -18,7 +18,7 @@ as returned by a function of the same name.}
 \item{length}{Length above which links should be hidden.}
 }
 \description{
-Hide links over a certain length, based on computations by \code{graph_static_layout}.
+Hide links over a certain length, based on computations by \code{graph_layout_static}.
 Nodes will actually be hidden in resulting visualisation but not removed.
 }
 \details{
@@ -32,7 +32,7 @@ able to discern smaller communities.
 gdata <- make_data(500)
 
 g <- graph(gdata) \%>\%
-  graph_static_layout(scaling = c(-1000, 1000)) \%>\% 
+  graph_layout_static(scaling = c(-1000, 1000)) \%>\% 
   graph_cluster() \%>\% 
   scale_link_color(cluster) 
 

@@ -21,7 +21,7 @@ Rescale the coordinates of the layout.
 g <- make_data()
 
 graph(g) \%>\% 
-  graph_static_layout(scaling = NULL) \%>\% 
+  graph_layout_static(scaling = NULL) \%>\% 
   rescale_layout()
 
 }

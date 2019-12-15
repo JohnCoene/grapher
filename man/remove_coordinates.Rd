@@ -13,15 +13,15 @@ as returned by a function of the same name.}
 }
 \description{
 Removes coordinates (\code{x}, \code{y}, and \code{z}) from the 
-graph. This is useful if you have used the \code{graph_static_layout}
+graph. This is useful if you have used the \code{graph_layout_static}
 to then \code{hide_long_links} but nonetheless want to use the default 
-force layout (\code{graph_live_layout}).
+force layout (\code{graph_layout_live}).
 }
 \examples{
 gdata <- make_data(500)
 
 graph(gdata) \%>\%
-  graph_static_layout() \%>\% 
+  graph_layout_static() \%>\% 
   hide_long_links(20) \%>\% # hide links
   remove_coordinates() 
 

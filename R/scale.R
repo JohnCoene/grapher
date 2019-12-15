@@ -21,7 +21,7 @@
 #' 
 #' # scale by coordinate position
 #' graph(graph_data) %>% 
-#'  graph_static_layout() %>% 
+#'  graph_layout_static() %>% 
 #'  scale_node_color_coords()
 #' 
 #' @name scale_node_color
@@ -121,7 +121,7 @@ scale_node_size.graph <- function(g, variable, range = c(20, 70)){
 #' 
 #' # color by coordinates
 #' graph(g) %>% 
-#'   graph_offline_layout() %>% 
+#'   graph_layout_offline() %>% 
 #'   scale_link_color_coords()
 #' 
 #' @name scale_link_color

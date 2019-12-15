@@ -41,7 +41,7 @@ Serialising the data to JSON can take some time depending on the size
 ```r
 # save as HTML
 make_data(10)
-graph(data)%>% 
+graph(data) %>%
 save_graph("grapher.html")
 
 # use case of JSON
@@ -52,8 +52,8 @@ file <- paste0(dir, "/graph.json")
 
 # create and save large graph as JSON
 graph_data <- make_data(1000)
-graph(graph_data)%>% 
-graph_static_layout()%>% 
+graph(graph_data) %>%
+graph_static_layout() %>%
 save_graph_json(file)
 
 # function to delete temp

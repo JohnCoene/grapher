@@ -42,7 +42,7 @@ server <- function(input, output) {
 output$graph <- renderGraph({
 graph_data %>%
 graph() %>%
-graph_live_layout(time_step = 5)
+graph_layout_live(time_step = 5)
 })
 
 observeEvent(input$dims, {

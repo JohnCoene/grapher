@@ -41,7 +41,7 @@ scale_node_color(var)
 
 # scale by coordinate position
 graph(graph_data) %>%
-graph_static_layout() %>%
+graph_layout_static() %>%
 scale_node_color_coords()
 ```
 

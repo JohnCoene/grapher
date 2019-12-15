@@ -58,7 +58,7 @@ graph(g) \%>\%
 
 # color by coordinates
 graph(g) \%>\% 
-  graph_offline_layout() \%>\% 
+  graph_layout_offline() \%>\% 
   scale_link_color_coords()
 
 }

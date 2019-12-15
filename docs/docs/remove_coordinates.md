@@ -7,9 +7,9 @@ sidebar_label: Remove Coordinates
 ## Description
 
 Removes coordinates ( `x` , `y` , and `z` ) from the
- graph. This is useful if you have used the `graph_static_layout` 
+ graph. This is useful if you have used the `graph_layout_static` 
  to then `hide_long_links` but nonetheless want to use the default
- force layout ( `graph_live_layout` ).
+ force layout ( `graph_layout_live` ).
 
 
 ## Usage
@@ -32,7 +32,7 @@ Argument      |Description
 gdata <- make_data(500)
 
 graph(gdata) %>%
-graph_static_layout() %>%
+graph_layout_static() %>%
 hide_long_links(20) %>% # hide links
 remove_coordinates()
 ```
