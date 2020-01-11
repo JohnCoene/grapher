@@ -134,6 +134,10 @@ HTMLWidgets.widget({
           renderer.camera(g).lookAt(x.cameraLookat);
         }
 
+        if(x.cameraFov){
+          renderer.camera(g).fov = x.cameraFov;
+        }
+
         if (HTMLWidgets.shinyMode) {
           if(x.on_node_click)
             renderer.on('nodeclick', function(node) {

@@ -41,6 +41,15 @@
 graph_camera_fov <- function(g, fov = 75L) UseMethod("graph_camera_fov")
 
 #' @export 
+#' @method graph_camera_fov graph
+graph_camera_fov.graph <- function(g, fov = 75L) {
+
+  g$x$cameraFov <- fov
+  
+  return(g)
+}
+
+#' @export 
 #' @method graph_camera_fov graph_proxy
 graph_camera_fov.graph_proxy <- function(g, fov = 75L) {
 
