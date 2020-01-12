@@ -15,3 +15,4 @@ FUNDING.yml
 ^derby\.log$
 ^logs$
 README.md
+.vscode

@@ -28,18 +28,18 @@ brew install v8
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
-If you skipped the step above set the parameter `dependencies` to `c("Depends", "Imports")` in either `install_github` function below. Otherwise run as is.
+Then run the following to install the package.
 
 <!--DOCUSAURUS_CODE_TABS-->
 <!--remotes-->
 ```r
 install.packages("remotes", repos = "https://cran.rstudio.com")
-remotes::install_github('JohnCoene/grapher', dependencies = c("Depends", "Imports", "Suggests"))
+remotes::install_github('JohnCoene/grapher', dependencies = c("Depends", "Imports"))
 ```
 <!--devtools-->
 ```r
 install.packages("devtools", repos = "https://cran.rstudio.com")
-devtools::install_github('JohnCoene/grapher', dependencies = c("Depends", "Imports", "Suggests"))
+devtools::install_github('JohnCoene/grapher', dependencies = c("Depends", "Imports"))
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
