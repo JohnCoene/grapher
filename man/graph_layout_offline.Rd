@@ -2,23 +2,8 @@
 % Please edit documentation in R/layout.R
 \name{graph_layout_offline}
 \alias{graph_layout_offline}
-\alias{graph_offline_layout}
 \title{Offline Layout}
 \usage{
-graph_offline_layout(
-  g,
-  steps = 500,
-  spring_length = 30L,
-  sping_coeff = 8e-04,
-  gravity = -1.2,
-  theta = 0.8,
-  drag_coeff = 0.02,
-  time_step = 20L,
-  is_3d = TRUE,
-  verlet_integration = FALSE,
-  quiet = !interactive()
-)
-
 graph_layout_offline(
   g,
   steps = 500,
