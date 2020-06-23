@@ -25,15 +25,15 @@ graph(g)
 
 # customise the live layout parameters
 graph(g) %>% 
-  graph_live_layout(gravity = -3)
+  graph_layout_live(gravity = -3)
 ```
 
 Since the above is draining on the browser you can stabilise the network after some time by using `graph_stable_layout` and specifying the number of milliseconds before the layout algorithm is stopped. 
 
 ```r
 graph(g) %>% 
-  graph_live_layout() %>% 
-  graph_stable_layout(ms = 4000) # stabilise after 4 seconds
+  graph_layout_live() %>% 
+  graph_layout_stable(ms = 4000) # stabilise after 4 seconds
 ```
 
 ## Static
@@ -42,7 +42,7 @@ By default grapher will use the `igraph::layout_nicely` function to compute the 
 
 ```r
 graph(g) %>% 
-  graph_static_layout(method = igraph::layout_with_kk) 
+  graph_layout_static(method = igraph::layout_with_kk) 
 ```
 
 ## Offline
@@ -51,7 +51,7 @@ Finally if you have the [full installation](install.md) you can also use the sam
 
 ```r
 graph(g) %>% 
-  graph_offline_layout() 
+  graph_layout_offline() 
 ```
 
 Then again, these do not have to be computed with grapher, you can compute them yourself prior to initialising the graph.

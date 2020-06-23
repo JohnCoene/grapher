@@ -25,7 +25,7 @@ ui <- fluidPage(
 server <- function(input, output){
   output$graph <- render_graph({
     graph(g) %>% 
-      graph_stable_layout(ms = 3000)
+      graph_layout_stable(ms = 3000)
   })
 }
 
@@ -64,7 +64,7 @@ ui <- fluidPage(
 server <- function(input, output){
   output$graph <- render_graph({
     graph(g) %>% 
-      graph_stable_layout(ms = 3000) %>% 
+      graph_layout_stable(ms = 3000) %>% 
       capture_node_click() # capture input
   })
 
