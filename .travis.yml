@@ -10,6 +10,7 @@ matrix:
         apt:
           packages: libnode-dev
     - os: osx
+      osx_image: xcode12.2
       brew_packages: v8
 
 addons:
