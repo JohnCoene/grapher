@@ -49,7 +49,7 @@ Scale links color, note that links colors are split in two.
 }
 
 \examples{
-g <- make_data(1000)
+g <- make_data(100)
 
 # color by cluster
 graph(g) \%>\% 

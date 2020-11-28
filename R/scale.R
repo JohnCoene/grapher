@@ -112,7 +112,7 @@ scale_node_size.graph <- function(g, variable, range = c(20, 70)){
 #' }
 #' 
 #' @examples
-#' g <- make_data(1000)
+#' g <- make_data(100)
 #' 
 #' # color by cluster
 #' graph(g) %>% 

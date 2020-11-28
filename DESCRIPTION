@@ -26,4 +26,4 @@ Suggests:
     sparklyr,
     tidygraph,
     graphframes
-RoxygenNote: 7.1.0.9000
+RoxygenNote: 7.1.1.9000
