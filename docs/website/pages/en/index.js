@@ -102,7 +102,7 @@ class Index extends React.Component {
           layout={props.layout}
         />
         <div className="btnwrap"> 
-          <a className="button" href='docs/get-started.md'>
+          <a className="button" href='docs/get-started.html'>
             Get Started
           </a>   
         </div>     
